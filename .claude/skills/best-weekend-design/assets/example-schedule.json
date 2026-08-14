@@ -1,22 +1,22 @@
 {
-  "theme": "토=집콕 정비+수영 / 일=회복+엄마집+사우나 / 월=문화(오디세이)+다음 주 준비",
-  "region": "헬리오시티(집·단지 커뮤니티) · 엄마집(도보 10분) · 잠실(8호선 2정거장)",
-  "note": "저녁 식사 없음. 아침·점심 2식 기준.",
+  "theme": "토=집콕 정비+수영+엄마집 / 일=휴식·회복+사우나 / 월=문화(오디세이)",
+  "region": "헬리오시티(집) · 동네 수영장 · 엄마집(도보 10분) · 잠실(자전거 15분)",
+  "note": "저녁 식사 없음(2식). 이동은 자전거 기본.",
   "days": [
     {
       "label": "토요일 (광복절)",
       "date": "2026-08-15",
       "activities": [
-        {"start":"05:10","end":"05:40","title":"아침 식사","category":"식사","zone":"집","travel_min_from_prev":0,"cost":0},
-        {"start":"05:55","end":"06:10","title":"수경 꽃병 4개 물갈이","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙(매주). 화분 4개는 8/22이 다음 차례"},
-        {"start":"06:25","end":"07:40","title":"화장실 청소","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"세제 뿌리고 20분 방치 후 문지르기 — 힘이 절반으로 준다"},
-        {"start":"07:55","end":"09:25","title":"옷장 계절 정리","category":"집개선","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"연휴 중 대형 과업 1개. 09:25에 끊고 바로 수영 준비"},
-        {"start":"09:50","end":"11:30","title":"수영강습 (커뮤니티 수영장)","category":"운동","zone":"단지 커뮤니티","travel_min_from_prev":5,"cost":0,"notes":"고정 일정 · 강습 10:00~10:50 + 샤워·드라이 40분. 오늘 첫 강습"},
-        {"start":"12:00","end":"12:50","title":"점심 식사","category":"식사","zone":"집","travel_min_from_prev":5,"cost":0,"notes":"식후 비타민C"},
-        {"start":"13:10","end":"14:10","title":"낮잠","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"첫 수영강습 뒤라 반드시 필요"},
-        {"start":"14:25","end":"15:40","title":"책 읽기","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0},
-        {"start":"15:55","end":"17:10","title":"다음 주 점심 도시락 밑반찬 만들기","category":"여가","zone":"집","travel_min_from_prev":0,"cost":20000,"notes":"저녁을 안 먹으니 점심이 하루의 중심 — 여기 투자하는 게 효율이 높다"},
-        {"start":"17:25","end":"19:00","title":"음악 들으며 자유시간","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"완충 구간 — 오전에 밀린 게 있으면 여기서 흡수"}
+        {"start":"05:10","end":"05:40","title":"아침 식사","category":"식사","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"재료 알려주시면 3일치 식단 제안 가능"},
+        {"start":"05:55","end":"06:10","title":"수경 꽃병 4개 물갈이","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙(매주). 화분 4개는 8/22, 콜드브루는 어제 만듦"},
+        {"start":"06:25","end":"07:55","title":"옷장 계절 정리","category":"집개선","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"연휴 중 대형 과업 1개"},
+        {"start":"08:10","end":"09:20","title":"주방 정리와 그릇 정돈","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0},
+        {"start":"09:45","end":"11:30","title":"수영강습 (동네 수영장)","category":"운동","zone":"동네 수영장","travel_min_from_prev":5,"cost":0,"notes":"고정 일정 · 강습 10:00~10:50 + 샤워·드라이 40분. 오늘 첫 강습"},
+        {"start":"12:00","end":"13:30","title":"엄마집 점심 식사","category":"식사","zone":"엄마집","travel_min_from_prev":10,"cost":0,"notes":"수영장에서 10분 · 조금 늦어도 괜찮음 · 식후 비타민C"},
+        {"start":"13:55","end":"14:55","title":"낮잠","category":"휴식","zone":"집","travel_min_from_prev":10,"cost":0,"notes":"첫 수영강습 뒤라 반드시 필요"},
+        {"start":"15:10","end":"16:15","title":"책 읽기","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0},
+        {"start":"16:30","end":"18:00","title":"나 혼자 산다 재방송","category":"여가","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙 · 이 시간대가 비었으므로"},
+        {"start":"18:15","end":"19:30","title":"음악 들으며 자유시간","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"완충 구간 · 오늘은 수영으로 씻었으니 화장실 청소 없음"}
       ]
     },
     {
@@ -25,14 +25,14 @@
       "activities": [
         {"start":"05:20","end":"05:50","title":"아침 식사","category":"식사","zone":"집","travel_min_from_prev":0,"cost":0},
         {"start":"06:05","end":"07:05","title":"아침 스트레칭과 요가","category":"운동","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"어제 수영으로 뭉친 어깨 위주"},
-        {"start":"07:30","end":"08:45","title":"자전거로 성내천 라이딩","category":"운동","zone":"동네","travel_min_from_prev":5,"cost":0,"notes":"8월엔 이 시간대가 유일하게 탈 만하다. 9시 넘으면 폭염"},
-        {"start":"09:15","end":"10:45","title":"주방 정리와 그릇 정돈","category":"집안일","zone":"집","travel_min_from_prev":5,"cost":0,"notes":"밑반찬 만든 다음 날이라 지금이 제자리"},
-        {"start":"11:00","end":"11:35","title":"여유 시간","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"엄마집 출발 전 완충. 12시 도착이 절대 조건"},
-        {"start":"12:00","end":"13:30","title":"엄마집 점심 식사","category":"식사","zone":"엄마집","travel_min_from_prev":10,"cost":0,"notes":"12~13시 · 오늘은 앞 일정이 전부 집이라 늦을 일이 없음 · 식후 비타민C"},
-        {"start":"13:55","end":"15:00","title":"집에서 쉬기","category":"휴식","zone":"집","travel_min_from_prev":10,"cost":0},
-        {"start":"15:15","end":"16:30","title":"다음 주 계획 세우기와 정리","category":"학습·작업","zone":"집","travel_min_from_prev":0,"cost":0},
-        {"start":"16:50","end":"18:10","title":"커뮤니티 사우나","category":"휴식","zone":"단지 커뮤니티","travel_min_from_prev":5,"cost":0,"notes":"주말 입장 09~19시 · 마감 50분 전 입장이라 여유. 여기서 머리 감기 해결"},
-        {"start":"18:30","end":"19:30","title":"사우나 후 늘어지기","category":"휴식","zone":"집","travel_min_from_prev":5,"cost":0}
+        {"start":"07:30","end":"08:45","title":"자전거로 성내천 라이딩","category":"운동","zone":"동네","travel_min_from_prev":5,"cost":0,"notes":"8월엔 이 시간대가 가장 탈 만하다. 물 챙기고 그늘길로"},
+        {"start":"09:15","end":"10:45","title":"다음 주 계획 세우기와 정리","category":"학습·작업","zone":"집","travel_min_from_prev":5,"cost":0},
+        {"start":"11:00","end":"11:45","title":"점심 식사","category":"식사","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"식후 비타민C"},
+        {"start":"12:00","end":"13:15","title":"집에서 쉬기","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0},
+        {"start":"13:30","end":"14:45","title":"음악 플레이리스트 정리","category":"여가","zone":"집","travel_min_from_prev":0,"cost":0},
+        {"start":"15:00","end":"16:00","title":"냉장고 정리와 장보기 목록 만들기","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"요리를 벌이는 게 아니라 목록만"},
+        {"start":"16:15","end":"17:15","title":"여유 시간","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"완충 구간"},
+        {"start":"17:50","end":"19:45","title":"커뮤니티 사우나","category":"휴식","zone":"단지 커뮤니티","travel_min_from_prev":5,"cost":0,"notes":"입장 마감 19:00 · 운영 20:00까지라 두 시간 온전히 씀. 여기서 머리 감기 해결"}
       ]
     },
     {
@@ -41,22 +41,22 @@
       "activities": [
         {"start":"05:15","end":"05:45","title":"아침 식사","category":"식사","zone":"집","travel_min_from_prev":0,"cost":0},
         {"start":"06:00","end":"07:30","title":"미뤄둔 과제 집중 처리","category":"학습·작업","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"황금 시간대. 영화 전에 무거운 것 하나만"},
-        {"start":"07:45","end":"08:10","title":"커피와 스트레칭","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"172분 착석 전 몸 풀기"},
-        {"start":"08:50","end":"12:40","title":"오디세이 관람 (롯데시네마 잠실)","category":"문화","zone":"잠실","travel_min_from_prev":25,"cost":15000,"notes":"09:30 시작 · 본편 172분 · 광고 포함 12:40경 종료. 지하철 25분 (자전거 15분 가능하나 귀가가 한낮이라 비추천)"},
-        {"start":"12:55","end":"14:10","title":"잠실에서 점심","category":"식사","zone":"잠실","travel_min_from_prev":5,"cost":15000,"notes":"극장 근처 · 식후 비타민C · 오늘의 마지막 식사"},
-        {"start":"14:35","end":"15:35","title":"롯데월드몰 서점 구경","category":"쇼핑","zone":"잠실","travel_min_from_prev":5,"cost":18000,"notes":"8월 오후 폭염이라 실내로. 석촌호수는 이 시간대엔 무리"},
-        {"start":"16:15","end":"17:00","title":"영화 여운 정리하며 쉬기","category":"휴식","zone":"집","travel_min_from_prev":25,"cost":0,"notes":"완충 구간"},
-        {"start":"17:15","end":"17:45","title":"다음 주 입을 옷 정하기","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙(매주). 토요일 옷장 정리 직후라 자리를 안다"},
-        {"start":"18:00","end":"19:15","title":"냉장고 정리와 다음 주 식단 짜기","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"어제 만든 밑반찬 기준으로 점심 도시락 계획"},
-        {"start":"19:30","end":"20:15","title":"가방 챙기고 하루 마무리","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"연휴 뒤 첫 출근 대비"}
+        {"start":"07:45","end":"08:10","title":"커피와 스트레칭","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"172분 착석 전 몸 풀기 · 어제 만든 콜드브루"},
+        {"start":"08:50","end":"12:40","title":"오디세이 관람 (롯데시네마 잠실)","category":"문화","zone":"잠실","travel_min_from_prev":15,"cost":15000,"notes":"09:30 시작 · 본편 172분 · 자전거 15분. 아침이라 갈 때는 시원함"},
+        {"start":"12:55","end":"14:10","title":"잠실에서 점심","category":"식사","zone":"잠실","travel_min_from_prev":5,"cost":15000,"notes":"식후 비타민C · 오늘의 마지막 식사"},
+        {"start":"14:35","end":"15:35","title":"롯데월드몰 서점 구경","category":"쇼핑","zone":"잠실","travel_min_from_prev":5,"cost":18000,"notes":"실내에서 더위 식히고 출발. 폭염 피크(14~16시)를 여기서 흘려보냄"},
+        {"start":"16:05","end":"16:50","title":"영화 여운 정리하며 쉬기","category":"휴식","zone":"집","travel_min_from_prev":15,"cost":0,"notes":"자전거 귀가 · 물 충분히 · 천천히"},
+        {"start":"17:05","end":"17:35","title":"다음 주 입을 옷 정하기","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙(매주). 토요일 옷장 정리 직후라 자리를 안다"},
+        {"start":"17:50","end":"19:00","title":"화장실 청소","category":"집안일","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"고정 규칙 · 저녁에 샤워 직전. 오늘은 수영·사우나가 없는 유일한 날"},
+        {"start":"19:15","end":"20:10","title":"샤워하고 가방 챙기며 마무리","category":"휴식","zone":"집","travel_min_from_prev":0,"cost":0,"notes":"청소 직후 샤워로 한 번에 끝 · 연휴 뒤 첫 출근 대비"}
       ]
     }
   ],
   "scores": {
-    "블랙": {"테마 적합성":9.8,"동선 효율":9.8,"다양성":9.6,"실행 가능성":9.7,"완성도":9.7},
-    "레드": {"테마 적합성":9.7,"동선 효율":9.8,"다양성":9.4,"실행 가능성":9.6,"완성도":9.5},
-    "블루": {"테마 적합성":9.7,"동선 효율":9.7,"다양성":9.6,"실행 가능성":9.6,"완성도":9.6},
-    "실버": {"테마 적합성":9.7,"동선 효율":9.7,"다양성":9.5,"실행 가능성":9.8,"완성도":9.8},
-    "골드": {"테마 적합성":9.8,"동선 효율":9.7,"다양성":9.6,"실행 가능성":9.6,"완성도":9.6}
+    "블랙": {"테마 적합성":9.8,"동선 효율":9.8,"다양성":9.6,"실행 가능성":9.8,"완성도":9.7},
+    "레드": {"테마 적합성":9.7,"동선 효율":9.8,"다양성":9.5,"실행 가능성":9.7,"완성도":9.6},
+    "블루": {"테마 적합성":9.7,"동선 효율":9.7,"다양성":9.6,"실행 가능성":9.7,"완성도":9.6},
+    "실버": {"테마 적합성":9.8,"동선 효율":9.7,"다양성":9.5,"실행 가능성":9.9,"완성도":9.8},
+    "골드": {"테마 적합성":9.7,"동선 효율":9.8,"다양성":9.6,"실행 가능성":9.7,"완성도":9.6}
   }
 }
