@@ -4,8 +4,10 @@
 사용법:
     python3 validate_schedule.py schedule.json
     python3 validate_schedule.py schedule.json --rules ../references/recurring-rules.md
+    python3 validate_schedule.py schedule.json --window 05:00-21:00
 
 --rules를 주면 주기가 돌아온 고정 규칙이 일정에 들어 있는지도 확인한다.
+--window를 주면 모든 활동이 기상~취침 시간대 안에 있는지 확인한다.
 형식은 references/schedule-schema.md 참고.
 ERROR가 하나라도 있으면 종료 코드 1.
 """
@@ -53,6 +55,25 @@ def parse_time(value, where):
     return hh * 60 + mm
 
 
+def fmt_min(total):
+    return f"{total // 60:02d}:{total % 60:02d}"
+
+
+def parse_window(text):
+    """'05:00-21:00' → (300, 1260)"""
+    m = re.fullmatch(r"\s*(\d{1,2}:\d{2})\s*[-~]\s*(\d{1,2}:\d{2})\s*", str(text))
+    if not m:
+        print(f"--window 형식이 잘못됨: {text!r} (예: 05:00-21:00)")
+        return None
+    start = parse_time(m.group(1), "--window 시작")
+    end = parse_time(m.group(2), "--window 종료")
+    if start is None or end is None:
+        return None
+    if end <= start:
+        end += 24 * 60
+    return start, end
+
+
 def normalize(title):
     return re.sub(r"\s+", " ", str(title)).strip().lower()
 
@@ -61,7 +82,7 @@ def is_home(zone):
     return str(zone).strip().lower() in HOME_ZONES
 
 
-def check_day(day, index):
+def check_day(day, index, window=None):
     label = day.get("label") or f"{index + 1}일차"
     acts = day.get("activities") or []
     if not acts:
@@ -82,6 +103,15 @@ def check_day(day, index):
                 err(f"{where}: 종료 시각이 시작보다 이름 ({act.get('start')}~{act.get('end')})")
                 continue
         spans.append((start, end, act, where))
+
+    # --- 기상~취침 시간대 ---
+    if window:
+        win_start, win_end = window
+        for start, end, act, where in spans:
+            if start < win_start:
+                err(f"{where}: 기상 시각({fmt_min(win_start)}) 이전에 시작 ({act.get('start')})")
+            if end > win_end:
+                err(f"{where}: 취침 시각({fmt_min(win_end)}) 이후까지 이어짐 ({act.get('end')})")
 
     for prev, cur in zip(spans, spans[1:]):
         prev_end, cur_start = prev[1], cur[0]
@@ -182,8 +212,12 @@ def parse_period_days(text):
 
 
 def parse_rules(path):
-    """recurring-rules.md의 마크다운 표에서 (이름, 주기일수, 마지막실행) 목록을 뽑는다."""
+    """recurring-rules.md의 마크다운 표에서 (이름, 주기일수, 마지막실행) 목록을 뽑는다.
+
+    '조건부' 규칙은 스크립트가 판정할 수 없으므로 목록만 알려주고 검사는 하지 않는다.
+    """
     rules = []
+    conditional = []
     try:
         with open(path, encoding="utf-8") as fh:
             lines = fh.readlines()
@@ -202,6 +236,10 @@ def parse_rules(path):
         if not name or name == "활동" or set(name) <= set("-: "):
             continue  # 헤더 또는 구분선
 
+        if "조건부" in cells[1] or "필요시" in cells[1]:
+            conditional.append(name)
+            continue
+
         period = parse_period_days(cells[1])
         if period is None:
             warn(f"고정 규칙 '{name}': 주기 '{cells[1]}'를 해석할 수 없어 검사에서 제외")
@@ -216,8 +254,10 @@ def parse_rules(path):
                 warn(f"고정 규칙 '{name}': 마지막 실행 날짜 '{cells[2]}'가 올바르지 않음")
         rules.append((name, period, last))
 
-    if not rules:
+    if not rules and not conditional:
         warn(f"고정 규칙을 하나도 읽지 못함 ({path}) — 표 형식을 확인할 것")
+    if conditional:
+        print(f"  조건부 규칙(직접 판단 필요): {', '.join(conditional)}")
     return rules
 
 
@@ -241,9 +281,12 @@ def check_rules(rules, days, end_date):
         for a in (day.get("activities") or [])
     ]
 
+    # 규칙 이름의 모든 낱말이 제목에 들어 있으면 이행으로 본다.
+    # 단순 부분문자열로 보면 '꽃병 물갈이'가 '수경 꽃병 4개 물갈이'에 안 걸린다 —
+    # 제목에는 개수나 위치 같은 말이 중간에 끼기 마련이다.
     for name, period, last in rules:
-        key = re.sub(r"\s+", "", name).lower()
-        present = any(key in t for t in titles)
+        tokens = [w.lower() for w in name.split() if w]
+        present = any(all(tok in t for tok in tokens) for t in titles)
         due = last is None or (end_date - last).days >= period
 
         if due and not present:
@@ -296,13 +339,23 @@ def check_scores(scores):
 def main():
     args = sys.argv[1:]
     rules_path = None
-    if "--rules" in args:
-        i = args.index("--rules")
+    window = None
+
+    for flag in ("--rules", "--window"):
+        if flag not in args:
+            continue
+        i = args.index(flag)
         if i + 1 >= len(args):
-            print("--rules 뒤에 파일 경로가 필요합니다")
+            print(f"{flag} 뒤에 값이 필요합니다")
             return 2
-        rules_path = args[i + 1]
+        value = args[i + 1]
         del args[i : i + 2]
+        if flag == "--rules":
+            rules_path = value
+        else:
+            window = parse_window(value)
+            if window is None:
+                return 2
 
     if len(args) != 1:
         print(__doc__)
@@ -327,7 +380,7 @@ def main():
 
     all_titles = []
     for i, day in enumerate(days):
-        all_titles += check_day(day, i)
+        all_titles += check_day(day, i, window)
 
     for title, n in Counter(t for t in all_titles if t).items():
         if n > 1:
