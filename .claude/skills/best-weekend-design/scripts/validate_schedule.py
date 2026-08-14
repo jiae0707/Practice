@@ -153,11 +153,10 @@ def check_day(day, index, window=None):
         if not zones or zones[-1] != z:
             zones.append(z)
 
-    trimmed = zones[:]
-    while trimmed and is_home(trimmed[0]):
-        trimmed.pop(0)
-    while trimmed and is_home(trimmed[-1]):
-        trimmed.pop()
+    # 집은 동선 검사에서 제외한다. 집에 들렀다 다시 나가는 건 핑퐁이 아니라
+    # 집을 기점으로 사는 사람의 정상적인 하루다. 진짜 핑퐁은 바깥 지역이
+    # 다시 등장할 때(강남 → 성수 → 강남)이고, 그건 아래 검사에 그대로 걸린다.
+    trimmed = [z for z in zones if not is_home(z)]
 
     repeated = [z for z, n in Counter(trimmed).items() if n > 1]
     if repeated:
@@ -166,7 +165,7 @@ def check_day(day, index, window=None):
             f"(같은 지역으로 되돌아옴: {', '.join(repeated)})"
         )
 
-    moves = max(len(trimmed) - 1, 0)
+    moves = len(trimmed)  # 집 밖으로 나가는 횟수
     if moves > MAX_ZONE_MOVES_PER_DAY:
         warn(f"[{label}] 지역 이동 {moves}회 (권장 {MAX_ZONE_MOVES_PER_DAY}회 이하): {' → '.join(zones)}")
 
