@@ -3,7 +3,9 @@
 
 사용법:
     python3 validate_schedule.py schedule.json
+    python3 validate_schedule.py schedule.json --rules ../references/recurring-rules.md
 
+--rules를 주면 주기가 돌아온 고정 규칙이 일정에 들어 있는지도 확인한다.
 형식은 references/schedule-schema.md 참고.
 ERROR가 하나라도 있으면 종료 코드 1.
 """
@@ -12,6 +14,7 @@ import json
 import re
 import sys
 from collections import Counter
+from datetime import date, datetime, timedelta
 
 # 활동 수에 포함하지 않는 카테고리
 NOT_COUNTED = {"식사", "이동"}
@@ -152,6 +155,110 @@ def check_day(day, index):
     return [normalize(a.get("title", "")) for a in acts if str(a.get("category", "")).strip() not in NOT_COUNTED]
 
 
+def parse_period_days(text):
+    """'2주', '매주', '격주', '월 1회', '2주일에 1번' 등을 일수로 바꾼다."""
+    t = str(text).strip()
+    if "매일" in t:
+        return 1
+    if "매주" in t:
+        return 7
+    if "격주" in t:
+        return 14
+    if "매월" in t or "매달" in t:
+        return 30
+    m = re.search(r"(\d+)\s*(주일|주|개월|달|일)", t)
+    if m:
+        n, unit = int(m.group(1)), m.group(2)
+        if unit in ("주", "주일"):
+            return n * 7
+        if unit in ("개월", "달"):
+            return n * 30
+        return n
+    if "월" in t:
+        return 30
+    if "주" in t:
+        return 7
+    return None
+
+
+def parse_rules(path):
+    """recurring-rules.md의 마크다운 표에서 (이름, 주기일수, 마지막실행) 목록을 뽑는다."""
+    rules = []
+    try:
+        with open(path, encoding="utf-8") as fh:
+            lines = fh.readlines()
+    except OSError as exc:
+        err(f"고정 규칙 파일을 읽을 수 없음: {exc}")
+        return rules
+
+    for line in lines:
+        s = line.strip()
+        if not s.startswith("|"):
+            continue
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if len(cells) < 3:
+            continue
+        name = re.sub(r"[`*_]", "", cells[0]).strip()
+        if not name or name == "활동" or set(name) <= set("-: "):
+            continue  # 헤더 또는 구분선
+
+        period = parse_period_days(cells[1])
+        if period is None:
+            warn(f"고정 규칙 '{name}': 주기 '{cells[1]}'를 해석할 수 없어 검사에서 제외")
+            continue
+
+        last = None
+        m = re.search(r"(\d{4})-(\d{2})-(\d{2})", cells[2])
+        if m:
+            try:
+                last = date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            except ValueError:
+                warn(f"고정 규칙 '{name}': 마지막 실행 날짜 '{cells[2]}'가 올바르지 않음")
+        rules.append((name, period, last))
+
+    if not rules:
+        warn(f"고정 규칙을 하나도 읽지 못함 ({path}) — 표 형식을 확인할 것")
+    return rules
+
+
+def weekend_end_date(days):
+    """일정에 적힌 날짜 중 가장 늦은 날. 없으면 오늘."""
+    found = []
+    for day in days:
+        m = re.search(r"(\d{4})-(\d{2})-(\d{2})", str(day.get("date") or ""))
+        if m:
+            try:
+                found.append(date(int(m.group(1)), int(m.group(2)), int(m.group(3))))
+            except ValueError:
+                pass
+    return max(found) if found else datetime.now().date()
+
+
+def check_rules(rules, days, end_date):
+    titles = [
+        re.sub(r"\s+", "", str(a.get("title", ""))).lower()
+        for day in days
+        for a in (day.get("activities") or [])
+    ]
+
+    for name, period, last in rules:
+        key = re.sub(r"\s+", "", name).lower()
+        present = any(key in t for t in titles)
+        due = last is None or (end_date - last).days >= period
+
+        if due and not present:
+            when = f"마지막 실행 {last} + {period}일" if last else "마지막 실행 미기록"
+            err(f"고정 규칙 누락: '{name}' — 주기 도래 ({when}) 인데 일정에 없음")
+        elif due and present:
+            print(f"  고정 규칙 이행: '{name}' ✔")
+        elif present and last is not None:
+            next_due = last + timedelta(days=period)
+            warn(
+                f"고정 규칙 '{name}'은 아직 주기 전 (다음 차례 {next_due}) — "
+                "이번 주말에 굳이 넣을 필요는 없음"
+            )
+
+
 def check_scores(scores):
     if not isinstance(scores, dict) or not scores:
         err("scores가 없음 — 5인 채점 결과가 필요함")
@@ -187,15 +294,25 @@ def check_scores(scores):
 
 
 def main():
-    if len(sys.argv) != 2:
+    args = sys.argv[1:]
+    rules_path = None
+    if "--rules" in args:
+        i = args.index("--rules")
+        if i + 1 >= len(args):
+            print("--rules 뒤에 파일 경로가 필요합니다")
+            return 2
+        rules_path = args[i + 1]
+        del args[i : i + 2]
+
+    if len(args) != 1:
         print(__doc__)
         return 2
 
     try:
-        with open(sys.argv[1], encoding="utf-8") as fh:
+        with open(args[0], encoding="utf-8") as fh:
             data = json.load(fh)
     except FileNotFoundError:
-        print(f"파일을 찾을 수 없음: {sys.argv[1]}")
+        print(f"파일을 찾을 수 없음: {args[0]}")
         return 2
     except json.JSONDecodeError as exc:
         print(f"JSON 파싱 실패: {exc}")
@@ -215,6 +332,9 @@ def main():
     for title, n in Counter(t for t in all_titles if t).items():
         if n > 1:
             err(f"활동 중복: '{title}'이(가) 주말 전체에서 {n}회 등장")
+
+    if rules_path:
+        check_rules(parse_rules(rules_path), days, weekend_end_date(days))
 
     check_scores(data.get("scores"))
 

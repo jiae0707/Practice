@@ -16,8 +16,18 @@
           "cost": 0
         },
         {
-          "start": "10:15",
-          "end": "11:00",
+          "start": "09:55",
+          "end": "10:05",
+          "title": "베란다 화분 물주기",
+          "category": "집안일",
+          "zone": "집",
+          "travel_min_from_prev": 0,
+          "cost": 0,
+          "notes": "고정 규칙 · 2주 주기 · 외출 전에 끝냄"
+        },
+        {
+          "start": "10:20",
+          "end": "10:55",
           "title": "세탁 돌리고 화장실 세제 방치",
           "category": "집안일",
           "zone": "집",
@@ -148,6 +158,16 @@
           "zone": "집",
           "travel_min_from_prev": 0,
           "cost": 15000
+        },
+        {
+          "start": "19:45",
+          "end": "20:15",
+          "title": "다음 주 입을 옷 정하기",
+          "category": "집안일",
+          "zone": "집",
+          "travel_min_from_prev": 0,
+          "cost": 0,
+          "notes": "고정 규칙 · 매주 · 건조 끝난 뒤"
         }
       ]
     }
