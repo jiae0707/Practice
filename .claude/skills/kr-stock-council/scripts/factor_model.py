@@ -28,7 +28,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
 sys.path.insert(0, HERE)
-from correlation import ols, mean, stdev  # noqa: E402
+from correlation import ols, mean, stdev, corr  # noqa: E402
 
 # 팩터별 시차(거래일). 미국 지표는 1일 뒤 한국장에 반영된다.
 LAG = {"VIX": 1, "WTI": 1, "SOX": 1, "NASDAQ": 1, "SP500": 1,
@@ -170,6 +170,8 @@ def main():
     ap.add_argument("--all", action="store_true")
     ap.add_argument("--factors", nargs="+", default=["VIX", "USDKRW", "WTI"])
     ap.add_argument("--top", type=int, default=6)
+    ap.add_argument("--auto", action="store_true",
+                    help="종목별로 최적 팩터를 데이터로 고른다")
     args = ap.parse_args()
 
     hist, fac = load()
@@ -184,9 +186,91 @@ def main():
         print(f"⚠️  없는 팩터: {', '.join(miss)} — 이 팩터는 빼고 돌린다")
 
     for n in targets:
-        if n in hist[max(hist)]:
+        if n not in hist[max(hist)]:
+            continue
+        if args.auto:
+            auto_select(hist, fac, n, args.top)
+        else:
             analyze(hist, fac, n, args.factors, args.top)
     return 0
+
+
+
+
+# ────────────────────── 종목별 최적 팩터 자동 선택 ──────────────────────
+
+CANDIDATES = ["KOSPI", "SOX", "VIX", "USDKRW", "WTI"]
+LAG_GRID = [0, 1, 2]
+
+
+def best_lag(hist, fac, name, key):
+    """이 종목·이 팩터에 맞는 시차를 데이터로 고른다. |t|가 가장 큰 것."""
+    ds, px = series(hist, name)
+    rd = ds[1:]
+    ret = [math.log(px[i] / px[i - 1]) for i in range(1, len(px))]
+    best = None
+    saved = LAG.get(key, 1)
+    for lag in LAG_GRID:
+        LAG[key] = lag
+        col = factor_change(fac, key, rd)
+        keep = [i for i, x in enumerate(col) if x is not None]
+        if len(keep) < 30:
+            continue
+        r = ols([ret[i] for i in keep], [[col[i] for i in keep]], [key])
+        if not r or r["t"][1] is None:
+            continue
+        if best is None or abs(r["t"][1]) > abs(best[2]):
+            best = (lag, r["beta"][1], r["t"][1], r["r2"], len(keep))
+    LAG[key] = saved
+    return best
+
+
+def auto_select(hist, fac, name, top=5, tcrit=2.0, rho_max=0.6):
+    """1) 팩터별 단독 검정 + 시차 최적화  2) 유의한 것만  3) 겹치면 하나만."""
+    print(f"\n{'='*68}\n  {name} — 종목별 최적 팩터 탐색\n{'='*68}")
+    print(f"  {'팩터':<9}{'시차':>5}{'베타':>10}{'t':>8}{'R²':>8}{'n':>6}   판정")
+    print("  " + "-" * 60)
+
+    singles = []
+    for k in CANDIDATES:
+        b = best_lag(hist, fac, name, k)
+        if not b:
+            print(f"  {k:<9}{'—':>5}{'데이터 부족':>28}")
+            continue
+        lag, beta, t, r2, n = b
+        ok = abs(t) >= tcrit
+        print(f"  {k:<9}{lag:>5}{beta:>10.4f}{t:>8.2f}{r2:>8.3f}{n:>6}   "
+              + ("채택" if ok else "탈락"))
+        if ok:
+            singles.append((abs(t), k, lag, n))
+
+    if not singles:
+        print("\n  유의한 팩터가 없다. 이 종목은 거시로 설명되지 않는다.")
+        return None
+
+    # 상관 높은 쌍은 t가 큰 쪽만 남긴다
+    singles.sort(reverse=True)
+    chosen = []
+    for _, k, lag, _ in singles:
+        drop = False
+        for _, k2, lag2 in chosen:
+            a = factor_change(fac, k, sorted(d for d in fac))
+            b = factor_change(fac, k2, sorted(d for d in fac))
+            pair = [(x, y) for x, y in zip(a, b) if x is not None and y is not None]
+            if len(pair) > 30:
+                rho = corr([p[0] for p in pair], [p[1] for p in pair])
+                if rho is not None and abs(rho) > rho_max:
+                    print(f"\n  · {k} 제외 — {k2}와 상관 {rho:+.2f} (겹침)")
+                    drop = True
+                    break
+        if not drop:
+            chosen.append((k, k, lag))
+
+    keys = [c[0] for c in chosen]
+    for k, _, lag in chosen:
+        LAG[k] = lag
+    print(f"\n  → 채택된 팩터: {' + '.join(keys)}")
+    return analyze(hist, fac, name, keys, top)
 
 
 if __name__ == "__main__":
