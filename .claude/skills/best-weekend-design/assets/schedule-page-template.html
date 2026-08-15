@@ -225,6 +225,29 @@
   .course ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
   .course .warn { font-size: 12.5px; color: var(--fixed); }
 
+  /* ---------- 고를 수 있는 후보 ---------- */
+  .picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .slot { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px;
+          padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .slot > .k { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; color: var(--accent); }
+  .opt { display: flex; flex-direction: column; gap: 4px; padding-bottom: 12px; border-bottom: 1px solid var(--line-soft); }
+  .opt:last-child { border-bottom: 0; padding-bottom: 0; }
+  .opt .nm { font-weight: 600; font-size: 14.5px; }
+  .opt .nm .badge {
+    font-size: 10px; font-weight: 600; letter-spacing: .06em; vertical-align: 2px;
+    margin-left: 7px; padding: 1px 5px; border-radius: 2px;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .opt .ch { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .opt .fact { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); }
+  .opt .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
+  .opt .links a {
+    font-size: 12px; text-decoration: none; color: var(--accent);
+    border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+  }
+  .opt .links a:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .opt .links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
   .hair { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
   @media (max-width: 620px) { .hair { grid-template-columns: repeat(2, 1fr); } }
   .hair div { border: 1px solid var(--line-soft); background: var(--surface); border-radius: 4px;
@@ -441,13 +464,13 @@
           <li class="pin"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">12:00</span>
             <span class="b"><span class="name">시립미술관 앞에서 만남 → 진주회관</span><span class="sub">콩국수 · 도보 5분 · 점심엔 만석이지만 회전이 빠르다 · 식후 비타민C</span><span class="where">서소문동 · 시청역</span></span></label></li>
           <li class="pin"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">13:40</span>
-            <span class="b"><span class="name">《사랑의 기원》</span><span class="sub">난지미술창작스튜디오 20주년 기념전 · 9/6까지 · 서소문본관 2층</span><span class="where">서울시립미술관 · 10–18시</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">15:25</span>
+            <span class="b"><span class="name">《유영국: 산은 내 안에 있다》</span><span class="sub">탄생 110주년 회고전 · 미공개작 포함 170여 점 · 5/19–10/25 · 110분</span><span class="where">서울시립미술관 서소문본관 · 주말 10–19시</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">15:45</span>
             <span class="b"><span class="name">덕수궁 돌담길 산책</span><span class="sub">미술관에서 카페로 가는 길에 흡수 · 그늘이 많은 구간</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">16:20</span>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">16:35</span>
             <span class="b"><span class="name">라운드앤드</span><span class="sub">정동길 35 · 08–22시 · 구움과자와 라떼</span></span></label></li>
-          <li class="pin"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:15</span>
-            <span class="b"><span class="name">사우나</span><span class="sub">17:00 출발 → 18:00 귀가 · 입장 마감 19:00 · 걸은 다리 풀기</span><span class="where">단지 커뮤니티 · 도보 5분</span></span></label></li>
+          <li class="pin"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:25</span>
+            <span class="b"><span class="name">사우나</span><span class="sub">17:10 출발 → 18:10 귀가 · 입장 마감 19:00 · 걸은 다리 풀기</span><span class="where">단지 커뮤니티 · 도보 5분</span></span></label></li>
           <li class="rule"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">20:05</span>
             <span class="b"><span class="name">사우나 정리</span><span class="sub">젖은 수건 · 속옷 빨래 함께</span></span></label></li>
         </ul>
@@ -537,7 +560,102 @@
   </section>
 
   <section>
-    <div class="sec-head"><h2>외출 코스</h2><span>일요일 종로 · 월요일 잠실</span></div>
+    <div class="sec-head"><h2>고를 수 있는 후보</h2><span>일요일 서소문·정동 — 어느 걸 골라도 동선은 그대로다</span></div>
+    <div class="picks">
+
+      <div class="slot">
+        <span class="k">13:40 · 전시</span>
+        <div class="opt">
+          <div class="nm">유영국: 산은 내 안에 있다 <span class="badge">지금 배치</span></div>
+          <div class="ch">탄생 110주년 회고전. 미공개작 포함 <b>170여 점</b>, 1935년 도쿄의 추상 실험부터 후반 심상 추상까지 60여 년. 서울시립미술관 ‘한국 근대 거장전’ 첫 번째.</div>
+          <div class="fact">5/19–10/25 · 서소문본관 · 주말 10–19시(하절기)</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/서울시립미술관%20서소문본관" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=서울시립미술관 서소문본관" target="_blank" rel="noopener">카카오맵</a>
+            <a href="https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1529410" target="_blank" rel="noopener">전시 정보</a>
+          </div>
+        </div>
+        <div class="opt">
+          <div class="nm">사랑의 기원</div>
+          <div class="ch">난지미술창작스튜디오 20주년 기념전. 같은 건물 2층이라 <b>둘 다 볼 수도 있다</b> — 유영국을 먼저 보고 시간이 남으면 들르는 순서가 자연스럽다.</div>
+          <div class="fact">4/30–9/6 · 서소문본관 2층</div>
+          <div class="links">
+            <a href="https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1523485" target="_blank" rel="noopener">전시 정보</a>
+          </div>
+        </div>
+        <div class="opt">
+          <div class="nm">국립현대미술관 덕수궁관</div>
+          <div class="ch">돌담길 산책 코스 위에 있어 동선이 깨지지 않는다. 다만 <b>현재 전시는 확인하지 못했다</b> — 가기로 정하면 먼저 확인이 필요하다.</div>
+          <div class="fact">도보 7분 · 현재 전시 미확인</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/국립현대미술관%20덕수궁관" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=국립현대미술관 덕수궁관" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slot">
+        <span class="k">12:00 · 점심</span>
+        <div class="opt">
+          <div class="nm">진주회관 <span class="badge">지금 배치</span></div>
+          <div class="ch">1962년부터 <b>콩국수 한 가지만</b> 하는 노포. 8월엔 제철이고, 점심엔 만석이지만 회전이 빨라 대기가 길지 않다.</div>
+          <div class="fact">서소문동 · 11:00–21:00 · 02-753-5388 · 일요일 영업 미확인</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/진주회관" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=진주회관" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+        <div class="opt">
+          <div class="nm">어반가든</div>
+          <div class="ch">파스타·화덕피자·스테이크를 세트로 내는 캐주얼 레스토랑. <b>매일 열어</b> 진주회관이 닫혔을 때의 안전한 대안.</div>
+          <div class="fact">정동길 12-15 · 매일 11:30–22:00 · 02-777-2254</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/어반가든%20정동" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=어반가든 정동" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+        <div class="opt">
+          <div class="nm">르풀</div>
+          <div class="ch">벽돌 건물의 브런치 카페. 샌드위치·파니니·샐러드. <b>점심과 카페를 한 번에</b> 끝내고 싶을 때.</div>
+          <div class="fact">정동길 33 · 돌담길 바로 옆</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/르풀%20정동" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=르풀 정동" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="slot">
+        <span class="k">16:35 · 카페</span>
+        <div class="opt">
+          <div class="nm">라운드앤드 <span class="badge">지금 배치</span></div>
+          <div class="ch">크루아상·페스츄리·휘낭시에 같은 구움과자와 <b>초콜릿 향이 도는 라떼</b>. 22시까지 열어 시간에 쫓기지 않는다.</div>
+          <div class="fact">정동길 35 · 매일 08:00–22:00 · 02-753-7005</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/라운드앤드%20정동" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=라운드앤드 정동" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+        <div class="opt">
+          <div class="nm">르풀</div>
+          <div class="ch">점심을 진주회관에서 했다면 카페는 여기로. 고풍스러운 벽돌 건물이라 <b>앉아서 오래 이야기하기</b> 좋다.</div>
+          <div class="fact">정동길 33</div>
+          <div class="links">
+            <a href="https://map.naver.com/p/search/르풀%20정동" target="_blank" rel="noopener">네이버지도</a>
+            <a href="https://map.kakao.com/?q=르풀 정동" target="_blank" rel="noopener">카카오맵</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin:14px 0 0;font-size:12.5px;color:var(--ink-faint);max-width:74ch">
+      사진과 최신 리뷰는 위 지도 링크에서 보는 게 정확하다. 외부 이미지는 이 페이지에 직접 넣을 수 없고,
+      리뷰 내용을 내가 요약해서 옮기면 지어낸 말이 섞인다.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>외출 코스</h2><span>일요일 서소문·정동 · 월요일 잠실</span></div>
     <div class="course">
       <article>
         <span class="k">SUN · 서소문 · 정동</span>
@@ -546,9 +664,9 @@
           <li><b>진주회관</b> — 서소문동, 콩국수 한 가지만 하는 1962년 노포. 11:00–21:00.
               점심엔 만석이지만 회전이 빨라 대기가 길지 않다. <b>8월에 콩국수는 제철</b>이고
               미술관에서 도보 5분이라 만나자마자 바로 갈 수 있다</li>
-          <li><b>《사랑의 기원》</b> — 난지미술창작스튜디오 20주년 기념전, 서소문본관 2층,
-              4/30–<b>9/6</b>. 미술관 관람 10–18시, 월요일 휴관이라 일요일이 맞다.
-              밥 먹고 바로 옆 건물이니 이동이 없다</li>
+          <li><b>《유영국: 산은 내 안에 있다》</b> — 탄생 110주년 회고전, 서소문본관, 5/19–<b>10/25</b>.
+              주말 10–19시(하절기), 월요일 휴관이라 일요일이 맞다. 밥 먹고 바로 옆 건물이라 이동이 없고,
+              170여 점 규모라 <b>110분</b>을 잡았다</li>
           <li><b>덕수궁 돌담길</b> — 미술관에서 카페로 가는 길 자체가 산책 코스라
               이동 시간이 그대로 일정이 된다. 그늘이 많아 8월 오후에도 걸을 만하다</li>
           <li><b>라운드앤드</b> — 정동길 35, 08:00–22:00. 구움과자와 라떼.
