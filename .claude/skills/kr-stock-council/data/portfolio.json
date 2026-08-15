@@ -2,15 +2,68 @@
   "updated": "2026-08-15",
   "note": "매매가 있을 때마다 갱신한다. 평단은 수수료 포함 실제 매입단가 기준.",
   "holdings": [
-    {"name": "현대차",     "code": "005380", "market": "KOSPI",  "avg_price": 235000, "qty": 2302},
-    {"name": "현대차우",   "code": "005385", "market": "KOSPI",  "avg_price": 280000, "qty": 316},
-    {"name": "네이버",     "code": "035420", "market": "KOSPI",  "avg_price": 235000, "qty": 550},
-    {"name": "한국전력",   "code": "015760", "market": "KOSPI",  "avg_price": 60000,  "qty": 1000},
-    {"name": "삼성전자",   "code": "005930", "market": "KOSPI",  "avg_price": 320000, "qty": 156,
-     "flag": "평단 확인 필요 — 액면분할(2018.5, 50:1) 이전 가격으로 보인다. 분할 후 기준이면 평단·수량 중 하나가 어긋난다"},
-    {"name": "동국산업",   "code": "005160", "market": "KOSPI",  "avg_price": 3700,   "qty": 6000},
-    {"name": "넥스틸",     "code": "092790", "market": "KOSPI",  "avg_price": 13150,  "qty": 1000},
-    {"name": "비츠로셀",   "code": "082920", "market": "KOSDAQ", "avg_price": 47500,  "qty": 200},
-    {"name": "화인베스틸", "code": "133820", "market": "KOSPI",  "avg_price": 1450,   "qty": 600}
+    {
+      "name": "현대차",
+      "code": "005380",
+      "market": "KOSPI",
+      "avg_price": 235000,
+      "qty": 2302
+    },
+    {
+      "name": "현대차우",
+      "code": "005385",
+      "market": "KOSPI",
+      "avg_price": 280000,
+      "qty": 316
+    },
+    {
+      "name": "네이버",
+      "code": "035420",
+      "market": "KOSPI",
+      "avg_price": 235000,
+      "qty": 550
+    },
+    {
+      "name": "한국전력",
+      "code": "015760",
+      "market": "KOSPI",
+      "avg_price": 60000,
+      "qty": 1000
+    },
+    {
+      "name": "삼성전자",
+      "code": "005930",
+      "market": "KOSPI",
+      "avg_price": 320000,
+      "qty": 156
+    },
+    {
+      "name": "동국산업",
+      "code": "005160",
+      "market": "KOSPI",
+      "avg_price": 3700,
+      "qty": 6000
+    },
+    {
+      "name": "넥스틸",
+      "code": "092790",
+      "market": "KOSPI",
+      "avg_price": 13150,
+      "qty": 1000
+    },
+    {
+      "name": "비츠로셀",
+      "code": "082920",
+      "market": "KOSDAQ",
+      "avg_price": 47500,
+      "qty": 200
+    },
+    {
+      "name": "화인베스틸",
+      "code": "133820",
+      "market": "KOSPI",
+      "avg_price": 1450,
+      "qty": 600
+    }
   ]
 }

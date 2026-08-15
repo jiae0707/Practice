@@ -71,8 +71,11 @@ def main():
     total_cost = sum(r["cost"] for r in rows)
     valued = [r for r in rows if r["value"] is not None]
     total_value = sum(r["value"] for r in valued) if valued else None
-    base = total_value if (total_value and len(valued) == len(rows)) else total_cost
-    base_label = "평가금액" if base == total_value else "매입금액"
+    # 비중의 분모: 현재가가 있으면 평가금액, 없으면 매입금액을 섞어 쓴다.
+    # 분모만 매입금액이고 분자가 평가금액이면 비중이 100%를 넘는다.
+    base = sum((r["value"] if r["value"] is not None else r["cost"]) for r in rows)
+    base_label = ("평가금액" if len(valued) == len(rows)
+                  else "평가금액(미확인 종목은 매입금액)")
 
     # ---------- 표 ----------
     head = f"{'종목':<12}{'평단':>10}{'현재가':>10}{'수량':>7}{'매입금액':>15}{'평가금액':>15}{'손익':>15}{'수익률':>9}{'비중':>8}"
