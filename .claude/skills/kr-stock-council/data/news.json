@@ -1,0 +1,20 @@
+{
+  "_note": "뉴스 점수 시계열. 채점 규칙은 references/news-scoring.md.",
+  "_warning": "blind:false는 주가를 본 뒤 채점한 것이라 사후 편향이 있다. 회귀 검증에 쓰지 않는다.",
+  "_score": "회귀에 넣는 값 = sentiment × surprise (범위 -4 ~ +4)",
+  "2026-06-23": {
+    "현대차": {"sentiment": -2, "surprise": 2, "scope": "firm", "category": "실적·관세",
+      "headline": "2분기 영업이익 2.9조로 컨센서스 3.2조 하회, 영업이익률 7.5%→5.8% / 미국 한국산 12.5% 관세 발표",
+      "blind": false, "source": "검색 2026-08-16"}
+  },
+  "2026-07-31": {
+    "삼성전자": {"sentiment": 2, "surprise": 2, "scope": "firm", "category": "실적",
+      "headline": "2분기 영업이익 89.4조 사상 최대(전년비 약 19배), AI 메모리 수요. SK하이닉스 상한가 동반",
+      "blind": false, "source": "검색 2026-08-16"}
+  },
+  "2026-08-14": {
+    "현대차": {"sentiment": 2, "surprise": 2, "scope": "firm", "category": "테마",
+      "headline": "보스턴다이내믹스 All New Atlas AI 학습영상 공개, 1차 협력사와 휴머노이드 사업 논의. 피지컬 AI 재부각",
+      "blind": false, "source": "검색 2026-08-15"}
+  }
+}

@@ -37,6 +37,29 @@ LAG = {"VIX": 1, "WTI": 1, "SOX": 1, "NASDAQ": 1, "SP500": 1,
 DIFF = {"VIX"}
 
 
+def news_series(name, dates, blind_only=True):
+    """뉴스 점수(sentiment x surprise)를 팩터 열로 만든다.
+
+    blind_only면 주가를 보고 매긴 점수(blind:false)를 제외한다.
+    그걸 섞으면 "악재인 날 빠졌다"는 동어반복이 회귀로 나온다.
+    """
+    path = os.path.join(DATA, "news.json")
+    if not os.path.exists(path):
+        return None, 0
+    with open(path, encoding="utf-8") as fh:
+        nw = json.load(fh)
+    col, scored = [], 0
+    for d in dates:
+        blk = nw.get(d) or {}
+        v = blk.get(name) if isinstance(blk, dict) else None
+        if not v or (blind_only and not v.get("blind", False)):
+            col.append(0.0)   # 사건 없음 = 0. 확인 안 한 날과는 구분이 안 되는 한계
+        else:
+            col.append(float(v.get("sentiment", 0)) * float(v.get("surprise", 0)))
+            scored += 1
+    return col, scored
+
+
 def load():
     with open(os.path.join(DATA, "history.json"), encoding="utf-8") as fh:
         hist = json.load(fh)
@@ -84,6 +107,15 @@ def analyze(hist, fac, name, keys, top):
     ret = [math.log(px[i] / px[i - 1]) for i in range(1, len(px))]
 
     cols, used = [], []
+    if "NEWS" in keys:
+        col, scored = news_series(name, rdates)
+        if col is None or scored < 60:
+            print(f"\n  ⚠️  뉴스 팩터: 편향 없이 채점된 건이 {scored if col else 0}건뿐이다.")
+            print("     60건 미만이면 계수를 보지 않는다. 매일 브리핑에서 쌓인다.")
+        else:
+            cols.append(col)
+            used.append("NEWS")
+        keys = [k for k in keys if k != "NEWS"]
     for k in keys:
         c = factor_change(fac, k, rdates)
         if sum(1 for x in c if x is not None) >= 30:
@@ -146,7 +178,8 @@ def main():
 
     avail = sorted({k for d in fac for k in fac[d]})
     print(f"사용 가능한 팩터: {', '.join(avail)}")
-    miss = [k for k in args.factors if k not in avail]
+    # NEWS는 factors.json이 아니라 news.json에서 오므로 여기서 빼고 검사한다
+    miss = [k for k in args.factors if k not in avail and k != "NEWS"]
     if miss:
         print(f"⚠️  없는 팩터: {', '.join(miss)} — 이 팩터는 빼고 돌린다")
 
