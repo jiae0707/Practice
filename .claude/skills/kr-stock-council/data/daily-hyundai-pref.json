@@ -1,0 +1,846 @@
+{
+ "_note": "현대차우 일별. 본장 종가.",
+ "_fields": "foreign, hold_pct, inst, indiv, close, volume",
+ "rows": {
+  "2026-08-14": {
+   "foreign": 29943,
+   "hold_pct": 56.78,
+   "inst": 3536,
+   "indiv": -34166,
+   "close": 211000,
+   "volume": 79830
+  },
+  "2026-08-13": {
+   "foreign": -10232,
+   "hold_pct": 56.65,
+   "inst": 2851,
+   "indiv": 4753,
+   "close": 200500,
+   "volume": 84767
+  },
+  "2026-08-12": {
+   "foreign": 2171,
+   "hold_pct": 56.41,
+   "inst": -5463,
+   "indiv": 6563,
+   "close": 199000,
+   "volume": 52905
+  },
+  "2026-08-11": {
+   "foreign": -586,
+   "hold_pct": 56.4,
+   "inst": -7421,
+   "indiv": 7887,
+   "close": 197700,
+   "volume": 40269
+  },
+  "2026-08-10": {
+   "foreign": -13019,
+   "hold_pct": 56.4,
+   "inst": -126,
+   "indiv": 12280,
+   "close": 197500,
+   "volume": 64874
+  },
+  "2026-08-07": {
+   "foreign": -12767,
+   "hold_pct": 56.46,
+   "inst": -237,
+   "indiv": 12673,
+   "close": 197500,
+   "volume": 47971
+  },
+  "2026-08-06": {
+   "foreign": -1450,
+   "hold_pct": 56.52,
+   "inst": 1178,
+   "indiv": 1024,
+   "close": 200000,
+   "volume": 66547
+  },
+  "2026-08-05": {
+   "foreign": 4635,
+   "hold_pct": 56.52,
+   "inst": -5697,
+   "indiv": 1334,
+   "close": 203000,
+   "volume": 77627
+  },
+  "2026-08-04": {
+   "foreign": -1485,
+   "hold_pct": 56.5,
+   "inst": -1059,
+   "indiv": 2683,
+   "close": 196000,
+   "volume": 55060
+  },
+  "2026-08-03": {
+   "foreign": -17748,
+   "hold_pct": 56.51,
+   "inst": -831,
+   "indiv": 18804,
+   "close": 197000,
+   "volume": 60829
+  },
+  "2026-07-31": {
+   "foreign": 17521,
+   "hold_pct": 56.58,
+   "inst": -1658,
+   "indiv": -15364,
+   "close": 199600,
+   "volume": 121794
+  },
+  "2026-07-30": {
+   "foreign": -13257,
+   "hold_pct": 56.51,
+   "inst": -192,
+   "indiv": 13842,
+   "close": 178700,
+   "volume": 100172
+  },
+  "2026-07-29": {
+   "foreign": -3733,
+   "hold_pct": 56.62,
+   "inst": 4465,
+   "indiv": -1704,
+   "close": 179200,
+   "volume": 185364
+  },
+  "2026-07-28": {
+   "foreign": -58054,
+   "hold_pct": 56.63,
+   "inst": 4463,
+   "indiv": 51995,
+   "close": 181600,
+   "volume": 141618
+  },
+  "2026-07-27": {
+   "foreign": 6428,
+   "hold_pct": 56.88,
+   "inst": -7923,
+   "indiv": 1548,
+   "close": 196100,
+   "volume": 51845
+  },
+  "2026-07-24": {
+   "foreign": -11416,
+   "hold_pct": 56.92,
+   "inst": -6721,
+   "indiv": 18274,
+   "close": 196400,
+   "volume": 69942
+  },
+  "2026-07-23": {
+   "foreign": 24366,
+   "hold_pct": 57.23,
+   "inst": 18994,
+   "indiv": -42998,
+   "close": 205000,
+   "volume": 126665
+  },
+  "2026-07-22": {
+   "foreign": 5904,
+   "hold_pct": 57.34,
+   "inst": -258,
+   "indiv": -5724,
+   "close": 193400,
+   "volume": 71988
+  },
+  "2026-07-21": {
+   "foreign": 15004,
+   "hold_pct": 57.32,
+   "inst": -5281,
+   "indiv": -9561,
+   "close": 189800,
+   "volume": 127292
+  },
+  "2026-07-20": {
+   "foreign": -26040,
+   "hold_pct": 57.35,
+   "inst": -1519,
+   "indiv": 27582,
+   "close": 185600,
+   "volume": 136857
+  },
+  "2026-07-16": {
+   "foreign": -20024,
+   "hold_pct": 57.46,
+   "inst": 1546,
+   "indiv": 18547,
+   "close": 194600,
+   "volume": 127957
+  },
+  "2026-07-15": {
+   "foreign": 921,
+   "hold_pct": 57.55,
+   "inst": 364,
+   "indiv": 371,
+   "close": 198800,
+   "volume": 149314
+  },
+  "2026-07-14": {
+   "foreign": -24187,
+   "hold_pct": 57.54,
+   "inst": 4492,
+   "indiv": 20054,
+   "close": 196200,
+   "volume": 176840
+  },
+  "2026-07-13": {
+   "foreign": -28257,
+   "hold_pct": 57.65,
+   "inst": -1061,
+   "indiv": 27769,
+   "close": 199800,
+   "volume": 127270
+  },
+  "2026-07-10": {
+   "foreign": -23324,
+   "hold_pct": 57.77,
+   "inst": -804,
+   "indiv": 19672,
+   "close": 204500,
+   "volume": 96143
+  },
+  "2026-07-09": {
+   "foreign": -33201,
+   "hold_pct": 57.99,
+   "inst": -132,
+   "indiv": 33936,
+   "close": 201500,
+   "volume": 141536
+  },
+  "2026-07-08": {
+   "foreign": 11118,
+   "hold_pct": 58.13,
+   "inst": -1689,
+   "indiv": -19875,
+   "close": 212000,
+   "volume": 121786
+  },
+  "2026-07-07": {
+   "foreign": -17442,
+   "hold_pct": 58.08,
+   "inst": -890,
+   "indiv": 18036,
+   "close": 213500,
+   "volume": 64325
+  },
+  "2026-07-06": {
+   "foreign": -12474,
+   "hold_pct": 58.16,
+   "inst": 2158,
+   "indiv": -13662,
+   "close": 222500,
+   "volume": 75629
+  },
+  "2026-07-03": {
+   "foreign": 8369,
+   "hold_pct": 58.21,
+   "inst": -3048,
+   "indiv": -5657,
+   "close": 214000,
+   "volume": 65614
+  },
+  "2026-07-02": {
+   "foreign": -882,
+   "hold_pct": 58.17,
+   "inst": -619,
+   "indiv": 1436,
+   "close": 213500,
+   "volume": 71082
+  },
+  "2026-07-01": {
+   "foreign": -3664,
+   "hold_pct": 58.18,
+   "inst": -1367,
+   "indiv": 5576,
+   "close": 221000,
+   "volume": 60286
+  },
+  "2026-06-30": {
+   "foreign": 6132,
+   "hold_pct": 58.19,
+   "inst": -2736,
+   "indiv": -3316,
+   "close": 217000,
+   "volume": 99920
+  },
+  "2026-06-29": {
+   "foreign": -5272,
+   "hold_pct": 58.16,
+   "inst": -547,
+   "indiv": 8235,
+   "close": 216500,
+   "volume": 71486
+  },
+  "2026-06-26": {
+   "foreign": 51887,
+   "hold_pct": 57.92,
+   "inst": -24009,
+   "indiv": -27638,
+   "close": 214000,
+   "volume": 144776
+  },
+  "2026-06-25": {
+   "foreign": 36751,
+   "hold_pct": 57.69,
+   "inst": -11369,
+   "indiv": -24784,
+   "close": 219000,
+   "volume": 116331
+  },
+  "2026-06-24": {
+   "foreign": -9882,
+   "hold_pct": 57.53,
+   "inst": 2662,
+   "indiv": 7016,
+   "close": 212000,
+   "volume": 89757
+  },
+  "2026-06-23": {
+   "foreign": -10804,
+   "hold_pct": 57.57,
+   "inst": -27090,
+   "indiv": 41007,
+   "close": 213000,
+   "volume": 181590
+  },
+  "2026-06-22": {
+   "foreign": -9338,
+   "hold_pct": 57.62,
+   "inst": 8740,
+   "indiv": 572,
+   "close": 235500,
+   "volume": 90077
+  },
+  "2026-06-19": {
+   "foreign": 3960,
+   "hold_pct": 57.66,
+   "inst": -1928,
+   "indiv": -1905,
+   "close": 243000,
+   "volume": 162664
+  },
+  "2026-06-18": {
+   "foreign": 1213,
+   "hold_pct": 57.64,
+   "inst": 2587,
+   "indiv": -3658,
+   "close": 241500,
+   "volume": 102143
+  },
+  "2026-06-17": {
+   "foreign": -6275,
+   "hold_pct": 57.63,
+   "inst": -5082,
+   "indiv": 11363,
+   "close": 247500,
+   "volume": 55422
+  },
+  "2026-06-16": {
+   "foreign": 10312,
+   "hold_pct": 57.66,
+   "inst": -16708,
+   "indiv": 6035,
+   "close": 253000,
+   "volume": 60260
+  },
+  "2026-06-15": {
+   "foreign": 13019,
+   "hold_pct": 57.48,
+   "inst": 4327,
+   "indiv": -16606,
+   "close": 256500,
+   "volume": 82342
+  },
+  "2026-06-12": {
+   "foreign": 13370,
+   "hold_pct": 57.28,
+   "inst": -644,
+   "indiv": -5806,
+   "close": 241500,
+   "volume": 79213
+  },
+  "2026-06-11": {
+   "foreign": -31366,
+   "hold_pct": 57.23,
+   "inst": 4839,
+   "indiv": 27005,
+   "close": 234500,
+   "volume": 77900
+  },
+  "2026-06-10": {
+   "foreign": 2437,
+   "hold_pct": 57.5,
+   "inst": -13437,
+   "indiv": 10865,
+   "close": 240000,
+   "volume": 99876
+  },
+  "2026-06-09": {
+   "foreign": 21654,
+   "hold_pct": 57.49,
+   "inst": -16841,
+   "indiv": -3581,
+   "close": 246500,
+   "volume": 96931
+  },
+  "2026-06-08": {
+   "foreign": -30028,
+   "hold_pct": 57.41,
+   "inst": 909,
+   "indiv": 31468,
+   "close": 237500,
+   "volume": 159402
+  },
+  "2026-06-05": {
+   "foreign": -7413,
+   "hold_pct": 57.53,
+   "inst": -8923,
+   "indiv": 16743,
+   "close": 259000,
+   "volume": 180200
+  },
+  "2026-06-04": {
+   "foreign": -20992,
+   "hold_pct": 57.61,
+   "inst": -3323,
+   "indiv": 23494,
+   "close": 268000,
+   "volume": 108733
+  },
+  "2026-06-02": {
+   "foreign": -41586,
+   "hold_pct": 57.7,
+   "inst": -1326,
+   "indiv": 43994,
+   "close": 282000,
+   "volume": 290532
+  },
+  "2026-06-01": {
+   "foreign": 86013,
+   "hold_pct": 57.91,
+   "inst": 20068,
+   "indiv": -110306,
+   "close": 295000,
+   "volume": 473801
+  },
+  "2026-05-29": {
+   "foreign": 29615,
+   "hold_pct": 57.55,
+   "inst": -28965,
+   "indiv": -1923,
+   "close": 274000,
+   "volume": 509564
+  },
+  "2026-05-28": {
+   "foreign": -62961,
+   "hold_pct": 57.42,
+   "inst": -18401,
+   "indiv": 79120,
+   "close": 265000,
+   "volume": 246870
+  },
+  "2026-05-27": {
+   "foreign": 51925,
+   "hold_pct": 57.66,
+   "inst": 6635,
+   "indiv": -55533,
+   "close": 277500,
+   "volume": 161055
+  },
+  "2026-05-26": {
+   "foreign": 40265,
+   "hold_pct": 57.44,
+   "inst": 10272,
+   "indiv": -49428,
+   "close": 277500,
+   "volume": 132345
+  },
+  "2026-05-22": {
+   "foreign": 18640,
+   "hold_pct": 57.27,
+   "inst": -86,
+   "indiv": -16747,
+   "close": 267500,
+   "volume": 112272
+  },
+  "2026-05-21": {
+   "foreign": 55526,
+   "hold_pct": 57.19,
+   "inst": -2575,
+   "indiv": -48616,
+   "close": 269500,
+   "volume": 147728
+  },
+  "2026-05-20": {
+   "foreign": 12599,
+   "hold_pct": 56.94,
+   "inst": -11062,
+   "indiv": -3630,
+   "close": 248000,
+   "volume": 168990
+  },
+  "2026-05-19": {
+   "foreign": -37166,
+   "hold_pct": 56.89,
+   "inst": -15298,
+   "indiv": 51332,
+   "close": 249000,
+   "volume": 196625
+  },
+  "2026-05-18": {
+   "foreign": -33099,
+   "hold_pct": 57.05,
+   "inst": -8960,
+   "indiv": 42824,
+   "close": 269000,
+   "volume": 158384
+  },
+  "2026-05-15": {
+   "foreign": 56460,
+   "hold_pct": 57.19,
+   "inst": -6260,
+   "indiv": -50968,
+   "close": 280000,
+   "volume": 276561
+  },
+  "2026-05-14": {
+   "foreign": 20792,
+   "hold_pct": 56.95,
+   "inst": 8956,
+   "indiv": -26493,
+   "close": 284000,
+   "volume": 237773
+  },
+  "2026-05-13": {
+   "foreign": 34751,
+   "hold_pct": 56.86,
+   "inst": 4728,
+   "indiv": -34456,
+   "close": 280500,
+   "volume": 235076
+  },
+  "2026-05-12": {
+   "foreign": 3980,
+   "hold_pct": 56.67,
+   "inst": 5418,
+   "indiv": -9547,
+   "close": 267000,
+   "volume": 250197
+  },
+  "2026-05-11": {
+   "foreign": -15242,
+   "hold_pct": 56.64,
+   "inst": -3646,
+   "indiv": 14455,
+   "close": 272000,
+   "volume": 196030
+  },
+  "2026-05-08": {
+   "foreign": 43738,
+   "hold_pct": 56.7,
+   "inst": 15883,
+   "indiv": -65889,
+   "close": 269000,
+   "volume": 336858
+  },
+  "2026-05-07": {
+   "foreign": 14556,
+   "hold_pct": 56.54,
+   "inst": 297,
+   "indiv": -12651,
+   "close": 257500,
+   "volume": 125492
+  },
+  "2026-05-06": {
+   "foreign": 38859,
+   "hold_pct": 56.47,
+   "inst": -4284,
+   "indiv": -32241,
+   "close": 252500,
+   "volume": 126348
+  },
+  "2026-05-04": {
+   "foreign": -16495,
+   "hold_pct": 56.31,
+   "inst": -723,
+   "indiv": 16187,
+   "close": 249000,
+   "volume": 80883
+  },
+  "2026-04-30": {
+   "foreign": -55177,
+   "hold_pct": 56.37,
+   "inst": 6834,
+   "indiv": 47605,
+   "close": 249000,
+   "volume": 104218
+  },
+  "2026-04-29": {
+   "foreign": -6047,
+   "hold_pct": 56.6,
+   "inst": -3584,
+   "indiv": 5951,
+   "close": 259500,
+   "volume": 74219
+  },
+  "2026-04-28": {
+   "foreign": 24095,
+   "hold_pct": 56.63,
+   "inst": -8197,
+   "indiv": -24698,
+   "close": 261500,
+   "volume": 157723
+  },
+  "2026-04-27": {
+   "foreign": 32919,
+   "hold_pct": 56.53,
+   "inst": -3050,
+   "indiv": -29600,
+   "close": 252500,
+   "volume": 85421
+  },
+  "2026-04-24": {
+   "foreign": -45882,
+   "hold_pct": 56.39,
+   "inst": -17399,
+   "indiv": 68259,
+   "close": 246000,
+   "volume": 113578
+  },
+  "2026-04-23": {
+   "foreign": 3582,
+   "hold_pct": 56.58,
+   "inst": -2885,
+   "indiv": 1196,
+   "close": 254500,
+   "volume": 72981
+  },
+  "2026-04-22": {
+   "foreign": -5732,
+   "hold_pct": 56.55,
+   "inst": -1198,
+   "indiv": 6867,
+   "close": 255500,
+   "volume": 56923
+  },
+  "2026-04-21": {
+   "foreign": 16660,
+   "hold_pct": 56.58,
+   "inst": 6358,
+   "indiv": -21635,
+   "close": 258500,
+   "volume": 82092
+  },
+  "2026-04-20": {
+   "foreign": -10083,
+   "hold_pct": 56.51,
+   "inst": -397,
+   "indiv": 10790,
+   "close": 250000,
+   "volume": 68653
+  },
+  "2026-04-17": {
+   "foreign": -9944,
+   "hold_pct": 56.55,
+   "inst": -5202,
+   "indiv": 15087,
+   "close": 253500,
+   "volume": 69618
+  },
+  "2026-04-16": {
+   "foreign": 5733,
+   "hold_pct": 56.59,
+   "inst": -2189,
+   "indiv": -428,
+   "close": 254000,
+   "volume": 126245
+  },
+  "2026-04-15": {
+   "foreign": 37322,
+   "hold_pct": 56.57,
+   "inst": -8722,
+   "indiv": -27631,
+   "close": 247000,
+   "volume": 106196
+  },
+  "2026-04-14": {
+   "foreign": 34691,
+   "hold_pct": 56.41,
+   "inst": -1228,
+   "indiv": -17255,
+   "close": 242000,
+   "volume": 97698
+  },
+  "2026-04-13": {
+   "foreign": 7818,
+   "hold_pct": 56.26,
+   "inst": -2545,
+   "indiv": -5555,
+   "close": 235000,
+   "volume": 64606
+  },
+  "2026-04-10": {
+   "foreign": -12893,
+   "hold_pct": 56.23,
+   "inst": -4193,
+   "indiv": 18495,
+   "close": 239500,
+   "volume": 100949
+  },
+  "2026-04-09": {
+   "foreign": -2108,
+   "hold_pct": 56.28,
+   "inst": -17486,
+   "indiv": 19128,
+   "close": 242500,
+   "volume": 94986
+  },
+  "2026-04-08": {
+   "foreign": 24057,
+   "hold_pct": 56.57,
+   "inst": -2020,
+   "indiv": -257,
+   "close": 249000,
+   "volume": 128025
+  },
+  "2026-04-07": {
+   "foreign": 7436,
+   "hold_pct": 56.47,
+   "inst": -3511,
+   "indiv": -4860,
+   "close": 237500,
+   "volume": 56488
+  },
+  "2026-04-06": {
+   "foreign": 9062,
+   "hold_pct": 56.43,
+   "inst": -203,
+   "indiv": -8301,
+   "close": 235500,
+   "volume": 36208
+  },
+  "2026-04-03": {
+   "foreign": -3248,
+   "hold_pct": 56.12,
+   "inst": -22823,
+   "indiv": 26967,
+   "close": 236000,
+   "volume": 75654
+  },
+  "2026-04-02": {
+   "foreign": -22221,
+   "hold_pct": 56.13,
+   "inst": 4738,
+   "indiv": 16347,
+   "close": 235500,
+   "volume": 124086
+  },
+  "2026-04-01": {
+   "foreign": 20183,
+   "hold_pct": 56.23,
+   "inst": -17606,
+   "indiv": -4760,
+   "close": 247000,
+   "volume": 104994
+  },
+  "2026-03-31": {
+   "foreign": -27219,
+   "hold_pct": 56.14,
+   "inst": 1780,
+   "indiv": 26663,
+   "close": 229000,
+   "volume": 141476
+  },
+  "2026-03-30": {
+   "foreign": -30147,
+   "hold_pct": 56.26,
+   "inst": -1931,
+   "indiv": 29790,
+   "close": 243500,
+   "volume": 117068
+  },
+  "2026-03-27": {
+   "foreign": 21139,
+   "hold_pct": 56.39,
+   "inst": -2471,
+   "indiv": -18017,
+   "close": 257000,
+   "volume": 74094
+  },
+  "2026-03-26": {
+   "foreign": -1852,
+   "hold_pct": 56.44,
+   "inst": 147,
+   "indiv": 1438,
+   "close": 250500,
+   "volume": 66214
+  },
+  "2026-03-25": {
+   "foreign": 11746,
+   "hold_pct": 56.73,
+   "inst": -10039,
+   "indiv": -1659,
+   "close": 256500,
+   "volume": 51671
+  },
+  "2026-03-24": {
+   "foreign": -20520,
+   "hold_pct": 56.68,
+   "inst": 17063,
+   "indiv": 4019,
+   "close": 250000,
+   "volume": 110092
+  },
+  "2026-03-23": {
+   "foreign": -14768,
+   "hold_pct": 56.76,
+   "inst": -29578,
+   "indiv": 42401,
+   "close": 247000,
+   "volume": 149886
+  },
+  "2026-03-20": {
+   "foreign": -15834,
+   "hold_pct": 56.83,
+   "inst": -8946,
+   "indiv": 23966,
+   "close": 265000,
+   "volume": 159943
+  },
+  "2026-03-19": {
+   "foreign": -28825,
+   "hold_pct": 56.9,
+   "inst": -3202,
+   "indiv": 30906,
+   "close": 269000,
+   "volume": 101310
+  },
+  "2026-03-18": {
+   "foreign": 37093,
+   "hold_pct": 57.02,
+   "inst": -5702,
+   "indiv": -31497,
+   "close": 279500,
+   "volume": 99628
+  },
+  "2026-03-17": {
+   "foreign": 11427,
+   "hold_pct": 56.86,
+   "inst": -2362,
+   "indiv": -8446,
+   "close": 267500,
+   "volume": 79405
+  },
+  "2026-03-16": {
+   "foreign": 28775,
+   "hold_pct": 56.81,
+   "inst": -26748,
+   "indiv": -1147,
+   "close": 262000,
+   "volume": 96514
+  }
+ }
+}
