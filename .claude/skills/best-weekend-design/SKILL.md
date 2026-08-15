@@ -59,8 +59,10 @@ description: 최고의 주말을 설계하는 스킬. 블랙/레드/블루/실�
 
 ### 0단계 — 사용자 파일 세 개를 먼저 읽는다
 
-1. **`references/user-profile.md`** — 생활 리듬(기상·취침), 고정 습관, 선호와 기피,
-   수정 요청 처리 방식. 이걸 안 읽고 짠 일정은 남의 주말이다
+1. **`.claude/context/about-me.md`** — 저장소 공용 프로필. 생활 리듬(기상 05:00·취침 21:00),
+   건강과 운동, 집과 취향, 미술·자연 취향, 이동수단, 2식 생활, 씻기, 일하는 방식.
+   이걸 안 읽고 짠 일정은 남의 주말이다.
+   (주말 설계에서 특히 자주 걸리는 항목은 `references/user-profile.md`에 요약해뒀다)
 2. **`references/recurring-rules.md`** — 주기가 돌아온 반복 활동
 3. **`references/routine-patterns.md`** — 실제 기록에서 뽑은 루틴 패턴.
    항상 붙어 다니는 묶음(사우나→정리, 화분→꽃병, 옷 정하기→스타일러), 자주 가는 곳,
@@ -227,7 +229,8 @@ HTML 아티팩트로 만든다 (그때는 `artifact-design` 스킬을 먼저 읽
 
 ## 참고 파일
 
-- `references/user-profile.md` — **매번 가장 먼저.** 생활 리듬, 고정 습관, 선호, 수정 처리
+- `.claude/context/about-me.md` — **매번 가장 먼저.** 저장소 공용 사용자 프로필
+- `references/user-profile.md` — 그중 주말 설계에 자주 걸리는 항목 요약
 - `references/recurring-rules.md` — 주기 반복 활동. 읽고, 끝나면 실행일 갱신
 - `references/routine-patterns.md` — 실제 기록에서 뽑은 루틴 패턴. 활동을 여기서 조합한다
 - `references/personas.md` — 5인의 성격, 말투, 체크리스트
