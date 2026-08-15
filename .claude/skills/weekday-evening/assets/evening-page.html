@@ -1,0 +1,445 @@
+<title>평일 저녁 60분</title>
+<style>
+  :root {
+    --ground:       #EDEFF4;
+    --surface:      #FBFCFE;
+    --surface-sunk: #E2E6EE;
+    --line:         #C7CEDC;
+    --line-soft:    #DBE0EA;
+    --ink:          #1A2133;
+    --ink-soft:     #4C5771;
+    --ink-faint:    #7E879E;
+    --accent:       #3D5288;   /* 해진 뒤 하늘 */
+    --accent-soft:  #DDE3F2;
+    --amber:        #A2651B;   /* 가로등 */
+    --amber-soft:   #F5E6D0;
+    --done:         #939BAE;
+    --shadow: 0 1px 2px rgba(26,33,51,.05), 0 10px 30px -20px rgba(26,33,51,.4);
+
+    --dusk-1: #F0DCC2;
+    --dusk-2: #C9D2E4;
+    --hill:   #33415F;
+    --water:  #4A5D86;
+    --lamp:   #E0A552;
+    --scene-opacity: .6;
+
+    --display: AppleMyungjo, "Nanum Myeongjo", "Noto Serif KR", Batang, serif;
+    --body: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", system-ui, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#0D1120; --surface:#151B2E; --surface-sunk:#1D2439;
+      --line:#2E374F; --line-soft:#232B41;
+      --ink:#E7EAF3; --ink-soft:#A5AEC6; --ink-faint:#78829C;
+      --accent:#93A7DC; --accent-soft:#1E2745;
+      --amber:#D9A25C; --amber-soft:#332614;
+      --done:#5D6580;
+      --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 30px -20px rgba(0,0,0,.9);
+      --dusk-1:#2A2438; --dusk-2:#151C31;
+      --hill:#1A2138; --water:#26314F; --lamp:#B98440;
+      --scene-opacity:.55;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#0D1120; --surface:#151B2E; --surface-sunk:#1D2439;
+    --line:#2E374F; --line-soft:#232B41;
+    --ink:#E7EAF3; --ink-soft:#A5AEC6; --ink-faint:#78829C;
+    --accent:#93A7DC; --accent-soft:#1E2745;
+    --amber:#D9A25C; --amber-soft:#332614;
+    --done:#5D6580;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 10px 30px -20px rgba(0,0,0,.9);
+    --dusk-1:#2A2438; --dusk-2:#151C31;
+    --hill:#1A2138; --water:#26314F; --lamp:#B98440;
+    --scene-opacity:.55;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--body); font-size: 15px; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: var(--scene-opacity); }
+  .scene svg { width: 100%; height: 100%; display: block; }
+
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 1120px; margin: 0 auto;
+    padding: clamp(28px, 5vw, 60px) clamp(16px, 4vw, 40px) 80px;
+    display: flex; flex-direction: column; gap: clamp(26px, 4vw, 42px);
+  }
+
+  .masthead { display: flex; flex-direction: column; gap: 12px; }
+  .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-family: var(--display); font-size: clamp(34px, 6vw, 54px); line-height: 1.08;
+       margin: 0; font-weight: 400; letter-spacing: -.01em; text-wrap: balance; }
+  .dek { color: var(--ink-soft); max-width: 62ch; margin: 0; }
+
+  .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+              border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 18px; }
+  .sec-head h2 { font-family: var(--display); font-size: 20px; font-weight: 400; margin: 0; }
+  .sec-head span { font-size: 12.5px; color: var(--ink-faint); }
+
+  /* ---------- 시간 막대 ---------- */
+  .bar { display: flex; height: 44px; border-radius: 4px; overflow: hidden;
+         border: 1px solid var(--line-soft); background: var(--surface); }
+  .seg { display: grid; place-items: center; font-size: 11.5px; font-weight: 600;
+         color: var(--ink-soft); border-right: 1px solid var(--line-soft); min-width: 0;
+         padding: 0 4px; text-align: center; }
+  .seg:last-child { border-right: 0; }
+  .seg.use { background: var(--accent-soft); color: var(--accent); }
+  .seg.free { background: var(--amber-soft); color: var(--amber); }
+  .bar-legend { display: flex; justify-content: space-between; margin-top: 7px;
+                font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); }
+  .bar-note { margin: 12px 0 0; font-size: 13.5px; color: var(--ink-soft); max-width: 70ch; }
+  .bar-note b { color: var(--ink); }
+
+  /* ---------- 요일 카드 ---------- */
+  .days { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start; }
+  .day { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px;
+         box-shadow: var(--shadow); overflow: hidden; }
+  .day > header { padding: 15px 18px 12px; border-bottom: 1px solid var(--line-soft);
+                  display: flex; flex-direction: column; gap: 3px; }
+  .day header .dow { font-family: var(--display); font-size: 24px; line-height: 1.1;
+                     display: flex; align-items: baseline; gap: 9px; }
+  .day header .dow em { font-family: var(--mono); font-style: normal; font-size: 12px;
+                        color: var(--ink-faint); }
+  .day header .am { font-size: 12px; color: var(--ink-faint); font-family: var(--mono); }
+  .day header .tag { font-size: 12.5px; color: var(--accent); font-weight: 600; }
+  .day.hero { border-color: var(--accent); }
+  .day.solo header .tag { color: var(--amber); }
+
+  ul.tl { list-style: none; margin: 0; padding: 2px 18px 14px; }
+  ul.tl > li { border-bottom: 1px solid var(--line-soft); }
+  ul.tl > li:last-child { border-bottom: 0; }
+  .row { display: grid; grid-template-columns: 18px 48px 1fr; gap: 0 10px;
+         padding: 9px 0; align-items: start; cursor: pointer; }
+  .row input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .box { width: 15px; height: 15px; margin-top: 3px; border-radius: 3px;
+         border: 1.5px solid var(--line); display: grid; place-items: center;
+         color: transparent; font-size: 10px; line-height: 1; transition: all .13s ease; }
+  .row input:checked ~ .box { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+  .row input:checked ~ .box::after { content: "✓"; }
+  .row input:focus-visible ~ .box { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .t { font-family: var(--mono); font-size: 12px; font-variant-numeric: tabular-nums;
+       color: var(--ink-faint); padding-top: 3px; }
+  .b { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .b .name { font-weight: 600; line-height: 1.4; font-size: 14.5px; }
+  .b .sub { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+  .row input:checked ~ .b .name { color: var(--done); text-decoration: line-through; text-decoration-thickness: 1px; }
+  .row input:checked ~ .b .sub, .row input:checked ~ .t { color: var(--done); }
+  li.free .b .name { color: var(--amber); }
+  li.free .b .name::after { content: "보상"; font-size: 10px; font-weight: 600; letter-spacing: .06em;
+    vertical-align: 2px; margin-left: 7px; padding: 1px 5px; border-radius: 2px;
+    background: var(--amber-soft); color: var(--amber); }
+
+  .mini { padding: 11px 18px 15px; border-top: 1px solid var(--line-soft); background: var(--surface-sunk); }
+  .mini .lbl { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+               color: var(--ink-faint); font-weight: 600; margin-bottom: 5px; }
+  .mini p { margin: 0; font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ---------- 영어 ---------- */
+  .eng { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px;
+          padding: 17px 19px; display: flex; flex-direction: column; gap: 9px; }
+  .card h3 { margin: 0; font-size: 15.5px; font-weight: 600; }
+  .card .k { font-family: var(--mono); font-size: 11.5px; color: var(--accent); letter-spacing: .06em; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
+  .card ol { margin: 0; padding-left: 19px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  .card ol b, .card p b { color: var(--ink); font-weight: 600; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+  .links a { font-size: 12px; text-decoration: none; color: var(--accent);
+             border: 1px solid var(--line); border-radius: 999px; padding: 3px 11px; }
+  .links a:hover { background: var(--accent-soft); border-color: var(--accent); }
+  .links a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 620px) { .steps { grid-template-columns: 1fr; } }
+  .step { border: 1px solid var(--line-soft); border-radius: 4px; padding: 12px 14px;
+          background: var(--surface); display: flex; flex-direction: column; gap: 3px; }
+  .step .m { font-family: var(--mono); font-size: 11.5px; color: var(--accent); }
+  .step .h { font-weight: 600; font-size: 14px; }
+  .step .d { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  .rescue { background: var(--amber-soft); border: 1px solid var(--amber); border-radius: 4px;
+            padding: 16px 19px; display: flex; flex-direction: column; gap: 7px; }
+  .rescue h3 { margin: 0; font-size: 15.5px; font-weight: 600; color: var(--amber); }
+  .rescue p, .rescue ol { margin: 0; font-size: 13.5px; color: var(--ink-soft); line-height: 1.65; }
+  .rescue ol { padding-left: 19px; }
+  .rescue b { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<!-- ===== 해질녘 성내천 ===== -->
+<div class="scene" aria-hidden="true">
+  <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="dusk" x1="0" y1="0" x2="0.2" y2="1">
+        <stop offset="0%" stop-color="var(--dusk-1)"/>
+        <stop offset="45%" stop-color="var(--dusk-2)"/>
+        <stop offset="100%" stop-color="var(--ground)"/>
+      </linearGradient>
+      <linearGradient id="stream" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="var(--water)" stop-opacity=".22"/>
+        <stop offset="100%" stop-color="var(--water)" stop-opacity=".04"/>
+      </linearGradient>
+      <radialGradient id="glow">
+        <stop offset="0%" stop-color="var(--lamp)" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="var(--lamp)" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+
+    <rect width="1200" height="800" fill="url(#dusk)"/>
+
+    <!-- 낮게 걸린 해 -->
+    <circle cx="196" cy="212" r="42" fill="var(--dusk-1)" opacity=".9"/>
+    <circle cx="196" cy="212" r="78" fill="none" stroke="var(--dusk-1)" stroke-width="1.1" opacity=".45"/>
+
+    <!-- 능선 -->
+    <path d="M0 330 C 160 300, 300 340, 470 320 C 640 300, 800 268, 960 296 C 1080 316, 1140 300, 1200 308 L1200 800 L0 800 Z"
+          fill="var(--hill)" opacity=".12"/>
+    <path d="M0 392 C 200 360, 340 404, 520 386 C 700 368, 860 344, 1010 372 C 1110 390, 1160 378, 1200 384 L1200 800 L0 800 Z"
+          fill="var(--hill)" opacity=".09"/>
+
+    <!-- 성내천 물길 -->
+    <path d="M-40 560 C 220 520, 380 596, 640 566 C 880 538, 1000 596, 1240 566 L1240 800 L-40 800 Z" fill="url(#stream)"/>
+    <g stroke="var(--water)" fill="none" opacity=".2" stroke-linecap="round">
+      <path d="M40 612 q 60 -14 120 0 t 120 0 t 120 0 t 120 0 t 120 0 t 120 0 t 120 0 t 120 0" stroke-width="1.4"/>
+      <path d="M0 652 q 70 -15 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0 t 140 0" stroke-width="1.1"/>
+    </g>
+
+    <!-- 가로등 두 개 -->
+    <g>
+      <circle cx="905" cy="470" r="66" fill="url(#glow)"/>
+      <path d="M905 470 L905 640" stroke="var(--hill)" stroke-width="3" opacity=".4"/>
+      <circle cx="905" cy="468" r="7" fill="var(--lamp)" opacity=".85"/>
+      <circle cx="1078" cy="498" r="48" fill="url(#glow)"/>
+      <path d="M1078 498 L1078 636" stroke="var(--hill)" stroke-width="2.4" opacity=".33"/>
+      <circle cx="1078" cy="496" r="5.5" fill="var(--lamp)" opacity=".8"/>
+    </g>
+
+    <!-- 나무 실루엣 -->
+    <g fill="var(--hill)" opacity=".26">
+      <path d="M120 640 C 96 592, 108 548, 146 528 C 190 506, 236 534, 236 578 C 236 618, 200 644, 168 642 Z"/>
+      <rect x="168" y="636" width="7" height="52" rx="3"/>
+      <path d="M300 654 C 284 618, 294 586, 322 572 C 354 556, 388 578, 386 610 C 384 640, 356 658, 334 656 Z"/>
+      <rect x="336" y="650" width="6" height="42" rx="3"/>
+    </g>
+
+    <!-- 갈대 -->
+    <g stroke="var(--hill)" fill="none" opacity=".24" stroke-linecap="round">
+      <path d="M60 780 C 56 736, 44 712, 24 696" stroke-width="2.2"/>
+      <path d="M86 782 C 88 742, 102 718, 124 704" stroke-width="1.8"/>
+      <path d="M1160 786 C 1154 744, 1138 720, 1114 706" stroke-width="2"/>
+      <path d="M1188 784 C 1192 748, 1204 726, 1224 714" stroke-width="1.6"/>
+    </g>
+
+    <!-- 초저녁 별 -->
+    <g fill="var(--dusk-1)" opacity=".5">
+      <circle cx="740" cy="120" r="2"/><circle cx="838" cy="176" r="1.6"/>
+      <circle cx="1010" cy="104" r="1.8"/><circle cx="612" cy="164" r="1.4"/>
+    </g>
+  </svg>
+</div>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">퇴근 17:00 · 취침 21:00</div>
+    <h1>평일 저녁 60분</h1>
+    <p class="dek">
+      집에 오면 늘어지는 건 의지 문제가 아니다. <b>한 번 앉으면 다시 일어나기 어렵다</b>는
+      구조가 원인이다. 그래서 게임과 넷플릭스를 없애지 않고 <b>순서만 바꾼다</b> —
+      운동과 영어를 앞에 두고, 그 뒤는 마음대로.
+    </p>
+  </header>
+
+  <section>
+    <div class="sec-head"><h2>하루에서 쓰는 몫</h2><span>210분 중 60분 · 나머지는 전부 자유다</span></div>
+    <div class="bar">
+      <div class="seg" style="flex:15">집 정리 15</div>
+      <div class="seg use" style="flex:35">운동 35</div>
+      <div class="seg" style="flex:20">씻기 20</div>
+      <div class="seg use" style="flex:25">영어 25</div>
+      <div class="seg free" style="flex:95">자유 95분</div>
+      <div class="seg" style="flex:20">취침 준비</div>
+    </div>
+    <div class="bar-legend"><span>17:30</span><span>19:10</span><span>21:00</span></div>
+    <p class="bar-note">
+      파란 두 칸이 실제로 쓰는 <b>60분</b>이고, 가장 넓은 칸이 <b>자유 시간</b>이다.
+      저녁을 통째로 설계하려 들면 그 계획은 안 지켜진다. 그리고
+      <b>자유 시간은 항상 마지막</b>이다 — 앞으로 오면 그날은 거기서 끝난다.
+    </p>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>요일별</h2><span>같은 요일엔 같은 운동 · 고르는 데 드는 힘을 없앤다</span></div>
+    <div class="days">
+
+      <article class="day">
+        <header>
+          <div class="dow">월 <em>MON</em></div>
+          <div class="am">아침 06:10 요가 (회사)</div>
+          <div class="tag">단지 산책 35분</div>
+        </header>
+        <ul class="tl">
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:30</span>
+            <span class="b"><span class="name">집 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:45</span>
+            <span class="b"><span class="name">단지 산책 35분</span><span class="sub">성내천 입구까지 · 중간에 집에 안 들름</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:45</span>
+            <span class="b"><span class="name">영어 25분</span><span class="sub">산책 중 혼잣말로 끝냈으면 생략</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:10</span>
+            <span class="b"><span class="name">자유 시간</span></span></label></li>
+        </ul>
+        <div class="mini"><div class="lbl">힘든 날</div><p>단지 한 바퀴 10분 + 영어 3분 버전</p></div>
+      </article>
+
+      <article class="day solo">
+        <header>
+          <div class="dow">화 <em>TUE</em></div>
+          <div class="am">아침 06:10 필라테스 (회사)</div>
+          <div class="tag">수영 19:00 — 저녁이 이거 하나</div>
+        </header>
+        <ul class="tl">
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:30</span>
+            <span class="b"><span class="name">집 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:40</span>
+            <span class="b"><span class="name">영어 3분 버전</span><span class="sub">출발 전에 끝내둔다 · 다녀와서 아무것도 안 해도 되게</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
+            <span class="b"><span class="name">출발</span><span class="sub">수영가방은 전날 밤에</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:00</span>
+            <span class="b"><span class="name">수영 강습</span><span class="sub">~19:50 · 20:30 귀가</span></span></label></li>
+        </ul>
+        <div class="mini"><div class="lbl">이 날만은</div>
+          <p>자유 시간이 없는 날로 친다. <b>용품 정리는 내일 아침으로</b> —
+             20:40에 젖은 수영복을 널면 취침이 밀린다.
+             점심 이후 7시간째 공복이니 첫 2~3주는 무리하지 않는다.</p></div>
+      </article>
+
+      <article class="day hero">
+        <header>
+          <div class="dow">수 <em>WED</em></div>
+          <div class="am">아침 운동 없음</div>
+          <div class="tag">자전거 성내천 35분 — 이번 주의 중심</div>
+        </header>
+        <ul class="tl">
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">아침</span>
+            <span class="b"><span class="name">수영용품 정리</span><span class="sub">어제 것</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:30</span>
+            <span class="b"><span class="name">집 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:45</span>
+            <span class="b"><span class="name">자전거 성내천 35분</span><span class="sub">물 챙기고 그늘 구간으로 · 스트레칭은 따로 붙이지 않는다</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:45</span>
+            <span class="b"><span class="name">영어 25분</span><span class="sub">6 Minute English 1일차 — 자막 보며</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:10</span>
+            <span class="b"><span class="name">자유 시간</span></span></label></li>
+        </ul>
+        <div class="mini"><div class="lbl">비 오면</div><p>목요일 홈트로 바꾼다. 자전거를 못 탄 게 쉬는 이유가 되지 않게.</p></div>
+      </article>
+
+      <article class="day">
+        <header>
+          <div class="dow">목 <em>THU</em></div>
+          <div class="am">아침 운동 없음</div>
+          <div class="tag">홈트 + 스트레칭 35분</div>
+        </header>
+        <ul class="tl">
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:30</span>
+            <span class="b"><span class="name">집 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:45</span>
+            <span class="b"><span class="name">홈트 35분</span><span class="sub">워밍업 5 · 상체·코어 18 · 하체 7 · 스트레칭 5 — 끊지 않고 이어서</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:45</span>
+            <span class="b"><span class="name">영어 25분</span><span class="sub">2일차 — 자막 보며 한 번 더</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:10</span>
+            <span class="b"><span class="name">자유 시간</span></span></label></li>
+        </ul>
+        <div class="mini"><div class="lbl">어제 자전거를 탔으니</div><p>하체는 가볍게, 상체·코어 위주로. 나가지 않아도 되는 날이 하나 있으면 주 전체가 덜 부담스럽다.</p></div>
+      </article>
+
+      <article class="day">
+        <header>
+          <div class="dow">금 <em>FRI</em></div>
+          <div class="am">아침 06:10 요가 (회사)</div>
+          <div class="tag">단지 산책 35분 · 주말 진입</div>
+        </header>
+        <ul class="tl">
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:30</span>
+            <span class="b"><span class="name">집 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">17:45</span>
+            <span class="b"><span class="name">단지 산책 35분</span><span class="sub">이어폰 끼고 <b>영어 혼잣말</b> — 여기서 영어까지 끝난다</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:40</span>
+            <span class="b"><span class="name">자유 시간</span><span class="sub">산책에서 영어를 했다면 이 시간부터 통째로</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">밤</span>
+            <span class="b"><span class="name">내일 수영가방</span><span class="sub">토요일 10시 강습</span></span></label></li>
+        </ul>
+        <div class="mini"><div class="lbl">힘든 날</div><p>단지 한 바퀴 10분. 그것도 한 날이다.</p></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>영어 25분</h2><span>25분 내내 소리를 내는 게 유일한 규칙 · 조용히 읽기만 한 25분은 0분과 같다</span></div>
+    <div class="steps">
+      <div class="step"><span class="m">0–5분</span><span class="h">어제 문장 3개</span><span class="d">소리내어 다시. 복습이 없으면 매일 새로 시작하게 된다</span></div>
+      <div class="step"><span class="m">5–20분</span><span class="h">오늘 주제로 말하기</span><span class="d">아래 콘텐츠 중 하나. 한 주 동안 같은 걸 쓴다</span></div>
+      <div class="step"><span class="m">20–25분</span><span class="h">막힌 표현 3개 적기</span><span class="d">이게 엔진이다. 내일 첫 5분의 재료가 된다</span></div>
+    </div>
+
+    <div class="eng" style="margin-top:16px">
+      <div class="card">
+        <span class="k">기본 · 쉐도잉</span>
+        <h3>BBC 6 Minute English</h3>
+        <p><b>6분</b>이라 25분 안에 세 번 반복할 수 있다. <b>스크립트와 워크시트가 무료</b>로 붙어 있고
+           진행자 둘이 주고받는 형식이라, 혼자 두 사람 몫을 따라 하면 리듬이 빨리 붙는다.</p>
+        <p><b>한 주 사용법</b> — 월요일에 한 회차를 골라 금요일까지 그것만.
+           1~2일차 자막 보며, 3~4일차 자막 없이, 5일차 자기 말로 요약.</p>
+        <div class="links">
+          <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026" target="_blank" rel="noopener">회차 + 스크립트</a>
+          <a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener">코스 홈</a>
+          <a href="https://podcasts.apple.com/us/podcast/6-minute-english/id262026947" target="_blank" rel="noopener">팟캐스트</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="k">취향 · 미술</span>
+        <h3>Great Art Explained</h3>
+        <p>한 편에 <b>작품 하나</b>를 15분으로. 'art-speak' 없이 명확한 문장을 써서 따라 하기 좋다.
+           월 1회 업로드.</p>
+        <p><b>쓰는 법</b> — 15분을 통째로 쉐도잉하지 말고 <b>좋았던 2분 구간만</b> 반복.
+           그리고 그 작품에 대해 <b>자기 의견을 영어로 3분</b>. 아는 게 많은 주제라 말이 안 끊긴다.
+           영어 자막 + 0.75배속.</p>
+        <div class="links">
+          <a href="https://www.youtube.com/channel/UCePDFpCr78_qmVtpoB1Axaw/videos" target="_blank" rel="noopener">유튜브 채널</a>
+          <a href="https://www.greatartexplained.com/art-history-videos" target="_blank" rel="noopener">작품별 목록</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="k">말하기 상대</span>
+        <h3>AI 음성 대화</h3>
+        <p>Claude 앱이나 ChatGPT 앱의 음성 모드. <b>상대가 기다려주고 창피할 일이 없다</b>는 게 핵심이라,
+           말하기 싫은 날의 저항이 가장 낮다.</p>
+        <p><b>프롬프트</b> — "영어 회화 연습 상대가 되어줘. 내가 말하면 자연스럽게 대화를 이어가되,
+           어색하면 <b>내가 쓴 단어를 최대한 살려서</b> 고쳐줘. 통째로 다른 문장으로 바꾸지는 말고."</p>
+        <p>고쳐받은 문장은 <b>그 자리에서 소리내어 세 번</b>. 안 읽으면 안 남는다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rescue">
+    <h3>힘든 날의 3분 버전</h3>
+    <p>절대 건너뛰지 않는 최소치. <b>하루 빼먹는 것보다 연속성이 끊기는 게 나쁘다.</b></p>
+    <ol>
+      <li>어제 적은 문장 3개를 소리내어 읽는다 <b>(1분)</b></li>
+      <li>오늘 한 일을 한 문장으로 말한다 <b>(1분)</b></li>
+      <li>내일 할 일을 한 문장으로 말한다 <b>(1분)</b></li>
+    </ol>
+    <p>이걸 했으면 오늘도 한 날로 친다. <b>스스로에게 그렇게 쳐야 내일 이어진다.</b></p>
+  </section>
+
+</div>
