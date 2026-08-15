@@ -94,12 +94,21 @@
   .sec-head span { font-size: 12.5px; color: var(--ink-faint); }
 
   /* ---------- meals ---------- */
-  .meals { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .meals { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
   .meal { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px;
-          padding: 15px 17px; display: flex; flex-direction: column; gap: 5px; }
+          padding: 16px 18px; display: flex; flex-direction: column; gap: 7px; }
   .meal .d { font-family: var(--mono); font-size: 11.5px; letter-spacing: .1em; color: var(--accent); }
-  .meal .m { font-weight: 600; line-height: 1.45; }
+  .meal .m { font-weight: 600; line-height: 1.45; font-size: 15.5px; }
   .meal .n { font-size: 13px; color: var(--ink-soft); }
+  .meal .ing {
+    font-size: 12.5px; color: var(--ink); background: var(--surface-sunk);
+    border-radius: 3px; padding: 7px 10px; line-height: 1.55;
+  }
+  .meal ol { margin: 2px 0 0; padding-left: 19px; font-size: 13px; color: var(--ink-soft); line-height: 1.65; }
+  .meal ol li { margin-bottom: 4px; }
+  .meal ol li b { color: var(--ink); font-weight: 600; }
+  .meal .fail { font-size: 12.5px; color: var(--fixed); line-height: 1.55; }
+  .meal .plan-b { font-size: 12.5px; color: var(--ink-faint); line-height: 1.55; }
 
   /* ---------- days ---------- */
   .days { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: start; }
@@ -318,11 +327,46 @@
   </header>
 
   <section>
-    <div class="sec-head"><h2>아침</h2><span>계란 6개를 사흘에 두 개씩 — 남지도 모자라지도 않게</span></div>
+    <div class="sec-head"><h2>아침</h2><span>계란 6개를 사흘에 두 개씩 · 재료는 계량해서, 단계는 시계로</span></div>
     <div class="meals">
-      <div class="meal"><div class="d">SAT · 완료</div><div class="m">이미 드심</div><div class="n">아침 먹고 주방 정리까지 끝난 상태</div></div>
-      <div class="meal"><div class="d">SUN</div><div class="m">머그컵 계란찜 2개 + 그릭요거트</div><div class="n">전자레인지 3분, 불 안 씀. 많이 걷는 날이라 가볍게</div></div>
-      <div class="meal"><div class="d">MON</div><div class="m">플레인 오믈렛 2개 + 견과류 요거트</div><div class="n">약불 5분. 세 시간 앉아 있으니 든든하게</div></div>
+
+      <div class="meal">
+        <div class="d">SAT · 완료</div>
+        <div class="m">이미 드심</div>
+        <div class="n">아침 먹고 주방 정리까지 끝난 상태. 계란 2개 사용.</div>
+      </div>
+
+      <div class="meal">
+        <div class="d">SUN · 불 안 씀</div>
+        <div class="m">머그컵 계란찜</div>
+        <div class="ing">계란 <b>2개</b> · 물 <b>4큰술</b>(60ml) · 소금 <b>두 꼬집</b> · 머그컵 1개</div>
+        <ol>
+          <li>머그컵에 계란 2개를 깨 넣고 젓가락으로 <b>30초</b> 푼다. 노른자 덩어리가 안 보일 때까지</li>
+          <li>물 4큰술과 소금을 넣고 다시 섞는다. 컵의 <b>2/3까지만</b> 차야 안 넘친다</li>
+          <li>접시로 컵을 덮고 전자레인지 <b>1분</b></li>
+          <li>꺼내서 젓가락으로 <b>한 번 크게 휘젓는다</b></li>
+          <li>다시 <b>1분</b>. 가운데가 아직 흐르면 20초씩 추가</li>
+        </ol>
+        <p class="fail">망하는 이유는 하나 — <b>4번을 건너뛰면</b> 가장자리만 굳고 가운데가 물이다.</p>
+        <p class="plan-b">곁들임: 그릭요거트에 견과류 한 줌. 라이딩 전이라 이 정도가 딱 좋다.</p>
+      </div>
+
+      <div class="meal">
+        <div class="d">MON · 약불 5분</div>
+        <div class="m">플레인 오믈렛</div>
+        <div class="ing">계란 <b>2개</b> · 소금 <b>한 꼬집</b> · 버터 또는 기름 <b>1작은술</b></div>
+        <ol>
+          <li>계란 2개를 그릇에 풀고 소금 한 꼬집. 젓가락으로 <b>30초</b>, 흰자 덩어리가 없어질 때까지</li>
+          <li>팬을 <b>약불에 1분</b> 예열하고 버터를 녹인다. <b>연기가 나면 불이 센 것</b> — 불을 줄이고 팬을 식힌다</li>
+          <li>계란물을 붓고 <b>10초</b> 그대로 둔다</li>
+          <li>젓가락으로 바깥에서 안쪽으로 천천히 저어 <b>30초</b>. 반쯤 익은 덩어리가 생긴다</li>
+          <li>젓기를 멈추고 <b>15초</b> → 뒤집개로 한쪽을 들어 반으로 접고 <b>30초</b> 더</li>
+        </ol>
+        <p class="fail">망하는 이유도 하나 — <b>불이 세면</b> 겉이 타고 속이 안 익는다. 끝까지 약불.</p>
+        <p class="plan-b">모양이 안 잡히면 그냥 계속 저어 <b>스크램블</b>로 가면 된다. 맛은 같다.
+          곁들임: 견과류 요거트. 세 시간 앉아 있으니 든든하게.</p>
+      </div>
+
     </div>
   </section>
 
