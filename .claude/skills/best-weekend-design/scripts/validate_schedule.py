@@ -22,6 +22,9 @@ from datetime import date, datetime, timedelta
 NOT_COUNTED = {"식사", "이동"}
 # 하루 2회 초과가 허용되는 카테고리
 UNLIMITED = {"식사", "휴식", "이동"}
+# 날마다 반복돼도 지겹지 않은 활동 — 중복 검사에서 뺀다.
+# 책 읽기처럼 가볍고 매일 해도 좋은 것이 여기 들어간다.
+REPEATABLE = {"책 읽기", "독서", "가벼운 스트레칭", "스트레칭"}
 HOME_ZONES = {"집", "자택", "home", "house"}
 
 PERSONAS = ["블랙", "레드", "블루", "실버", "골드"]
@@ -381,8 +384,9 @@ def main():
     for i, day in enumerate(days):
         all_titles += check_day(day, i, window)
 
+    repeatable = {normalize(t) for t in REPEATABLE}
     for title, n in Counter(t for t in all_titles if t).items():
-        if n > 1:
+        if n > 1 and title not in repeatable:
             err(f"활동 중복: '{title}'이(가) 주말 전체에서 {n}회 등장")
 
     if rules_path:

@@ -39,33 +39,43 @@
         },
         {
           "start": "15:00",
-          "end": "17:40",
-          "title": "넷플릭스 《조디악》 + 화이트 와인",
+          "end": "16:40",
+          "title": "넷플릭스 《조디악》 + 코딩",
           "category": "여가",
           "zone": "집",
           "travel_min_from_prev": 0,
           "cost": 0,
-          "notes": "157분 · 낮잠 대신 이걸로"
+          "notes": "화이트 와인과 함께 · 16:40에 끊는다"
         },
         {
-          "start": "17:55",
-          "end": "19:30",
-          "title": "클로드와 코딩",
-          "category": "학습·작업",
+          "start": "16:40",
+          "end": "18:10",
+          "title": "나 혼자 산다 재방송",
+          "category": "여가",
           "zone": "집",
           "travel_min_from_prev": 0,
           "cost": 0,
-          "notes": "오전에 이어서"
+          "notes": "고정 규칙 · 기본 설정대로"
         },
         {
-          "start": "19:45",
-          "end": "20:15",
-          "title": "가벼운 스트레칭",
+          "start": "18:25",
+          "end": "19:40",
+          "title": "자유시간",
           "category": "휴식",
           "zone": "집",
           "travel_min_from_prev": 0,
           "cost": 0,
-          "notes": "수영한 날이라 어깨 위주 · 하루 마무리"
+          "notes": "후보 — ① 조디악 마저 보기 ② 코딩 이어서 ③ 놀라운 토요일"
+        },
+        {
+          "start": "19:55",
+          "end": "20:20",
+          "title": "책 읽기",
+          "category": "휴식",
+          "zone": "집",
+          "travel_min_from_prev": 0,
+          "cost": 0,
+          "notes": "짧게 · 매일 해도 되는 활동"
         }
       ]
     },
