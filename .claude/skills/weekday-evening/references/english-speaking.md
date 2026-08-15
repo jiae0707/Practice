@@ -63,7 +63,19 @@
 - **스크립트와 워크시트가 무료로 제공된다** — 쉐도잉은 스크립트가 없으면 안 된다
 - 매주 새 회차가 올라온다. 주제가 일상·과학·사회로 다양하고 대화체다
 - 진행자 둘이 주고받는 형식이라 **혼자 두 사람 몫을 따라 하면** 리듬이 빨리 붙는다
-- https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/
+
+**접속 방법 (전부 무료 · 회원가입 불필요)**
+
+| | |
+|---|---|
+| 회차 목록 + **스크립트·워크시트 PDF** | https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026 |
+| 전체 코스 홈 | https://www.bbc.co.uk/learningenglish |
+| 팟캐스트 (Apple) | https://podcasts.apple.com/us/podcast/6-minute-english/id262026947 |
+| 앱 | 앱스토어·플레이스토어에서 **BBC Learning English** 검색 |
+
+회차 페이지에 들어가면 오디오 아래에 **Transcript(스크립트)**와 Worksheet 링크가 있다.
+쉐도잉은 스크립트를 띄워놓고 해야 하므로 웹 페이지를 쓰는 게 낫고,
+산책하며 들을 때만 팟캐스트 앱을 쓴다.
 
 **한 주 사용법**: 월요일에 한 회차를 고르고 금요일까지 그것만 쓴다.
 1~2일차는 자막 보며 따라 말하기, 3~4일차는 자막 없이, 5일차는 그 내용을 자기 말로 요약.
@@ -74,9 +86,18 @@
 
 - 런던 아트 컨설턴트 James Payne이 **한 편에 작품 하나**를 15분으로 설명한다
 - 'art-speak' 없이 명확한 문장을 쓴다 — 듣기 좋고 따라 하기도 좋다
-- 월 1회 업로드. 뒤메상, 보티첼리, 오키프, 폴록, 페르메이르 등
-- 같은 채널의 《Great Books Explained》도 있다
-- https://www.greatartexplained.com/art-history-videos
+- 월 1회 업로드. 뒤샹, 보티첼리, 오키프, 폴록, 페르메이르 등
+- 같은 제작자의 《Great Books Explained》도 있다
+
+**접속 방법**
+
+| | |
+|---|---|
+| 유튜브 채널 (영상 전체) | https://www.youtube.com/channel/UCePDFpCr78_qmVtpoB1Axaw/videos |
+| 공식 사이트 (작품별 목록) | https://www.greatartexplained.com/art-history-videos |
+
+유튜브에서 **자동 생성 자막을 영어로 켜고** 본다. 한국어 자막을 켜면 듣기 연습이 안 된다.
+설정 → 재생 속도 **0.75배**로 두면 따라 말하기 좋다.
 
 **쓰는 법**: 15분을 통째로 쉐도잉하지 말고 **좋았던 2분 구간만** 반복한다.
 그리고 그 작품에 대해 **자기 의견을 영어로 3분** 말한다 — 이게 진짜 스피킹 연습이다.
@@ -84,7 +105,8 @@
 
 ### 말하기 상대 — AI 음성 대화
 
-Claude나 ChatGPT의 음성 모드. 주제를 정해 5분 말하고 고쳐 달라고 한 뒤
+**Claude 앱**(claude.ai/download 또는 앱스토어) 또는 **ChatGPT 앱**의 음성 모드.
+둘 다 무료 계정으로 쓸 수 있다. 주제를 정해 5분 말하고 고쳐 달라고 한 뒤
 고친 문장으로 다시 말한다. **상대가 기다려주고 창피할 일이 없다는 게 핵심**이다.
 
 - 프롬프트 예: *"영어 회화 연습 상대가 되어줘. 내가 말하면 자연스럽게 대화를 이어가되,
