@@ -34,18 +34,15 @@
   }
 
   *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--ground); color:var(--ink);
+  body{margin:0; background:var(--ground); color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",
                 "Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
-    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
-  }
+    font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased}
   .num{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
        font-variant-numeric:tabular-nums; letter-spacing:-.01em}
-  .wrap{max-width:560px; margin:0 auto; padding:22px 16px 72px;
-        display:flex; flex-direction:column; gap:18px}
+  .wrap{max-width:600px; margin:0 auto; padding:22px 16px 72px;
+        display:flex; flex-direction:column; gap:16px}
 
-  /* ── 머리 ── */
   header{display:flex; flex-direction:column; gap:3px}
   .eyebrow{font-size:11px; letter-spacing:.14em; text-transform:uppercase;
            color:var(--muted); font-weight:600}
@@ -53,20 +50,15 @@
      letter-spacing:-.02em; text-wrap:balance}
   .stamp{font-size:13px; color:var(--muted)}
 
-  /* ── 결론 배너 ── */
-  .verdict{
-    background:var(--surface); border:1px solid var(--line); border-radius:14px;
-    padding:18px 18px 16px; box-shadow:var(--shadow);
-    border-left:4px solid var(--accent);
-    display:flex; flex-direction:column; gap:6px;
-  }
+  .verdict{background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    padding:17px 18px 15px; box-shadow:var(--shadow); border-left:4px solid var(--accent);
+    display:flex; flex-direction:column; gap:5px}
   .verdict.act{border-left-color:var(--warn)}
   .verdict-label{font-size:11px; letter-spacing:.13em; text-transform:uppercase;
                  color:var(--muted); font-weight:600}
-  .verdict-main{font-size:21px; font-weight:700; letter-spacing:-.02em; line-height:1.3}
+  .verdict-main{font-size:20px; font-weight:700; letter-spacing:-.02em; line-height:1.3}
   .verdict-sub{font-size:14px; color:var(--ink-2)}
 
-  /* ── 카드 ── */
   section{background:var(--surface); border:1px solid var(--line);
           border-radius:14px; box-shadow:var(--shadow); overflow:hidden}
   .head{display:flex; align-items:baseline; justify-content:space-between;
@@ -75,8 +67,7 @@
   .head .note{font-size:12px; color:var(--muted)}
   .body{padding:14px 16px 16px}
 
-  /* ── 밤사이 지표 칩 ── */
-  .chips{display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:8px}
+  .chips{display:grid; grid-template-columns:repeat(auto-fit,minmax(94px,1fr)); gap:8px}
   .chip{background:var(--surface-2); border:1px solid var(--line-soft);
         border-radius:10px; padding:9px 10px; display:flex; flex-direction:column; gap:1px}
   .chip .k{font-size:11px; color:var(--muted); font-weight:600}
@@ -84,65 +75,69 @@
   .pending{border-style:dashed; background:transparent}
   .pending .v{color:var(--muted); font-weight:600; font-size:13px}
 
-  /* ── 종목 표 ── */
-  .scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
-  table{width:100%; border-collapse:collapse; font-size:13px; min-width:420px}
-  th{font-size:11px; letter-spacing:.05em; color:var(--muted); font-weight:600;
-     text-align:right; padding:0 0 8px; white-space:nowrap}
-  th:first-child{text-align:left}
-  td{padding:9px 0; border-top:1px solid var(--line-soft); text-align:right; white-space:nowrap}
-  td:first-child{text-align:left; font-weight:600}
-  tbody tr:first-child td{border-top:1px solid var(--line)}
-  .up{color:var(--up)} .down{color:var(--down)}
-  .ticker{display:flex; flex-direction:column; gap:1px}
-  .ticker small{font-size:11px; color:var(--muted); font-weight:500}
-  .pos{display:inline-block; font-size:11px; font-weight:600; padding:2px 7px;
-       border-radius:999px; white-space:nowrap}
-  .pos-over{background:var(--up-soft); color:var(--up)}
-  .pos-under{background:var(--down-soft); color:var(--down)}
-  .pos-mid{background:var(--surface-2); color:var(--muted)}
+  /* ── 종목 카드 ── */
+  .stock{background:var(--surface); border:1px solid var(--line); border-radius:14px;
+         box-shadow:var(--shadow); overflow:hidden}
+  .s-top{display:flex; justify-content:space-between; align-items:flex-start;
+         gap:12px; padding:15px 16px 12px}
+  .s-id{display:flex; flex-direction:column; gap:5px; min-width:0}
+  .s-name{font-size:17px; font-weight:700; letter-spacing:-.02em;
+          display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .tag{font-size:11px; font-weight:700; padding:3px 9px; border-radius:999px;
+       letter-spacing:.01em; white-space:nowrap}
+  .t-sell{background:var(--warn-soft); color:var(--warn)}
+  .t-hold{background:var(--accent-soft); color:var(--accent)}
+  .t-wait{background:var(--surface-2); color:var(--muted); border:1px solid var(--line-soft)}
+  .s-pos{font-size:12.5px; color:var(--muted); line-height:1.5}
+  .s-pos b{color:var(--ink-2); font-weight:600}
+  .s-px{text-align:right; white-space:nowrap; flex:0 0 auto}
+  .s-px .p{font-size:19px; font-weight:700; letter-spacing:-.02em}
+  .s-px .c{font-size:12.5px; font-weight:600; margin-top:1px}
 
-  /* ── 할 일 ── */
-  ul.todo{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:2px}
-  ul.todo li{display:flex; gap:11px; align-items:flex-start; padding:9px 0;
-             border-bottom:1px solid var(--line-soft)}
-  ul.todo li:last-child{border-bottom:0}
-  .box{flex:0 0 18px; width:18px; height:18px; margin-top:2px; border-radius:5px;
-       border:1.5px solid var(--muted); background:transparent}
-  .todo-t{font-size:14px; font-weight:600; line-height:1.45}
-  .todo-w{font-size:12px; color:var(--muted); line-height:1.45}
-  .empty{display:flex; gap:10px; align-items:center; padding:6px 0}
+  .lane{border-top:1px solid var(--line-soft); padding:12px 16px}
+  .lane-h{display:flex; align-items:center; gap:7px; margin-bottom:9px}
+  .lane-h .arrow{font-size:13px; font-weight:800}
+  .lane-h .lbl{font-size:12px; font-weight:700}
+  .lane-h .sub{font-size:11px; color:var(--muted); font-weight:500}
+  .up-lane .arrow,.up-lane .lbl{color:var(--up)}
+  .dn-lane .arrow,.dn-lane .lbl{color:var(--down)}
+
+  .order{display:grid; grid-template-columns:auto 1fr auto; gap:4px 11px;
+         align-items:baseline; padding:7px 0; border-bottom:1px dashed var(--line-soft)}
+  .order:last-child{border-bottom:0; padding-bottom:0}
+  .o-px{font-size:14px; font-weight:700; white-space:nowrap}
+  .o-do{font-size:13.5px; font-weight:600; color:var(--ink-2)}
+  .o-gap{font-size:12px; font-weight:700; white-space:nowrap; text-align:right}
+  .o-note{grid-column:1/-1; font-size:11.5px; color:var(--muted); line-height:1.5;
+          margin-top:-2px}
+  .opt{font-size:10px; font-weight:700; color:var(--muted); border:1px solid var(--line);
+       border-radius:4px; padding:1px 5px; margin-left:6px; vertical-align:1px}
+
+  .keep{background:var(--surface-2); border-top:1px solid var(--line-soft);
+        padding:11px 16px; font-size:12.5px; color:var(--ink-2); line-height:1.55}
+  .keep b{font-weight:700; color:var(--ink)}
+
+  .mini{display:grid; grid-template-columns:1fr; gap:0}
+  .mini-row{display:flex; justify-content:space-between; align-items:baseline;
+            gap:10px; padding:9px 0; border-bottom:1px solid var(--line-soft);
+            font-size:13px}
+  .mini-row:last-child{border-bottom:0}
+  .mini-row .l{font-weight:600}
+  .mini-row .r{color:var(--muted); font-size:12px; text-align:right}
+
+  .empty{display:flex; gap:10px; align-items:center; padding:4px 0}
   .empty .mark{width:22px; height:22px; border-radius:50%; flex:0 0 22px;
                background:var(--accent-soft); color:var(--accent);
                display:grid; place-items:center; font-size:13px; font-weight:700}
   .empty p{margin:0; font-size:14px; color:var(--ink-2)}
 
-  /* ── 트리거 거리 ── */
-  .trigs{display:flex; flex-direction:column; gap:0}
-  .trig{padding:11px 0; border-bottom:1px solid var(--line-soft);
-        display:flex; flex-direction:column; gap:6px}
-  .trig:last-child{border-bottom:0}
-  .trig-top{display:flex; justify-content:space-between; align-items:baseline; gap:10px}
-  .trig-name{font-size:13px; font-weight:600}
-  .trig-name span{color:var(--muted); font-weight:500}
-  .trig-gap{font-size:13px; font-weight:700; white-space:nowrap}
-  .bar{position:relative; height:5px; border-radius:3px; background:var(--surface-2);
-       overflow:hidden; border:1px solid var(--line-soft)}
-  .bar i{position:absolute; top:0; bottom:0; border-radius:3px; display:block}
-  .bar i.u{background:var(--up); right:50%}
-  .bar i.d{background:var(--down); left:50%}
-  .axis{position:absolute; left:50%; top:-2px; bottom:-2px; width:1px;
-        background:var(--line); transform:translateX(-.5px)}
-  .near{font-size:11px; font-weight:700; color:var(--warn);
-        background:var(--warn-soft); padding:1px 6px; border-radius:999px}
-
-  /* ── 요약 줄 ── */
   .sum{display:grid; grid-template-columns:1fr 1fr; gap:1px;
        background:var(--line-soft); border-radius:10px; overflow:hidden}
   .sum div{background:var(--surface); padding:11px 12px}
   .sum .k{font-size:11px; color:var(--muted); font-weight:600}
   .sum .v{font-size:16px; font-weight:700; margin-top:1px}
 
+  .up{color:var(--up)} .down{color:var(--down)}
   footer{font-size:12px; color:var(--muted); line-height:1.65;
           border-top:1px solid var(--line); padding-top:14px}
   footer b{color:var(--ink-2); font-weight:600}
@@ -153,227 +148,291 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">05:10 · 개장 3시간 30분 전</div>
+    <div class="eyebrow">05:10 · 개장 3시간 50분 전</div>
     <h1>오늘 아침 브리핑</h1>
-    <div class="stamp">8월 14일(금) <b>본장 종가</b> 기준 · 예수금 1억 반영</div>
+    <div class="stamp">8월 14일(금) 본장 종가 기준 · 예수금 1억 반영</div>
   </header>
 
   <div class="preview">
-    <b>레이아웃 미리보기입니다.</b> 모든 수치는 <b>본장(정규장) 종가</b> 기준이고,
+    <b>레이아웃 미리보기입니다.</b> 종목별 지시는 실제 값이고,
     밤사이 미국장 자리만 비어 있습니다. 화요일 새벽에 그 칸이 채워집니다.
   </div>
 
-  <div class="verdict">
+  <div class="verdict act">
     <div class="verdict-label">오늘의 결론</div>
-    <div class="verdict-main">변경 없음 — 걸어둔 주문 그대로</div>
-    <div class="verdict-sub">발동된 트리거 없음. 새로 걸 주문 없음.</div>
+    <div class="verdict-main">현대차만 손댑니다 — 매도 2건 예약</div>
+    <div class="verdict-sub">나머지 8종목은 전부 보유. 새로 걸 주문 없음.</div>
   </div>
 
   <section>
-    <div class="head">
-      <h2>밤사이</h2>
-      <div class="note">미국 마감 05:00</div>
-    </div>
+    <div class="head"><h2>밤사이</h2><div class="note">미국 마감 05:00</div></div>
     <div class="body">
       <div class="chips">
         <div class="chip pending"><span class="k">나스닥</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">S&amp;P 500</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">SOX 반도체</span><span class="v">확인 예정</span></div>
+        <div class="chip pending"><span class="k">VIX</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">원/달러</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">미 10년물</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">WTI</span><span class="v">확인 예정</span></div>
       </div>
     </div>
   </section>
 
+  <!-- ════════ 현대차 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">현대차 <span class="tag t-sell">일부 매도</span></div>
+        <div class="s-pos">보유 <b>2,302주</b> · 10억 4,281만 · <b class="up">+92.8%</b> · 비중 77.1%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">453,000</div>
+        <div class="c num up">+8.24%</div>
+      </div>
+    </div>
+
+    <div class="lane up-lane">
+      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 판다</span>
+        <span class="sub">지금 지정가로 걸어두세요</span></div>
+      <div class="order">
+        <span class="o-px num">459,000</span>
+        <span class="o-do">매도 <b>322주</b></span>
+        <span class="o-gap num up">+1.32%</span>
+        <span class="o-note">세후 1억 4,748만원 · 실현이익 +7,178만원</span>
+      </div>
+      <div class="order">
+        <span class="o-px num">475,000</span>
+        <span class="o-do">매도 <b>300주</b></span>
+        <span class="o-gap num up">+4.86%</span>
+        <span class="o-note">세후 1억 4,219만원 · 7월 중순 매물대 진입점</span>
+      </div>
+      <div class="order">
+        <span class="o-px num">510,000</span>
+        <span class="o-do">매도 <b>300주</b><span class="opt">선택</span></span>
+        <span class="o-gap num up">+12.58%</span>
+        <span class="o-note">세후 1억 5,267만원 · 60일선(514,391) 도달 자리</span>
+      </div>
+    </div>
+
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
+        <span class="sub">예약주문 불가 — 조건 닿으면 그때 판단</span></div>
+      <div class="order">
+        <span class="o-px num">400,000</span>
+        <span class="o-do">종가 2일 연속 이탈 → <b>200주 매도 검토</b></span>
+        <span class="o-gap num down">−11.70%</span>
+        <span class="o-note">20일선 399,300 이탈 = 반등 실패 신호. 자동 매도가 아니라 그날 다시 판단합니다</span>
+      </div>
+    </div>
+
+    <div class="keep">
+      1·2차가 다 체결되면 <b>622주 매도 · 1,680주(73%) 보유</b>.
+      622주가 기준선인 이유는 <b>연 배당이 1,999만원으로 내려가 금융소득종합과세를 벗어나기</b> 때문입니다.
+      8월 말 배당 기준일 전에 622주를 못 채우면 올해는 종합과세가 유지됩니다.
+    </div>
+  </div>
+
+  <!-- ════════ 현대차우 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">현대차우 <span class="tag t-hold">전량 보유</span></div>
+        <div class="s-pos">보유 <b>316주</b> · 6,668만 · <b class="down">−24.6%</b> · 비중 4.9%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">211,000</div>
+        <div class="c num up">+5.24%</div>
+      </div>
+    </div>
+
+    <div class="lane up-lane">
+      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 절반 판다</span>
+        <span class="sub">지금 걸어도 되고, 215,000 회복 확인 후 걸어도 됩니다</span></div>
+      <div class="order">
+        <span class="o-px num">230,000</span>
+        <span class="o-do">매도 <b>158주</b></span>
+        <span class="o-gap num up">+9.00%</span>
+        <span class="o-note">세후 3,626만원 · 60일선(약 215,000) 회복이 먼저 확인돼야 의미가 있습니다</span>
+      </div>
+    </div>
+
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
+        <span class="sub">팔지 않습니다 — 보유 근거를 다시 확인만</span></div>
+      <div class="order">
+        <span class="o-px num">195,230</span>
+        <span class="o-do">20일선 이탈 → <b>보유 근거 재확인</b></span>
+        <span class="o-gap num down">−7.47%</span>
+        <span class="o-note">외국인 보유율 56.78%가 무너지는지가 핵심. 유지되면 그대로 둡니다</span>
+      </div>
+    </div>
+
+    <div class="keep">
+      <b>파는 순서는 보통주가 먼저입니다.</b> 5개월간 외국인이 보통주는 −3.87%p 팔았는데
+      우선주는 <b>−0.03%p로 그대로</b>였고, 배당수익률도 <b>4.79% vs 2.21%</b>로 2배 이상입니다.
+    </div>
+  </div>
+
+  <!-- ════════ 네이버 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">네이버 <span class="tag t-wait">추매 보류</span></div>
+        <div class="s-pos">보유 <b>550주</b> · 1억 2,540만 · <b class="down">−3.0%</b> · 비중 9.3%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">228,000</div>
+        <div class="c num up">+0.66%</div>
+      </div>
+    </div>
+
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면 산다</span>
+        <span class="sub">단, 아래 조건이 먼저 충족돼야 합니다</span></div>
+      <div class="order">
+        <span class="o-px num">222,000</span>
+        <span class="o-do">매수 <b>100주</b></span>
+        <span class="o-gap num down">−2.63%</span>
+        <span class="o-note">약 2,220만원 · 6월 하순 지지선</span>
+      </div>
+      <div class="order">
+        <span class="o-px num">215,000</span>
+        <span class="o-do">매수 <b>100주</b></span>
+        <span class="o-gap num down">−5.70%</span>
+        <span class="o-note">약 2,150만원 · 60일선(215,081)</span>
+      </div>
+      <div class="order">
+        <span class="o-px num">211,850</span>
+        <span class="o-do">20일선 이탈 → <b>추매 중단</b></span>
+        <span class="o-gap num down">−7.08%</span>
+        <span class="o-note">여기까지 밀리면 사지 말고 멈춥니다</span>
+      </div>
+    </div>
+
+    <div class="keep">
+      ⚠️ <b>지금은 주문을 걸지 마세요.</b> 외국인이 5개월간 보유율 −3.34%p를 직선으로
+      팔고 있습니다(회귀 R² 0.82). <b>외국인 보유율이 20거래일 상승 전환</b>한 뒤에
+      위 주문을 겁니다. 연변동성 68.7%라 200주를 더 넣으면 노출이 36% 늘어납니다.
+    </div>
+  </div>
+
+  <!-- ════════ 삼성전자 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">삼성전자 <span class="tag t-hold">조건부 보유</span></div>
+        <div class="s-pos">보유 <b>156주</b> · 4,282만 · <b class="down">−14.2%</b> · 비중 3.2%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">274,500</div>
+        <div class="c num up">+2.43%</div>
+      </div>
+    </div>
+
+    <div class="lane up-lane">
+      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 계속 보유</span>
+        <span class="sub">팔지 않습니다</span></div>
+      <div class="order">
+        <span class="o-px num">290,500</span>
+        <span class="o-do">60일선 회복 → <b>평단 320,000까지 보유</b></span>
+        <span class="o-gap num up">+5.83%</span>
+        <span class="o-note">회복하면 그때 매도 계획을 새로 짭니다</span>
+      </div>
+    </div>
+
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면 전량 판다</span>
+        <span class="sub">예약주문 불가 — 종가 확인 후 다음날 실행</span></div>
+      <div class="order">
+        <span class="o-px num">244,475</span>
+        <span class="o-do">20일선 종가 이탈 → <b>156주 전량 매도</b></span>
+        <span class="o-gap num down">−10.94%</span>
+        <span class="o-note">세후 약 3,806만원 · 반등이 꺾였다는 뜻이므로 미련 없이 정리</span>
+      </div>
+    </div>
+
+    <div class="keep">
+      <b>이 종목만 SOX를 봅니다.</b> 시장을 통제한 뒤에도 반도체 지수 반응이 남는
+      유일한 종목입니다(베타 0.32, t=2.18). 간밤 SOX가 +3%면 개장 기대 +1%p 정도입니다.
+    </div>
+  </div>
+
+  <!-- ════════ 한국전력 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">한국전력 <span class="tag t-hold">보유 · 추매 금지</span></div>
+        <div class="s-pos">보유 <b>1,000주</b> · 3,325만 · <b class="down">−44.4%</b> · 비중 2.5%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">33,250</div>
+        <div class="c num up">+0.45%</div>
+      </div>
+    </div>
+
+    <div class="lane up-lane">
+      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 그때 살지 본다</span>
+        <span class="sub">지금은 한 주도 사지 않습니다</span></div>
+      <div class="order">
+        <span class="o-px num">36,631</span>
+        <span class="o-do">60일선 회복 → <b>추매 검토 시작</b></span>
+        <span class="o-gap num up">+10.17%</span>
+        <span class="o-note">현재 완전 역배열입니다. 회복 전 매수는 떨어지는 칼 잡기입니다</span>
+      </div>
+    </div>
+
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내려도 안 판다</span>
+        <span class="sub">뉴스만 확인합니다</span></div>
+      <div class="order">
+        <span class="o-px num">32,850</span>
+        <span class="o-do">이탈 → <b>왜 빠지는지 뉴스 확인</b></span>
+        <span class="o-gap num down">−1.20%</span>
+        <span class="o-note">실적·규제 악재면 그때 판단, 단순 수급이면 버팁니다. 자동 매도 아닙니다</span>
+      </div>
+    </div>
+
+    <div class="keep">
+      손절 논의는 끝났습니다. <b>외국인이 최근 20거래일 +219만주 순매수로 전환</b>했고
+      (5개월 내내 팔던 종목입니다), 상관계수가 5종목 중 가장 낮아 <b>유일하게 분산에 기여</b>합니다.
+      평단 60,000까지는 +80%가 필요하지만, <b>팔 이유가 없다</b>는 게 결론입니다.
+    </div>
+  </div>
+
+  <!-- ════════ 소형주 ════════ -->
   <section>
     <div class="head">
-      <h2>내 종목</h2>
-      <div class="note">이평 대비 위치</div>
+      <h2>소형주 4종 — 전부 보유</h2>
+      <div class="note">합계 4,136만 · 3.1%</div>
     </div>
     <div class="body">
-      <div class="scroll">
-        <table>
-          <thead>
-            <tr><th>종목</th><th>종가</th><th>전일비</th><th>5일선</th><th>20일선</th><th>60일선</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div class="ticker">현대차<small>77.4%</small></div></td>
-              <td class="num">453,000</td>
-              <td class="num up">+8.24%</td>
-              <td><span class="pos pos-over">+9.8%</span></td>
-              <td><span class="pos pos-over">+15.1%</span></td>
-              <td><span class="pos pos-under">−10.7%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">네이버<small>9.2%</small></div></td>
-              <td class="num">227,500</td>
-              <td class="num down">−0.44%</td>
-              <td><span class="pos pos-over">+3.8%</span></td>
-              <td><span class="pos pos-over">+7.4%</span></td>
-              <td><span class="pos pos-over">+5.8%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">현대차우<small>4.9%</small></div></td>
-              <td class="num">211,000</td>
-              <td class="num up">+5.24%</td>
-              <td><span class="pos pos-over">+4.9%</span></td>
-              <td><span class="pos pos-over">+8.1%</span></td>
-              <td><span class="pos pos-under">−1.9%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">삼성전자<small>3.1%</small></div></td>
-              <td class="num">274,500</td>
-              <td class="num up">+2.43%</td>
-              <td><span class="pos pos-over">+8.3%</span></td>
-              <td><span class="pos pos-over">+12.3%</span></td>
-              <td><span class="pos pos-under">−5.5%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">한국전력<small>2.4%</small></div></td>
-              <td class="num">33,350</td>
-              <td class="num up">+0.76%</td>
-              <td><span class="pos pos-under">−3.4%</span></td>
-              <td><span class="pos pos-under">−3.6%</span></td>
-              <td><span class="pos pos-under">−9.0%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">동국산업<small>1.2%</small></div></td>
-              <td class="num">2,685</td>
-              <td class="num up">+1.32%</td>
-              <td><span class="pos pos-over">+0.5%</span></td>
-              <td><span class="pos pos-over">+9.3%</span></td>
-              <td><span class="pos pos-over">+8.8%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">넥스틸<small>0.9%</small></div></td>
-              <td class="num">12,920</td>
-              <td class="num up">+0.94%</td>
-              <td><span class="pos pos-mid">—</span></td>
-              <td><span class="pos pos-mid">—</span></td>
-              <td><span class="pos pos-mid">—</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">비츠로셀<small>0.5%</small></div></td>
-              <td class="num">31,750</td>
-              <td class="num down">−3.79%</td>
-              <td><span class="pos pos-under">−5.1%</span></td>
-              <td><span class="pos pos-over">+4.5%</span></td>
-              <td><span class="pos pos-under">−18.0%</span></td>
-            </tr>
-            <tr>
-              <td><div class="ticker">화인베스틸<small>0.4%</small></div></td>
-              <td class="num">997</td>
-              <td class="num up">+1.01%</td>
-              <td><span class="pos pos-over">+1.1%</span></td>
-              <td><span class="pos pos-under">−2.2%</span></td>
-              <td><span class="pos pos-under">−5.8%</span></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="mini">
+        <div class="mini-row">
+          <span class="l">동국산업 <span class="num">2,685</span></span>
+          <span class="r">▼ 2,457(20일선) 이탈 시 재검토 · PBR 0.31, 하락 방어 1위</span>
+        </div>
+        <div class="mini-row">
+          <span class="l">넥스틸 <span class="num">12,920</span></span>
+          <span class="r">−1.7%로 사실상 본전 · 조건 없음</span>
+        </div>
+        <div class="mini-row">
+          <span class="l">비츠로셀 <span class="num">31,750</span></span>
+          <span class="r">▼ 30,375(20일선) 이탈 시 재검토</span>
+        </div>
+        <div class="mini-row">
+          <span class="l">화인베스틸 <span class="num">997</span></span>
+          <span class="r">재무 확인 불가 · 정리 여부는 본인 판단 (598만원)</span>
+        </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="head"><h2>오늘 할 일</h2></div>
+    <div class="head"><h2>오늘 걸 주문</h2></div>
     <div class="body">
       <div class="empty">
-        <span class="mark">✓</span>
-        <p>없습니다. 걸어둔 예약주문이 그대로 유효합니다.</p>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="head">
-      <h2>걸어둔 트리거</h2>
-      <div class="note">현재가에서의 거리</div>
-    </div>
-    <div class="body">
-      <div class="trigs">
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">현대차 <span>475,000 매도 300주</span></div>
-            <div class="trig-gap up num">+4.86%</div>
-          </div>
-          <div class="bar"><i class="d" style="width:16.2%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">현대차 <span>510,000 매도 300주 · 선택</span></div>
-            <div class="trig-gap up num">+12.58%</div>
-          </div>
-          <div class="bar"><i class="d" style="width:41.9%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">현대차 <span>400,000 이탈 시 방어</span></div>
-            <div class="trig-gap down num">−11.70%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:39.0%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">네이버 <span>222,000 매수 100주</span></div>
-            <div class="trig-gap down num">−2.42%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:8.1%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">네이버 <span>215,000 매수 100주</span></div>
-            <div class="trig-gap down num">−5.49%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:18.3%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">한국전력 <span>32,850 이탈 시 뉴스 확인</span></div>
-            <div class="trig-gap down num">−1.50%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:5.0%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">삼성전자 <span>290,500 회복 시 보유 유지</span></div>
-            <div class="trig-gap up num">+5.83%</div>
-          </div>
-          <div class="bar"><i class="d" style="width:19.4%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">삼성전자 <span>244,475 이탈 시 전량</span></div>
-            <div class="trig-gap down num">−10.94%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:36.5%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">동국산업 <span>2,457 이탈 시 재검토</span></div>
-            <div class="trig-gap down num">−8.49%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:28.3%"></i><span class="axis"></span></div>
-        </div>
-
-        <div class="trig">
-          <div class="trig-top">
-            <div class="trig-name">비츠로셀 <span>30,375 이탈 시 재검토</span></div>
-            <div class="trig-gap down num">−4.33%</div>
-          </div>
-          <div class="bar"><i class="u" style="width:14.4%"></i><span class="axis"></span></div>
-        </div>
-
+        <span class="mark">2</span>
+        <p>현대차 <b>459,000 매도 322주</b>, <b>475,000 매도 300주</b> — 이 둘만 걸면 끝입니다.</p>
       </div>
     </div>
   </section>
@@ -382,8 +441,8 @@
     <div class="head"><h2>포트폴리오</h2></div>
     <div class="body">
       <div class="sum">
-        <div><div class="k">총 평가</div><div class="v num">13억 5,242만</div></div>
-        <div><div class="k">손익</div><div class="v num up">+4억 3,025만</div></div>
+        <div><div class="k">총 평가</div><div class="v num">13억 5,232만</div></div>
+        <div><div class="k">손익</div><div class="v num up">+4억 3,015만</div></div>
         <div><div class="k">예수금</div><div class="v num">1억 0,000만</div></div>
         <div><div class="k">현대차+우</div><div class="v num">82.0%</div></div>
       </div>
@@ -391,10 +450,12 @@
   </section>
 
   <footer>
-    <b>막대 읽는 법</b> — 가운데 선이 현재가입니다. 오른쪽으로 뻗으면 가격이 더
-    올라야 닿는 트리거, 왼쪽이면 더 내려야 닿는 트리거입니다. 막대가 짧을수록 가깝습니다.<br><br>
+    <b>▲ 오르면</b>은 지금 증권사 앱에 <b>지정가 예약주문</b>으로 걸어둘 수 있는 것입니다.
+    매도는 현재가보다 위, 매수는 현재가보다 아래라야 걸립니다.<br><br>
+    <b>▼ 내리면</b>은 현재가보다 아래여서 <b>지정가로 못 겁니다.</b> 조건이 닿은 날 저녁에
+    다시 판단하는 항목이고, 자동으로 팔리지 않습니다.<br><br>
     판단 재료이고 최종 결정은 본인이 합니다. 장중에는 대응이 어려우므로
-    모든 지시는 아침에 예약주문으로 걸 수 있는 형태로만 냅니다.
+    모든 지시는 아침에 걸 수 있는 형태로만 냅니다.
   </footer>
 
 </div>
