@@ -48,6 +48,7 @@ def main():
     ap.add_argument("--sell", help='매도 계획. {"현대차":500} = 500주 매도')
     ap.add_argument("--dividends", help='연간 배당 예상. {"현대차":11400} = 주당 배당금')
     ap.add_argument("--cash", type=int, help="예수금. 생략하면 portfolio.json의 cash를 쓴다")
+    ap.add_argument("--compare", help="전일 prices 파일. 종목별 전일비를 함께 낸다")
     args = ap.parse_args()
 
     with open(args.portfolio, encoding="utf-8") as fh:
@@ -105,6 +106,25 @@ def main():
               f"(현금 비중 {cash/assets*100:.1f}%)")
         print(f"  · 현금 포함 기준 1위 종목 비중 "
               f"{max((r['value'] or r['cost']) for r in rows)/assets*100:.1f}%")
+
+    # ---------- 전일 대비 ----------
+    # 아침 브리핑용. 캡처의 전일비와 대조하면 값을 잘못 읽었는지 바로 드러난다.
+    if args.compare:
+        prev = load_json_arg(args.compare)
+        print(f"\n=== 전일 대비 ({os.path.basename(args.compare)}) ===")
+        day_pnl = 0
+        for r in sorted(rows, key=lambda x: -(x["value"] or x["cost"])):
+            p0, p1 = prev.get(r["name"]), r["price"]
+            if not p0 or not p1:
+                print(f"  {r['name']:<8} 전일 종가 없음 — 비교 불가")
+                continue
+            diff = p1 - p0
+            day_pnl += diff * r["qty"]
+            mark = "▲" if diff > 0 else ("▼" if diff < 0 else "―")
+            print(f"  {r['name']:<8}{won(p0):>10} → {won(p1):>10}  "
+                  f"{mark}{won(abs(diff)):>8} ({diff/p0*100:+5.2f}%)   "
+                  f"평가액 {won(diff*r['qty']):>14}")
+        print(f"  {'하루 평가손익':<8}{won(day_pnl):>40}원")
 
     # ---------- 집중도 ----------
     print(f"\n=== 집중도 ({base_label} 기준) ===")
