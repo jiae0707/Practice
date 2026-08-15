@@ -135,6 +135,17 @@ def main():
     if top1 >= 30:
         print(f"  ⚠️  단일 종목이 {top1:.0f}% — 이 종목의 사건이 포트 전체를 좌우한다")
 
+    # 허핀달 지수와 유효 종목 수. 상관 데이터가 없어도 비중만으로 계산된다.
+    # 종목 수를 세는 것과 분산된 것은 다르다 — 이 숫자가 그 차이를 말한다.
+    ws = [(r["value"] or r["cost"]) / base for r in rows]
+    hhi = sum(w * w for w in ws)
+    eff_n = 1 / hhi if hhi > 0 else None
+    print(f"  허핀달 지수 {hhi:.3f}   유효 종목 수 {eff_n:.2f}종목 / 실제 {len(rows)}종목")
+    if eff_n and eff_n < 2:
+        print(f"  ⚠️  {len(rows)}종목을 갖고 있지만 비중으로 보면 {eff_n:.1f}종목짜리다.")
+        print("     종목들이 같이 움직이면 실질은 이보다 더 낮다 "
+              "(correlation.py로 확인)")
+
     # 같은 회사 묶음 (보통주+우선주)
     groups = {}
     for r in rows:

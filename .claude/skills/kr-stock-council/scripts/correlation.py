@@ -312,8 +312,92 @@ def pair_report(y_name, x_name, dates, by_date, weights=None):
             print(f"    ⚠️  {len(ratios)}개 관측으로 계산한 평균이다. 아직 평균이라 부를 수 없다")
 
 
+# ────────────────────────────── 이동평균 역산 ──────────────────────────────
+
+def ma_segments(blk):
+    """MA5·MA20·MA60에서 과거 구간의 평균가를 역산한다.
+
+    MA20은 최근 20일 종가의 합/20이고 MA5는 최근 5일의 합/5이므로,
+    6~20일 전 15일의 평균은 (20·MA20 − 5·MA5)/15로 정확히 나온다.
+    MA60과 MA20으로 21~60일 전 40일 구간도 같은 방식으로 나온다.
+
+    구간 평균이지 특정일의 가격이 아니다. 그래도 종목이 어느 구간에서
+    무너지고 어느 구간에서 돌아섰는지는 이걸로 정확히 보인다.
+    """
+    c, m5 = blk.get("close"), blk.get("ma5")
+    m20, m60 = blk.get("ma20"), blk.get("ma60")
+    seg = {}
+    if m5 is not None:
+        seg["최근5일"] = float(m5)
+    if None not in (m5, m20):
+        seg["6~20일전"] = (20 * m20 - 5 * m5) / 15
+    if None not in (m20, m60):
+        seg["21~60일전"] = (60 * m60 - 20 * m20) / 40
+    if c is not None:
+        seg["현재"] = float(c)
+    return seg
+
+
+ORDER = ["21~60일전", "6~20일전", "최근5일", "현재"]
+
+
+def ma_report(path):
+    with open(path, encoding="utf-8") as fh:
+        data = json.load(fh)
+    stocks = {k: v for k, v in data.items() if not k.startswith("_")}
+
+    print(f"=== 이동평균 역산 — {os.path.basename(path)} ===")
+    print("  MA5·MA20·MA60에서 과거 구간의 평균가를 되돌린 값이다.")
+    print("  구간 평균이지 특정일 종가가 아니다.\n")
+
+    hdr = f"{'종목':<11}" + "".join(f"{s:>12}" for s in ORDER)
+    print(hdr + f"{'구간수익률 (과거→현재)':>28}")
+    print("-" * (len(hdr) + 30))
+
+    traj = {}
+    for name, blk in stocks.items():
+        seg = ma_segments(blk)
+        pts = [seg.get(s) for s in ORDER]
+        row = f"{name:<11}" + "".join(
+            "           —" if p is None else f"{p:>12,.0f}" for p in pts)
+
+        rets, parts = [], []
+        for i in range(1, len(pts)):
+            a, b = pts[i - 1], pts[i]
+            if a and b:
+                r = b / a - 1
+                rets.append(r)
+                parts.append(f"{r*100:+6.1f}%")
+            else:
+                rets.append(None)
+                parts.append("     —")
+        traj[name] = rets
+        print(row + "   " + " ".join(parts))
+
+    print("\n  구간 정의:  21~60일전 → 6~20일전 → 최근5일 → 현재")
+    print("  (대략 6월 중순~7월 중순 → 7월 하순 → 8월 초 → 8/14)\n")
+
+    # 구간별로 같은 방향인지 — 상관계수를 못 낼 때의 대안
+    print("=== 구간별 방향 일치 ===")
+    labels = ["1구간(하락기)", "2구간(반등기)", "3구간(최근)"]
+    for i, lab in enumerate(labels):
+        ups = [n for n, r in traj.items() if r[i] is not None and r[i] > 0]
+        dns = [n for n, r in traj.items() if r[i] is not None and r[i] < 0]
+        print(f"  {lab}   ▲ {len(ups)}종목  ▼ {len(dns)}종목")
+        if dns and len(dns) <= 3:
+            print(f"      혼자 내린 것: {', '.join(dns)}")
+        if ups and len(ups) <= 3:
+            print(f"      혼자 오른 것: {', '.join(ups)}")
+
+    print("\n  ⚠️  구간이 3개뿐이라 상관계수는 계산하지 않는다.")
+    print("     3개 관측으로 낸 상관계수는 우연이 만든 숫자다.")
+    print("     [일별] 탭 캡처로 60거래일을 채우면 그때 진짜 상관이 나온다.")
+    return traj
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--ma", help="이동평균 JSON. 과거 구간을 역산한다")
     ap.add_argument("--glob", help="prices 파일 패턴")
     ap.add_argument("--history", help="추가 시계열 JSON {날짜:{종목:종가}}",
                     default=os.path.join(DATA, "history.json"))
@@ -321,6 +405,10 @@ def main():
     ap.add_argument("--regress", help="이 종목을 --factors에 회귀")
     ap.add_argument("--factors", nargs="+", help="설명변수 이름들")
     args = ap.parse_args()
+
+    if args.ma:
+        ma_report(args.ma)
+        return 0
 
     dates, by_date, names = load_series(args.glob, args.history)
     if len(dates) < 2:
