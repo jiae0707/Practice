@@ -47,11 +47,13 @@ def main():
     ap.add_argument("--prices", help='현재가. {"현대차":250000} 또는 파일 경로')
     ap.add_argument("--sell", help='매도 계획. {"현대차":500} = 500주 매도')
     ap.add_argument("--dividends", help='연간 배당 예상. {"현대차":11400} = 주당 배당금')
+    ap.add_argument("--cash", type=int, help="예수금. 생략하면 portfolio.json의 cash를 쓴다")
     args = ap.parse_args()
 
     with open(args.portfolio, encoding="utf-8") as fh:
         pf = json.load(fh)
     holdings = pf["holdings"]
+    cash = args.cash if args.cash is not None else pf.get("cash", 0)
     prices = load_json_arg(args.prices)
     sells = load_json_arg(args.sell)
     divs = load_json_arg(args.dividends)
@@ -95,6 +97,14 @@ def main():
     if total_value is not None and len(valued) == len(rows):
         pnl = total_value - total_cost
         print(f"총 평가금액 {won(total_value)}원   손익 {won(pnl)}원 ({pnl/total_cost*100:+.1f}%)")
+
+    # 예수금까지 합친 총자산. 현금을 빼고 비중을 보면 집중도를 실제보다 높게 본다.
+    if cash:
+        assets = base + cash
+        print(f"예수금 {won(cash)}원   →   총자산 {won(assets)}원 "
+              f"(현금 비중 {cash/assets*100:.1f}%)")
+        print(f"  · 현금 포함 기준 1위 종목 비중 "
+              f"{max((r['value'] or r['cost']) for r in rows)/assets*100:.1f}%")
 
     # ---------- 집중도 ----------
     print(f"\n=== 집중도 ({base_label} 기준) ===")
