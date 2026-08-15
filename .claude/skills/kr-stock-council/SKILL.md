@@ -93,6 +93,44 @@ python3 .claude/skills/kr-stock-council/scripts/portfolio.py \
 스크립트가 내는 것: 종목별 평가금액·손익·수익률, **세후 실현금액**, 포트 비중,
 집중도 지표, 상위 종목 편중. 손으로 계산하지 않는다 — 틀리면 판단 전체가 무너진다.
 
+## 1.5단계 — 정량 분석. 인상으로 말하지 않는다
+
+"비중이 높습니다", "실적이 좋습니다"는 분석이 아니다. 계산하고 말한다.
+
+```bash
+# 상관·리스크 기여도·유효 종목 수·VaR — 실버와 레드가 쓴다
+python3 scripts/correlation.py
+
+# 페어 회귀. 괴리가 통계적 이상치인지 z점수로 판정
+python3 scripts/correlation.py --pair 현대차우 현대차
+
+# 종목을 여러 팩터에 회귀 — 이 종목이 진짜 무엇에 베팅하고 있는가
+python3 scripts/correlation.py --regress 현대차 --factors KOSPI USDKRW
+
+# 회계 품질·부도 위험 — 분기 1회면 충분하다 (재무제표는 분기에 한 번 바뀐다)
+python3 scripts/fundamentals.py
+```
+
+### 왜 비중이 아니라 리스크 기여도인가
+
+**비중 77%가 리스크의 77%인 경우는 없다.** 변동성이 큰 종목은 비중보다 큰
+리스크를 지고, 상관이 낮은 종목은 비중보다 작은 리스크를 진다.
+그래서 "현대차 77%"보다 **"현대차가 포트 리스크의 88%"**가 정확한 문장이다.
+
+**유효 종목 수**는 이 포트가 실질적으로 몇 종목짜리인지를 말한다.
+아홉 종목이어도 전부 같이 움직이면 1.3종목이다. 이 숫자가 2 미만이면
+"분산돼 있다"는 말을 쓰지 않는다.
+
+### 관측치가 없으면 계산하지 않는다
+
+상관·회귀는 **60거래일 이상**이어야 판단에 쓴다. 30개 미만이면 참고도 어렵고,
+**2개면 상관계수가 수학적으로 반드시 ±1**이 나온다 — 참이지만 아무 정보가 없다.
+스크립트가 이걸 막지만, 사람도 알고 있어야 한다.
+
+시계열이 부족하면 **증권사 앱의 [일별] 탭 캡처**를 요청한다.
+한 장에 20거래일이 나오므로 종목당 3장이면 60일이 모인다.
+모은 값은 `data/history.json`에 `{"2026-08-14": {"현대차": 459500, ...}}` 형태로 넣는다.
+
 ## 2단계 — 5인 토론 (최소 4라운드)
 
 `references/personas.md`를 읽고 각자의 시각을 유지한다.
@@ -210,4 +248,7 @@ python3 .claude/skills/kr-stock-council/scripts/portfolio.py \
 - `references/decision-protocol.md` — 라운드 구조, 채점 5항목
 - `references/tax-and-fees.md` — 세금·수수료 계산 규칙
 - `scripts/portfolio.py` — 평가·손익·세후·비중 계산
+- `scripts/correlation.py` — 상관·리스크 기여도·유효 종목 수·VaR·회귀 (의존성 없음)
+- `scripts/fundamentals.py` — F-Score·Altman Z·Beneish M·발생액·ROIC (분기 1회)
+- `data/history.json` — 일별 종가 시계열. 상관·회귀의 재료
 - `assets/output-template.md` — 출력 형식
