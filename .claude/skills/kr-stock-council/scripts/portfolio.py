@@ -13,6 +13,7 @@
 
 import argparse
 import json
+import math
 import os
 import sys
 
@@ -125,6 +126,25 @@ def main():
                   f"{mark}{won(abs(diff)):>8} ({diff/p0*100:+5.2f}%)   "
                   f"평가액 {won(diff*r['qty']):>14}")
         print(f"  {'하루 평가손익':<8}{won(day_pnl):>40}원")
+
+    # ---------- 본전 회복 ----------
+    # 사용자의 손절 기준은 상장폐지가 아니라 "본전 회복 가능성이 없는가"다.
+    # 그래서 필요한 숫자는 부도 확률이 아니라 평단까지의 거리와 그 거리를
+    # 좁히는 데 걸리는 시간이다.
+    losers = [r for r in rows if r["pnl"] is not None and r["pnl"] < 0]
+    if losers:
+        print("\n=== 본전 회복까지 ===")
+        print(f"  {'종목':<10}{'현재가':>10}{'평단':>10}{'필요수익률':>11}"
+              f"{'연10%면':>9}{'연20%면':>9}")
+        print("  " + "-" * 59)
+        for r in sorted(losers, key=lambda x: -(x["avg_price"] / x["price"])):
+            need = r["avg_price"] / r["price"] - 1
+            y10 = math.log(1 + need) / math.log(1.10)
+            y20 = math.log(1 + need) / math.log(1.20)
+            print(f"  {r['name']:<10}{won(r['price']):>10}{won(r['avg_price']):>10}"
+                  f"{need*100:>10.1f}%{y10:>8.1f}년{y20:>8.1f}년")
+        print("  · 연10%는 시장 평균, 연20%는 그 두 배로 오래 가야 한다는 뜻이다")
+        print("  · 필요수익률이 크고 산업 성장이 멈춘 종목이 진짜 정리 대상이다")
 
     # ---------- 집중도 ----------
     print(f"\n=== 집중도 ({base_label} 기준) ===")
