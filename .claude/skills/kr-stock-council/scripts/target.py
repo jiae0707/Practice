@@ -45,6 +45,14 @@ def main():
     if cur_pbr > hi * 0.98:
         print(f"  ⚠️  현재 PBR {cur_pbr:.2f}는 **밴드 상단**이다. "
               "'싸다'는 근거는 성립하지 않는다")
+    elif cur_pbr < lo * 1.15:
+        print(f"  · 현재 PBR {cur_pbr:.2f}는 **밴드 하단** 근처다")
+
+    # ROE가 비정상적으로 높으면 영구성장 가정이 깨진다
+    if args.roe > 25:
+        print(f"  🚨 ROE {args.roe:.2f}%는 **피크 수치**일 가능성이 크다.")
+        print(f"     이걸 영구 성장률(연 {g*100:.1f}%)에 쓰면 BPS가 폭주한다.")
+        print(f"     정상화된 ROE를 --roe로 직접 넣어 다시 돌린다.")
 
     print(f"\n  {'기간':<7}{'예상 BPS':>11}"
           f"{'비관 '+f'{lo:.2f}':>13}{'중립 '+f'{mid:.2f}':>13}{'낙관 '+f'{hi:.2f}':>13}")
