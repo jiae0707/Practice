@@ -133,6 +133,26 @@ python3 scripts/portfolio.py --prices data/prices-20260818.json \
 | **비츠로셀** | 방산·군수 발주, 스마트미터 수주 | 리튬일차전지 수요처가 여기다 |
 | **화인베스틸** | 조선 수주, **재무 공시** | 시총 370억. 소멸 위험을 계속 본다 |
 
+## 거래량을 같이 읽는다
+
+전날 종가만 보면 그 움직임의 질을 모른다. 캡처에는 거래량이 같이 있으니
+`data/daily-*.json`에 붙여두고 주 1회 이상 돌린다.
+
+```bash
+python3 scripts/trend.py --compare \
+  data/daily-hyundai.json:현대차 data/daily-naver.json:네이버 \
+  data/daily-samsung.json:삼성전자 data/daily-kepco.json:한국전력
+```
+
+카드에 쓰는 건 두 가지다.
+
+- **OBV 괴리** — 주가는 오르는데 OBV t가 −2 아래면 오르는 동안 물량이
+  넘어가고 있다. 그 상승을 근거로 목표주가를 올리지 않는다
+- **VWAP(매물대)** — 현재가가 VWAP보다 낮으면 그 구간에 물린 물량이
+  저항이다. ▲오르면 지정가를 그 위에 걸 때 한 번 더 생각한다
+
+읽는 법은 `references/future-value.md`의 "거래량 없이 가격만 읽지 않는다".
+
 ## 출력 — HTML 아티팩트
 
 **`assets/brief-template.html`을 복사해서 그날 값으로 채운다.** 매일 새로 디자인하지 않는다.

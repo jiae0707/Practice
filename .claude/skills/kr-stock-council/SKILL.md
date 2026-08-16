@@ -316,5 +316,7 @@ python3 scripts/fundamentals.py
 - `scripts/implied.py` — **현재가에 반영된 기대치 역산.** 서사의 가격표
 - `scripts/factor_model.py` — 종목별 팩터 자동 선택, 이상수익률
 - `scripts/flows.py` — 수급 회귀, 외국인 보유율 추세
+- `scripts/trend.py` — **가격 × 거래량.** OBV 괴리·매물대(VWAP)·매도 소진 판정
+- `scripts/target.py` — 기간별 목표주가 (6개월·1년·2년·3년)
 - `data/history.json` — 일별 종가 시계열. 상관·회귀의 재료
 - `assets/output-template.md` — 출력 형식
