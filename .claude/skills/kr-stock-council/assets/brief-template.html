@@ -138,6 +138,34 @@
   .sum .v{font-size:16px; font-weight:700; margin-top:1px}
 
   .up{color:var(--up)} .down{color:var(--down)}
+
+  /* ── 목표주가 ── */
+  .tgt{border-top:1px solid var(--line-soft); padding:12px 16px;
+       background:linear-gradient(0deg,var(--surface-2),var(--surface))}
+  .tgt-h{display:flex; align-items:center; gap:7px; margin-bottom:9px}
+  .tgt-h .lbl{font-size:12px; font-weight:700; color:var(--accent)}
+  .tgt-h .sub{font-size:11px; color:var(--muted); font-weight:500}
+  table.tg{width:100%; border-collapse:collapse; font-size:12.5px}
+  table.tg th{font-size:10.5px; color:var(--muted); font-weight:700; padding:0 0 6px;
+              text-align:right; letter-spacing:.02em}
+  table.tg th:first-child{text-align:left}
+  table.tg td{padding:6px 0; border-top:1px solid var(--line-soft); text-align:right;
+              white-space:nowrap}
+  table.tg td:first-child{text-align:left; font-weight:700; color:var(--muted); font-size:11.5px}
+  .tg-pct{font-size:10.5px; display:block; font-weight:600; margin-top:1px}
+
+  /* ── 비교표 ── */
+  table.cmp{width:100%; border-collapse:collapse; font-size:12.5px}
+  table.cmp th{font-size:10.5px; color:var(--muted); font-weight:700;
+               padding:0 0 7px; text-align:right}
+  table.cmp th:first-child{text-align:left}
+  table.cmp td{padding:9px 0; border-top:1px solid var(--line-soft); text-align:right;
+               white-space:nowrap}
+  table.cmp td:first-child{text-align:left; font-weight:700}
+  .loc{font-size:10px; font-weight:700; padding:2px 6px; border-radius:999px}
+  .loc-lo{background:var(--accent-soft); color:var(--accent)}
+  .loc-hi{background:var(--warn-soft); color:var(--warn)}
+  .bigpos{font-weight:700}
   footer{font-size:12px; color:var(--muted); line-height:1.65;
           border-top:1px solid var(--line); padding-top:14px}
   footer b{color:var(--ink-2); font-weight:600}
@@ -161,7 +189,7 @@
   <div class="verdict">
     <div class="verdict-label">오늘의 결론</div>
     <div class="verdict-main">오늘 걸 주문 없음</div>
-    <div class="verdict-sub">현대차 매도 논거를 재검토 중입니다. 아래를 읽어주세요.</div>
+    <div class="verdict-sub">비중이 큰 두 종목이 밸류 상단, 작은 두 종목이 하단입니다. 아래 비교표부터 보세요.</div>
   </div>
 
   <section>
@@ -174,6 +202,42 @@
         <div class="chip pending"><span class="k">VIX</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">원/달러</span><span class="v">확인 예정</span></div>
         <div class="chip pending"><span class="k">WTI</span><span class="v">확인 예정</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="head">
+      <h2>어디에 돈이 있고, 어디가 오를 것 같은가</h2>
+      <div class="note">PBR 밴드 중립 + 배당</div>
+    </div>
+    <div class="body">
+      <div class="scroll">
+        <table class="cmp">
+          <thead><tr><th>종목</th><th>비중</th><th>PBR</th><th>밴드 위치</th><th>1년</th><th>3년</th></tr></thead>
+          <tbody>
+            <tr><td>한국전력</td><td class="num">2.5%</td><td class="num">0.41</td>
+                <td><span class="loc loc-lo">하단</span></td>
+                <td class="num up bigpos">+27.1%</td><td class="num up bigpos">+52.8%</td></tr>
+            <tr><td>네이버</td><td class="num">9.3%</td><td class="num">1.15</td>
+                <td><span class="loc loc-lo">하단</span></td>
+                <td class="num up bigpos">+20.4%</td><td class="num up bigpos">+35.9%</td></tr>
+            <tr><td>현대차</td><td class="num">77.1%</td><td class="num">0.96</td>
+                <td><span class="loc loc-hi">상단</span></td>
+                <td class="num down bigpos">−16.6%</td><td class="num down">−1.7%</td></tr>
+            <tr><td>삼성전자</td><td class="num">3.2%</td><td class="num">2.51</td>
+                <td><span class="loc loc-hi">상단</span></td>
+                <td class="num down bigpos">−22.6%</td><td class="num down">−2.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        ⚠️ <b>돈이 가장 많이 들어간 종목의 기대수익이 가장 나쁩니다.</b>
+        많이 오른 종목이 비중도 커졌고, 오른 만큼 밸류가 밴드 상단에 갔습니다.
+        <br><br>
+        이 표의 유일한 가정은 <b>“PBR이 밴드 중간으로 돌아온다”</b>입니다.
+        회사 성격이 바뀌면(현대차→로봇, 삼성전자→AI) 밴드 자체가 이동합니다.
       </div>
     </div>
   </section>
@@ -217,6 +281,23 @@
         <span class="o-gap num down">−11.70%</span>
         <span class="o-note">20일선 399,300 이탈 = 반등 실패 신호. 자동 매도가 아니라 그날 다시 판단합니다</span>
       </div>
+    </div>
+
+
+    <div class="tgt">
+      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 0.51~0.96 · BPS 연 6.08% 가정</span></div>
+      <div class="scroll"><table class="tg">
+        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
+        <tbody><tr><td>1년</td><td class="num">254,837<span class="tg-pct down">−43.7%</span></td><td class="num">367,266<span class="tg-pct down">−18.9%</span></td><td class="num">479,694<span class="tg-pct up">+5.9%</span></td></tr><tr><td>3년</td><td class="num">286,768<span class="tg-pct down">−36.7%</span></td><td class="num">413,283<span class="tg-pct down">−8.8%</span></td><td class="num">539,798<span class="tg-pct up">+19.2%</span></td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="keep">
+      🤖 <b>로봇 가격표</b> — 로봇 이전 PBR 0.587로 보면 자동차 가치는 56.6조.
+      지금 시총 92.8조이니 <b>로봇에 36.2조</b>가 붙어 있습니다.
+      6/1 고점 750,000원에서는 <b>97.0조</b>였고, 그래서 −40% 빠졌습니다.<br>
+      보스턴다이내믹스는 5년 누적 매출 5,022억에 <b>누적 순손실 1조 7,558억</b>입니다.
+      2028년 3만대 계획이 그대로 돼도 제 추정 가치는 <b>15.9조</b>(컨센서스 15~30조 하단).
+      <b>“유망하다”와 “지금 값이 싸다”는 다른 얘기입니다.</b>
     </div>
 
     <div class="keep">
@@ -266,6 +347,14 @@
       </div>
     </div>
 
+
+    <div class="tgt">
+      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">보통주 목표가 × 괴리율 46.6% (104일 평균 45.6%)</span></div>
+      <div class="scroll"><table class="tg">
+        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
+        <tbody><tr><td>1년</td><td class="num">118,754<span class="tg-pct down">−43.7%</span></td><td class="num">171,146<span class="tg-pct down">−18.9%</span></td><td class="num">223,537<span class="tg-pct up">+5.9%</span></td></tr><tr><td>3년</td><td class="num">133,634<span class="tg-pct down">−36.7%</span></td><td class="num">192,590<span class="tg-pct down">−8.7%</span></td><td class="num">251,546<span class="tg-pct up">+19.2%</span></td></tr></tbody>
+      </table></div>
+    </div>
     <div class="keep">
       <b>파는 순서는 보통주가 먼저입니다.</b> 5개월간 외국인이 보통주는 −3.87%p 팔았는데
       우선주는 <b>−0.03%p로 그대로</b>였고, 배당수익률도 <b>4.79% vs 2.21%</b>로 2배 이상입니다.
@@ -306,6 +395,21 @@
         <span class="o-gap num down">−7.08%</span>
         <span class="o-note">여기까지 밀리면 사지 말고 멈춥니다</span>
       </div>
+    </div>
+
+
+    <div class="tgt">
+      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 1.15~1.45 · BPS 연 5.42% 가정</span></div>
+      <div class="scroll"><table class="tg">
+        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
+        <tbody><tr><td>1년</td><td class="num">240,581<span class="tg-pct up">+5.5%</span></td><td class="num">271,961<span class="tg-pct up">+19.3%</span></td><td class="num">303,341<span class="tg-pct up">+33.0%</span></td></tr><tr><td>3년</td><td class="num">267,367<span class="tg-pct up">+17.3%</span></td><td class="num">302,240<span class="tg-pct up">+32.6%</span></td><td class="num">337,114<span class="tg-pct up">+47.9%</span></td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="keep">
+      <b>PBR 1.15로 밴드 하단</b>이고 매출은 4년간 +42.6%. 비관 시나리오도 플러스입니다.<br>
+      ⚠️ 다만 <b>ROE가 4년 내내 7% 언저리</b>(4.41→7.90→7.36→6.78)입니다.
+      자본은 154,077→198,445원으로 쌓이는데 이익이 못 따라갑니다.
+      <b>“싸다”는 맞지만 “좋다”는 아닙니다.</b>
     </div>
 
     <div class="keep">
@@ -350,6 +454,21 @@
       </div>
     </div>
 
+
+    <div class="tgt">
+      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 방식 불가 — 2026E ROE 55.83%는 피크</span></div>
+      <div class="scroll"><table class="tg">
+        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
+        <tbody><tr><td>PER 4배</td><td class="num">191,284<span class="tg-pct down">−30.3%</span></td><td class="num">—<span class="tg-pct up"></span></td><td class="num">—<span class="tg-pct up"></span></td></tr><tr><td>PER 6배</td><td class="num">—<span class="tg-pct down"></span></td><td class="num">286,926<span class="tg-pct up">+4.5%</span></td><td class="num">—<span class="tg-pct up"></span></td></tr><tr><td>PER 8배</td><td class="num">—<span class="tg-pct down"></span></td><td class="num">—<span class="tg-pct up"></span></td><td class="num">382,568<span class="tg-pct up">+39.4%</span></td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="keep">
+      🚨 <b>목표주가를 PBR로 못 냅니다.</b> 2026E 영업이익 390.9조, 영업이익률 52.93%,
+      ROE 55.83%는 AI 메모리 슈퍼사이클 수치라 영구 성장 가정에 쓸 수 없습니다.<br>
+      PER로 보면 <b>5.74배</b>인데, <b>사이클 산업에서 “피크 이익 + 낮은 PER”은 고점 신호</b>이기도 합니다.
+      이 슈퍼사이클이 몇 년 가는지가 전부이고, 저는 그걸 판정 못 합니다.
+    </div>
+
     <div class="keep">
       <b>이 종목만 SOX를 봅니다.</b> 시장을 통제한 뒤에도 반도체 지수 반응이 남는
       유일한 종목입니다(베타 0.32, t=2.18). 간밤 SOX가 +3%면 개장 기대 +1%p 정도입니다.
@@ -360,7 +479,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">한국전력 <span class="tag t-hold">보유 · 추매 금지</span></div>
+        <div class="s-name">한국전력 <span class="tag t-sell">매수 후보 1순위</span></div>
         <div class="s-pos">보유 <b>1,000주</b> · 3,325만 · <b class="down">−44.4%</b> · 비중 2.5%</div>
       </div>
       <div class="s-px">
@@ -389,6 +508,24 @@
         <span class="o-gap num down">−1.20%</span>
         <span class="o-note">실적·규제 악재면 그때 판단, 단순 수급이면 버팁니다. 자동 매도 아닙니다</span>
       </div>
+    </div>
+
+
+    <div class="tgt">
+      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 0.32~0.63 · BPS 연 7.99% 가정</span></div>
+      <div class="scroll"><table class="tg">
+        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
+        <tbody><tr><td>1년</td><td class="num">27,909<span class="tg-pct down">−16.1%</span></td><td class="num">41,427<span class="tg-pct up">+24.6%</span></td><td class="num">54,945<span class="tg-pct up">+65.2%</span></td></tr><tr><td>3년</td><td class="num">32,547<span class="tg-pct down">−2.1%</span></td><td class="num">48,312<span class="tg-pct up">+45.3%</span></td><td class="num">64,076<span class="tg-pct up">+92.7%</span></td></tr></tbody>
+      </table></div>
+    </div>
+    <div class="keep">
+      📈 <b>완전한 턴어라운드입니다.</b> 2023년 영업적자 4.5조 → 2025년 흑자 13.5조,
+      ROE −12.63% → 19.40%, 부채비율 543% → 401%. BPS는 55,837 → 80,762원(+44.6%).<br>
+      <b>PBR 0.41은 밴드 하단</b>이고 비관 시나리오조차 3년 −2.1%입니다.
+      평단 60,000은 3년 뒤 <b>PBR 0.59</b>면 닿습니다(BPS가 늘기 때문).<br>
+      ⛽ 유가 가설도 검정했습니다 — WTI +10%에 −1.77%(t=−2.25)로 방향은 맞지만,
+      5개월 −29% 중 유가 몫은 <b>−3.1%p(9%)</b>뿐입니다.
+      주범은 <b>2026E 영업이익 13.5조→8.2조 추정</b>입니다.
     </div>
 
     <div class="keep">
@@ -453,9 +590,10 @@
     매도는 현재가보다 위, 매수는 현재가보다 아래라야 걸립니다.<br><br>
     <b>▼ 내리면</b>은 현재가보다 아래여서 <b>지정가로 못 겁니다.</b> 조건이 닿은 날 저녁에
     다시 판단하는 항목이고, 자동으로 팔리지 않습니다.<br><br>
-    <b>다음 과제</b> — 현대차 비중을 줄이려면 갈아탈 종목이 먼저 필요합니다.
-    예수금 1억을 쓰면 <b>한 주도 안 팔고</b> 현대차 비중이 77.1%→71.8%,
-    유효 종목 수가 1.65→1.88이 됩니다. <b>여기부터 시작하는 게 순서입니다.</b><br><br>
+    <b>예수금 1억의 행선지</b> — 밖에서 새 종목을 찾을 필요가 없습니다.
+    이미 가진 종목 중 <b>한국전력(1년 +27.1%)</b>과 <b>네이버(+20.4%)</b>가 밴드 하단입니다.
+    한국전력이 기대수익도 높고 <b>5종목 중 상관계수가 가장 낮아 분산에도 기여</b>합니다.
+    현대차를 한 주도 안 팔고 비중이 77.1%→71.8%, 유효 종목 수가 1.65→1.88이 됩니다.<br><br>
     판단 재료이고 최종 결정은 본인이 합니다. 장중에는 대응이 어려우므로
     모든 지시는 아침에 걸 수 있는 형태로만 냅니다.
   </footer>
