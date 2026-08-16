@@ -53,13 +53,8 @@ def roe_adjust(name, price):
         if not roe or not pbr or roe <= 0:
             continue
         # 캡처 오류 감지 — 이 숫자를 그대로 쓰면 결론이 통째로 틀린다
-        why = []
-        if roe > 30:
-            why.append(f"ROE {roe:.1f}%")
-        if prev_rev and rev and rev / prev_rev > 1.5:
-            why.append(f"매출 {rev/prev_rev:.1f}배")
-        if why:
-            suspect.append((yr, ", ".join(why)))
+        if a.get("_suspect"):
+            suspect.append((yr, a["_suspect"]))
         else:
             rows.append((yr, a.get("op"), roe, pbr, pbr / roe, bps))
         prev_rev = rev or prev_rev
@@ -71,11 +66,23 @@ def roe_adjust(name, price):
         print(f"  {yr:<10}{op_s:>10}{roe:>7.2f}%{pbr:>7.2f}{ratio:>10.4f}")
 
     if suspect:
-        print(f"\n  ⚠️  제외한 연도 — 캡처 오류로 의심된다")
+        print(f"\n  ⚠️  제외한 연도 — 데이터가 검증되지 않았다")
         for yr, why in suspect:
             print(f"     {yr}: {why}")
-        print(f"     **재무 캡처를 다시 받기 전에는 이 종목 결론을 내지 않는다.**")
+        print(f"     **검증 전에는 이 종목 결론을 내지 않는다.**")
         return 1
+
+    # 정점이익 차단 — 여기서 걸리면 이 방법 자체가 성립하지 않는다
+    if len(rows) >= 2:
+        cur_roe = rows[-1][2]
+        peak = max(r[2] for r in rows[:-1])
+        if cur_roe > peak * 1.8:
+            print(f"\n  ⛔ **당기 ROE {cur_roe:.2f}%가 과거 최고 {peak:.2f}%의"
+                  f" {cur_roe/peak:.1f}배다. 정점이익이다.**")
+            print(f"     이 방법은 ROE가 정상 수준일 때만 쓴다. 정점 ROE를 넣으면")
+            print(f"     적정 PBR이 그만큼 부풀어 **터무니없는 상승여력**이 나온다.")
+            print(f"     → `implied.py --cycle {name} --price <현재가>`로 역산한다.")
+            return 1
 
     if len(rows) < 3:
         print("\n  관측치가 3년 미만이라 관계를 추정할 수 없다. 계산하지 않는다.")

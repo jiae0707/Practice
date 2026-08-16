@@ -14,27 +14,134 @@
 """
 
 import argparse
+import json
+import os
 import sys
 
 RF = 0.03          # 무위험수익률 가정 (한국 10년물 근처)
 ERP = 0.06         # 주식 위험프리미엄 가정
 TAX = 0.242
+HERE = os.path.dirname(os.path.abspath(__file__))
+FIN = os.path.join(HERE, "..", "data", "financials.json")
 
 
 def ke(beta):
     return RF + beta * ERP
 
 
+def cycle(name, price, beta, growths=(0.0, 0.02, 0.03, 0.05)):
+    """정점이익 종목을 역산으로 다룬다.
+
+    **경기민감주는 PER이 낮을 때가 고점이다.** 이익이 정점이면 EPS가 커서
+    PER이 작아지고, 그걸 '싸다'로 읽으면 정확히 꼭대기에서 산다.
+
+    그래서 당기 ROE를 정상 수준으로 쓰지 않는다. 대신 뒤집는다 —
+    **지금 PBR이 성립하려면 ROE가 영구히 몇 %여야 하는가**를 푼다.
+
+        PBR = (ROE − g) / (r − g)   →   ROE = PBR × (r − g) + g
+
+    이 값이 과거 ROE 이력과 얼마나 떨어져 있는지가 판단 재료다.
+    """
+    with open(FIN, encoding="utf-8") as fh:
+        fin = json.load(fh)
+    if name not in fin:
+        print(f"{name}이 financials.json에 없다.")
+        return 1
+    ann = fin[name]["annual"]
+    yrs = sorted(ann)
+    cur = ann[yrs[-1]]
+    bps, pbr, cur_roe = cur["bps"], cur["pbr"], cur["roe"]
+    r = ke(beta)
+
+    print(f"\n{'='*68}\n  {name} — 정점이익 검사와 역산된 지속가능 ROE\n{'='*68}")
+    print(f"  현재가 {price:,.0f}   BPS {bps:,.0f}   PBR {pbr:.2f}   "
+          f"당기 ROE {cur_roe:.2f}%")
+    print(f"  자본비용 {r*100:.2f}%  (무위험 {RF*100:.0f}% + 베타 {beta:.2f} "
+          f"× 프리미엄 {ERP*100:.0f}%)")
+
+    print(f"\n▸ ROE 이력")
+    print(f"    {'연도':<10}{'영업이익':>10}{'ROE':>9}{'EPS':>10}{'PER':>8}{'PBR':>7}")
+    for y in yrs:
+        a = ann[y]
+        op = f"{a['op']/10000:,.1f}조" if a.get("op") else "—"
+        per = f"{a['per']:.2f}" if a.get("per") else "—"
+        print(f"    {y:<10}{op:>10}{a['roe']:>8.2f}%{a.get('eps',0):>10,.0f}"
+              f"{per:>8}{a.get('pbr',0):>7.2f}")
+
+    past = [ann[y]["roe"] for y in yrs[:-1]]
+    avg, peak = sum(past) / len(past), max(past)
+    print(f"\n▸ 정점 판정")
+    print(f"    과거 {len(past)}년 평균 ROE {avg:.2f}%   최고 {peak:.2f}%"
+          f"   당기 {cur_roe:.2f}%")
+    if cur_roe > peak * 1.8:
+        print(f"    ⚠️ **당기 ROE가 과거 최고의 {cur_roe/peak:.1f}배다. 정점이익으로 다룬다.**")
+        print(f"       이 ROE를 정상 수준으로 놓고 계산하면 적정주가가 폭주한다.")
+        if cur.get("per"):
+            print(f"       PER {cur['per']:.2f}는 싸 보이지만 **분모가 정점 EPS**다.")
+    else:
+        print(f"    당기 ROE가 과거 범위 안이다. 일반 절차를 써도 된다.")
+
+    print(f"\n▸ 지금 가격이 성립하려면 ROE가 영구히 몇 %여야 하나")
+    print(f"    {'영구성장 g':>10}{'필요 ROE':>11}{'당기 대비':>11}   시장이 보는 것")
+    for g in growths:
+        if g >= r:
+            continue
+        need = pbr * (r - g) + g
+        share = need * 100 / cur_roe * 100   # need는 소수, cur_roe는 %
+        print(f"    {g*100:>9.0f}%{need*100:>10.2f}%{share:>10.0f}%"
+              f"   당기 이익의 {share:.0f}%만 지속된다고 본다")
+
+    g0 = 0.03
+    need0 = pbr * (r - g0) + g0
+    print(f"\n    → 성장 {g0*100:.0f}% 기준 **{need0*100:.1f}%**."
+          f" 과거 최고 {peak:.2f}%의 {need0*100/peak:.1f}배다.")
+    print(f"       **시장은 이미 큰 폭의 정상화를 가격에 넣었다.**"
+          f" 당기 {cur_roe:.2f}%를 믿는 게 아니다.")
+
+    print(f"\n▸ ROE가 어디에 안착하느냐에 따른 가격  (g {g0*100:.0f}%, 자본비용 {r*100:.2f}%)")
+    print(f"    {'지속 ROE':>10}{'적정 PBR':>11}{'적정주가':>13}{'현재가 대비':>13}"
+          f"{'정규화 PER':>12}")
+    scen = sorted(set([round(x, 2) for x in past]
+                      + [10.0, 15.0, 20.0, round(need0 * 100, 2), 30.0, cur_roe]))
+    for x in scen:
+        fp = (x / 100 - g0) / (r - g0)
+        if fp <= 0:
+            continue
+        px = fp * bps
+        eps_n = x / 100 * bps
+        mark = "  ← 역산값" if abs(x - need0 * 100) < 0.01 else (
+               "  ← 당기" if abs(x - cur_roe) < 0.01 else "")
+        print(f"    {x:>9.2f}%{fp:>11.2f}{px:>12,.0f}원"
+              f"{px/price*100-100:>+12.1f}%{price/eps_n:>11.1f}배{mark}")
+
+    print(f"\n{'='*68}")
+    print(f"  이 표는 예측이 아니다. **어느 ROE를 믿느냐가 곧 가격**이라는 지도다.")
+    print(f"  물어야 할 것은 '얼마까지 오르나'가 아니라")
+    print(f"  **'{name}의 이익이 사이클을 지나 어디에 안착하나'**이다.")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--name", required=True)
-    ap.add_argument("--cap", type=float, required=True, help="시가총액(조원)")
-    ap.add_argument("--nopat", type=float, required=True, help="연 세후영업이익(조원)")
+    ap.add_argument("--cycle", metavar="종목",
+                    help="정점이익 검사 + 역산된 지속가능 ROE (financials.json 사용)")
+    ap.add_argument("--price", type=float, help="--cycle에서 쓰는 현재가")
+    ap.add_argument("--name")
+    ap.add_argument("--cap", type=float, help="시가총액(조원)")
+    ap.add_argument("--nopat", type=float, help="연 세후영업이익(조원)")
     ap.add_argument("--beta", type=float, default=1.0, help="측정된 시장 베타")
     ap.add_argument("--net-debt", type=float, default=0.0, help="순부채(조원). 모르면 0")
     ap.add_argument("--story", help="서사 이름:추정가치(조원). 예 로봇:15")
     ap.add_argument("--wacc", type=float, help="직접 지정. 생략하면 CAPM")
     args = ap.parse_args()
+
+    if args.cycle:
+        if not args.price:
+            ap.error("--cycle에는 --price가 필요하다")
+        return cycle(args.cycle, args.price, args.beta)
+    missing = [f"--{k}" for k in ("name", "cap", "nopat") if getattr(args, k) is None]
+    if missing:
+        ap.error("필요한 인자: " + ", ".join(missing))
 
     r = args.wacc if args.wacc else ke(args.beta)
     ev = args.cap + args.net_debt          # 기업가치
