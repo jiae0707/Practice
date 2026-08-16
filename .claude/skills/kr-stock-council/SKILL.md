@@ -167,12 +167,35 @@ python3 scripts/fundamentals.py
 | R1 | 종목별 1차 판단 제시 → 서로의 판단에 반박 |
 | R2 | 반박을 반영해 수정 → **세금·수수료 반영한 세후 손익**으로 재검토 |
 | R3 | 포트폴리오 전체 관점 — 비중, 집중도, 상관관계, 현금 비중 |
+| **R3.5** | **번복 심사(실버) + 교차 검증(레드).** 출고 직전 관문 — 건너뛰지 않는다 |
 | R4 | 종목별 최종 결론 + 5인 채점 |
 | R5+ | 평균 9.5 미만이면 최저점자가 보완 요구 → 근거 보강 후 재채점 |
 
 **반드시 반대 논거를 남긴다.** 매수 결론이면 "이 판단이 틀린다면 그 이유는 무엇인가"를
 한 줄로 적는다. 다섯이 만장일치로 같은 방향을 보면 그건 합의가 아니라 **집단 편향**이다.
 레드가 그 역할을 맡는다.
+
+### 🚨 자주 뒤집히는 것이 틀리는 것보다 나쁘다
+
+2026-08-16 감사: **번복 5건 중 4건이 표류(표류율 80%).** 새 정보가 들어와서
+바뀐 게 아니라 같은 데이터에 다른 방법을 써서 바뀌었다. 사용자가 지적할 때마다
+결론이 뒤집히면 **맞은 결론까지 못 믿게 된다.**
+
+원인은 판단력이 아니라 **출고 기준**이었다. 방법 하나만 돌리고 결론을 냈다.
+
+```bash
+python3 scripts/decisions.py --list 종목    # 지난번 결론부터 꺼낸다
+python3 scripts/decisions.py --audit        # 표류율을 주기적으로 본다
+```
+
+세 가지를 지킨다:
+
+1. **같은 질문에 방법 둘.** 하나면 레드가 출고를 막는다
+2. **갈리면 "갈린다"가 결론이다.** 한쪽을 골라 확신을 주지 않는다
+3. **바꿀 땐 "새로 들어온 사실이 무엇인가"부터.** 없으면 표류이고,
+   **표류였다고 사용자에게 먼저 말한다.** 조용히 고치면 신뢰가 더 깎인다
+
+절차는 `references/decision-protocol.md`의 **R3.5**.
 
 ## 3단계 — 결론 형식
 
@@ -334,7 +357,7 @@ python3 scripts/fundamentals.py
 - `references/factor-selection.md` — 종목별 팩터 고르는 법, 순환 참조 함정
 - `references/news-scoring.md` — 뉴스를 숫자로 바꾸는 규칙, 사후 편향 방지
 - `references/personas.md` — 5인의 전문성과 각자가 반드시 확인하는 것
-- `references/decision-protocol.md` — 라운드 구조, 채점 5항목
+- `references/decision-protocol.md` — 라운드 구조, R3.5 번복 심사, 채점 6항목
 - `references/tax-and-fees.md` — 세금·수수료 계산 규칙
 - `scripts/portfolio.py` — 평가·손익·세후·비중 계산
 - `scripts/correlation.py` — 상관·리스크 기여도·유효 종목 수·VaR·회귀 (의존성 없음)
@@ -343,6 +366,8 @@ python3 scripts/fundamentals.py
 - `scripts/factor_model.py` — 종목별 팩터 자동 선택, 이상수익률
 - `scripts/flows.py` — 수급 회귀, 외국인 보유율 추세
 - `scripts/trend.py` — **가격 × 거래량.** OBV 괴리·매물대(VWAP)·매도 소진 판정
-- `scripts/target.py` — 기간별 목표주가 (6개월·1년·2년·3년)
+- `scripts/target.py` — 기간별 목표주가. `--roe-adjust`로 ROE 보정 검산
+- `scripts/decisions.py` — **결론 이력과 번복 심사.** 표류/갱신을 기계적으로 가른다
+- `data/decisions.json` — 결론·근거·반증 조건·번복 기록
 - `data/history.json` — 일별 종가 시계열. 상관·회귀의 재료
 - `assets/output-template.md` — 출력 형식
