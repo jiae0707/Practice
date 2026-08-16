@@ -304,11 +304,17 @@ python3 scripts/fundamentals.py
 - `.claude/context/about-me.md` — 사용자 성향
 - `data/portfolio.json` — 보유 종목 (평단·수량). 매매 후 갱신한다
 - `references/daily-brief.md` — **매일 아침 05:00 브리핑** 모드. 형식, 종목별 감시 지표, 하지 말 것
+- `references/future-value.md` — **미래가치 판단 5개 축.** 예측하지 않고 역산한다
+- `references/factor-selection.md` — 종목별 팩터 고르는 법, 순환 참조 함정
+- `references/news-scoring.md` — 뉴스를 숫자로 바꾸는 규칙, 사후 편향 방지
 - `references/personas.md` — 5인의 전문성과 각자가 반드시 확인하는 것
 - `references/decision-protocol.md` — 라운드 구조, 채점 5항목
 - `references/tax-and-fees.md` — 세금·수수료 계산 규칙
 - `scripts/portfolio.py` — 평가·손익·세후·비중 계산
 - `scripts/correlation.py` — 상관·리스크 기여도·유효 종목 수·VaR·회귀 (의존성 없음)
 - `scripts/fundamentals.py` — F-Score·Altman Z·Beneish M·발생액·ROIC (분기 1회)
+- `scripts/implied.py` — **현재가에 반영된 기대치 역산.** 서사의 가격표
+- `scripts/factor_model.py` — 종목별 팩터 자동 선택, 이상수익률
+- `scripts/flows.py` — 수급 회귀, 외국인 보유율 추세
 - `data/history.json` — 일별 종가 시계열. 상관·회귀의 재료
 - `assets/output-template.md` — 출력 형식
