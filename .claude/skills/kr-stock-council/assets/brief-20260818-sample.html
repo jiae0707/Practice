@@ -168,6 +168,13 @@
   .loc{font-size:10px; font-weight:700; padding:2px 6px; border-radius:999px}
   .loc-lo{background:var(--accent-soft); color:var(--accent)}
   .loc-hi{background:var(--warn-soft); color:var(--warn)}
+
+  /* 신뢰등급 — 종목의 좋고 나쁨이 아니라 내 판단이 얼마나 두꺼운지 */
+  .grade{font-size:10px; font-weight:700; padding:2px 7px; border-radius:5px;
+         letter-spacing:.06em; white-space:nowrap; border:1px solid transparent}
+  .g-hi{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+  .g-mid{background:var(--surface-2); color:var(--ink-2); border-color:var(--line)}
+  .g-lo{background:var(--warn-soft); color:var(--warn); border-color:var(--warn)}
   .bigpos{font-weight:700}
   footer{font-size:12px; color:var(--muted); line-height:1.65;
           border-top:1px solid var(--line); padding-top:14px}
@@ -191,8 +198,8 @@
 
   <div class="verdict">
     <div class="verdict-label">오늘의 결론</div>
-    <div class="verdict-main">오늘 걸 주문 없음 · 한국전력 갈아타기는 철회합니다</div>
-    <div class="verdict-sub">어제 근거로 쓴 계산을 스크립트로 재현했더니 방법이 틀렸습니다. 첫 두 칸부터 보세요.</div>
+    <div class="verdict-main">오늘 걸 주문 없음 · 5종목 전부 보유</div>
+    <div class="verdict-sub">IR 두 건으로 한국전력·네이버가 신뢰 ‘하’에서 ‘중’으로 올라갔습니다. 추매는 아직 안 합니다.</div>
   </div>
 
   <section>
@@ -255,6 +262,161 @@
         <br><br>
         📌 <b>삼성전자는 다른 이유입니다.</b> 제가 “캡처 오류”라고 했던 건
         <b>제가 틀렸습니다</b> — 아래 칸에서 검산했습니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>이제 모든 결론에 신뢰등급을 붙입니다</h2>
+      <div class="note">번복이 잦다는 지적을 받고 만든 것</div>
+    </div>
+    <div class="body">
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.65">
+        지금까지의 번복을 세어봤더니 <b>5건 중 4건이 “표류”</b>였습니다.
+        새 정보가 들어와서 바뀐 게 아니라 <b>같은 데이터에 다른 방법을 대보니
+        답이 달라진 것</b>입니다. 그건 새 판단이 아니라
+        <b>첫 판단이 덜 검증됐다는 뜻</b>입니다.
+        <br><br>
+        등급이 뜻하는 걸 먼저 말씀드립니다. 두 가지가 <b>아닙니다</b>:
+        <br>
+        ✗ 종목의 좋고 나쁨 → <b>○ 제 판단의 두께</b>
+        <br>
+        ✗ 이 판단이 맞을 확률 → <b>○ 제가 말을 바꿀 확률</b>
+      </div>
+      <div style="margin-top:14px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>등급</th><th>조건</th><th>뒤집히려면</th><th>하실 일</th></tr></thead>
+          <tbody>
+            <tr><td><span class="grade g-hi">상</span></td><td>방법 둘이 같은 방향</td>
+                <td>새 사실이 필요</td><td>움직여도 됨</td></tr>
+            <tr><td><span class="grade g-mid">중</span></td><td>방법 하나 · 가정에 민감</td>
+                <td>가정이 틀리면 바뀜</td><td>가정 보고 판단</td></tr>
+            <tr><td><span class="grade g-lo">하</span></td><td>데이터가 얇거나 모형 안 맞음</td>
+                <td>언제든 바뀜</td><td><b>아무것도 안 함</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        오늘 주신 IR 두 건으로 <b>한국전력과 네이버가 ‘하’에서 ‘중’으로 올라갔습니다.</b>
+        새 사실이 들어온 것이라 표류가 아니라 <b>갱신</b>이고,
+        표류율이 <b>80% → 57%</b>로 내려갔습니다.
+        <br><br>
+        모든 결론에 <b>반증 조건</b>을 미리 등록했습니다.
+        “무엇이 관찰되면 제가 틀렸다고 인정하는가”를 먼저 적어두는 겁니다.
+        그래야 다음에 제가 말을 바꿀 때 <b>그게 갱신인지 표류인지 확인하실 수 있습니다.</b>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>한국전력 — 유가 때문이 아니었습니다</h2>
+      <div class="note">2026년 2분기 IR</div>
+    </div>
+    <div class="body">
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.65">
+        “유가가 올라 원가가 높아졌다”고 들으셨다고 했고 저도 방향은 맞다고 했습니다.
+        <b>IR을 보니 반대입니다.</b>
+      </div>
+      <div style="margin-top:12px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>전력구입단가</th><th>25년 상반기</th><th>26년 상반기</th><th>변화</th></tr></thead>
+          <tbody>
+            <tr><td>원전</td><td class="num">79.8</td><td class="num">94.2</td>
+                <td class="num up bigpos">+18.0%</td></tr>
+            <tr><td>석탄</td><td class="num">151.4</td><td class="num">131.1</td>
+                <td class="num down">−13.4%</td></tr>
+            <tr><td>LNG</td><td class="num">161.5</td><td class="num">153.0</td>
+                <td class="num down">−5.3%</td></tr>
+            <tr><td>신재생</td><td class="num">190.2</td><td class="num">201.0</td>
+                <td class="num up">+5.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>화석연료는 오히려 내렸습니다.</b> 오른 건 가장 싼 전원인 <b>원전(+18.0%)</b>입니다.
+        <br><br>
+        진짜 구조는 <b>요금 규제</b>입니다 —
+        <b>판매단가는 +0.2%밖에 못 올렸는데 연료비는 +8.8% 올랐습니다.</b>
+        판매량도 −0.9%인데 그중 비중 51%인 산업용이 −2.2%로 빠졌습니다.
+        그래서 상반기 영업이익 <b>−16.6%</b>입니다.
+        <br><br>
+        <b>한전에 투자하는 건 “정부가 요금을 원가에 맞춰 올려주는가”에 대한 베팅</b>입니다.
+        상반기 데이터가 말하는 건 <b>아직 안 올려주고 있다</b>입니다.
+      </div>
+
+      <div style="margin-top:16px;font-size:13px;font-weight:700">6년 사이클이 보이자 그림이 나빠졌습니다</div>
+      <div style="margin-top:8px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>영업이익률</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th></tr></thead>
+          <tbody>
+            <tr><td>연결</td><td class="num up">7.0%</td><td class="num down">−9.6%</td>
+                <td class="num down bigpos">−45.8%</td><td class="num down">−5.2%</td>
+                <td class="num up">9.0%</td><td class="num up">13.9%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        2023·2024·2025 ROE가 제가 가진 값과 정확히 일치해 <b>두 출처가 서로를 검증</b>합니다.
+        정상화 이익은 어느 구간을 쓰느냐로 갈립니다 —
+        <b>6년 전체면 −5.0조(적자)</b>, 2022년 위기를 빼면 +3.0조, 최근 3년이면 +5.8조.
+        <br><br>
+        <b>2022년을 빼도 되는지가 쟁점이고, 제 판단은 빼면 안 된다는 쪽입니다.</b>
+        요금은 규제되고 원가는 시장이 정하니 원가가 튀면 한전이 다 뒤집어씁니다.
+        2022년은 일회성이 아니라 <b>사업 구조가 드러난 해</b>입니다.
+        <br><br>
+        자본구조도 확정됐습니다 — <b>총차입금 133.3조, 평균금리 3.1%, 시총 21.3조.</b>
+        주식이 기업가치의 <b>13.8%</b>뿐이라 <b>기업가치 1%가 주가 7.2%로 증폭</b>됩니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>네이버 — 순이익으로 보면 안 되는 회사</h2>
+      <div class="note">2026년 2분기 IR</div>
+    </div>
+    <div class="body">
+      <div class="scroll">
+        <table class="cmp">
+          <thead><tr><th>십억원</th><th>2Q25</th><th>4Q25</th><th>1Q26</th><th>2Q26</th></tr></thead>
+          <tbody>
+            <tr><td>영업이익</td><td class="num">522</td><td class="num">611</td>
+                <td class="num">542</td><td class="num">520</td></tr>
+            <tr><td>영업이익률</td><td class="num">17.9%</td><td class="num">19.1%</td>
+                <td class="num">16.7%</td><td class="num down bigpos">15.4%</td></tr>
+            <tr><td><b>영업외손익</b></td><td class="num up">+162</td><td class="num down bigpos">−311</td>
+                <td class="num down">−148</td><td class="num up bigpos">+382</td></tr>
+            <tr><td>순이익</td><td class="num">497</td><td class="num">163</td>
+                <td class="num">291</td><td class="num">704</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>2분기 순이익 704 중 382(54%)이 영업 밖에서 왔습니다.</b>
+        그것도 지분법·금융상품 <b>평가손익</b>이고, 분기마다 −311~+382로 출렁입니다.
+        <br>
+        제가 “자본이 영업과 무관하게 쌓인다”고 봤던 게 이것이었습니다.
+        <b>이 회사를 순이익이나 ROE로 보면 안 되는 이유가 확인됐습니다.</b>
+        <br><br>
+        영업 자체는 — <b>매출 +16.2%인데 영업이익 −0.2%.</b>
+        5분기째 5,200~6,100억 박스이고 영업이익률이 17.9% → <b>15.4%</b>로 깎였습니다.
+        회사 설명은 “AI 경쟁력 확보를 위한 <b>단기적인</b> 비용 증가”입니다.
+      </div>
+      <div style="margin-top:16px;font-size:13px;font-weight:700">순현금을 받아 드디어 EV를 계산했습니다</div>
+      <div style="margin-top:8px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        시총 34.66조 − <b>순현금 1.83조</b> = <b>기업가치 32.83조</b><br>
+        최근 4분기 영업이익 2.24조 → <b>EV/영업이익 14.6배</b>
+        <br><br>
+        <b>이 가격이 성립하려면 영업이익이 영구히 연 2.8% 성장해야 합니다</b>(자본비용 8% 기준).
+        지금은 <b>−0.2%</b>입니다.
+        <b>“단기적”이 맞으면 지금 가격이 맞고, 아니면 비쌉니다.</b> 그게 판단 지점입니다.
+        <br><br>
+        ⚠️ 순현금이 <b>2.88조 → 2.34조 → 1.83조</b>로 줄고 있습니다.
+        왈라팝 인수와 CapEx 때문이고 완충이 얇아지는 중입니다.
+        <br>
+        ✅ 8월 3일 <b>자기주식 3.1% 소각</b>(1조 170억원)은 주주환원입니다.
       </div>
     </div>
   </section>
@@ -464,7 +626,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">현대차 <span class="tag t-wait">매도 보류</span></div>
+        <div class="s-name">현대차 <span class="grade g-hi">신뢰 상</span><span class="tag t-wait">매도 보류</span></div>
         <div class="s-pos">보유 <b>2,302주</b> · 10억 4,281만 · <b class="up">+92.8%</b> · 비중 77.1%</div>
       </div>
       <div class="s-px">
@@ -546,7 +708,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">현대차우 <span class="tag t-hold">전량 보유</span></div>
+        <div class="s-name">현대차우 <span class="grade g-hi">신뢰 상</span><span class="tag t-hold">전량 보유</span></div>
         <div class="s-pos">보유 <b>316주</b> · 6,668만 · <b class="down">−24.6%</b> · 비중 4.9%</div>
       </div>
       <div class="s-px">
@@ -595,7 +757,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">네이버 <span class="tag t-wait">추매 보류</span></div>
+        <div class="s-name">네이버 <span class="grade g-mid">신뢰 중</span><span class="tag t-wait">보유 · 추매 안 함</span></div>
         <div class="s-pos">보유 <b>550주</b> · 1억 2,540만 · <b class="down">−3.0%</b> · 비중 9.3%</div>
       </div>
       <div class="s-px">
@@ -638,12 +800,17 @@
     <div class="keep">
       ✅ <b>5종목 중 거래량이 유일하게 주가를 따라옵니다.</b>
       최근 20일 주가 +18.2%에 OBV t=+3.91, 신고가 4회·신저가 0회.
-      상승일 거래량이 하락일의 <b>1.40배</b>라 매집으로 읽힙니다.
-      현재가가 매물대와 −1.2%로 거의 붙어 있어 위에 걸린 물량도 없습니다.<br>
-      ⚠️ 다만 <b>ROE가 4년 내내 7% 언저리</b>(4.41→7.90→7.36→6.78)입니다.
-      자본은 154,077→198,445원으로 쌓이는데 이익이 못 따라갑니다.
-      <b>“수급은 가장 좋다”는 맞지만 “이익이 좋다”는 아닙니다.</b>
-      위 목표주가는 PBR 밴드 가정이고, ROE 보정 모형은 이 종목에 맞지 않았습니다(맨 위 참조).
+      상승일 거래량이 하락일의 <b>1.40배</b>라 매집으로 읽힙니다.<br>
+      ⛔ <b>그런데 밸류는 반대를 가리킵니다.</b> IR로 순현금 1.83조가 확정돼
+      <b>EV/영업이익 14.6배</b>가 나왔는데, 이 가격이 성립하려면 영업이익이
+      <b>영구히 연 2.8% 성장</b>해야 합니다. 지금은 <b>YoY −0.2%</b>이고
+      영업이익률이 17.9%에서 <b>15.4%</b>로 깎였습니다.<br>
+      <b>ROE·순이익으로 보면 안 되는 회사입니다</b> — 2분기 순이익의 54%가
+      지분법·금융상품 평가손익이고 분기마다 −311~+382십억으로 출렁입니다.
+      위 목표주가(PBR 밴드)와 ROE 보정은 둘 다 이 종목에 맞지 않습니다.<br>
+      <b>수급은 좋고 밸류는 비쌉니다. 갈립니다.</b> 그래서 보유하되 추매는 안 합니다.<br><br>
+      🎯 <b>반증 조건 — 영업이익률이 2개 분기 연속 반등해 17%를 회복하면 추매로 전환,
+      15% 아래로 더 내려가면 비중 축소를 검토합니다.</b> 분기마다 확인됩니다.
     </div>
 
     <div class="keep">
@@ -657,7 +824,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">삼성전자 <span class="tag t-hold">조건부 보유</span></div>
+        <div class="s-name">삼성전자 <span class="grade g-hi">신뢰 상</span><span class="tag t-hold">조건부 보유</span></div>
         <div class="s-pos">보유 <b>156주</b> · 4,282만 · <b class="down">−14.2%</b> · 비중 3.2%</div>
       </div>
       <div class="s-px">
@@ -720,7 +887,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">한국전력 <span class="tag t-wait">보유 · 추매 철회</span></div>
+        <div class="s-name">한국전력 <span class="grade g-mid">신뢰 중</span><span class="tag t-wait">보유 · 추매 안 함</span></div>
         <div class="s-pos">보유 <b>1,000주</b> · 3,325만 · <b class="down">−44.4%</b> · 비중 2.5%</div>
       </div>
       <div class="s-px">
@@ -762,12 +929,15 @@
     <div class="keep">
       📈 <b>완전한 턴어라운드입니다.</b> 2023년 영업적자 4.5조 → 2025년 흑자 13.5조,
       ROE −12.63% → 19.40%, 부채비율 543% → 401%. BPS는 55,837 → 80,762원(+44.6%).<br>
-      ⛔ <b>다만 “PBR 0.41이 밴드 하단이라 싸다”는 철회합니다.</b>
-      2024년에 ROE 9.22%로 PBR 0.32였고, 2026E는 ROE 9.06%인데 PBR 0.41입니다.
-      <b>이익이 같은데 28% 비싸진 것</b>이라 밴드 하단이 저평가를 뜻하지 않습니다.
-      ROE로 보정하면 적정주가 24,578원(−26.1%)인데, 이것도 과거 데이터가
-      2년뿐이라 숫자로 쓰지 않고 <b>방향만</b> 씁니다. 위 목표주가 표는
+      ⛔ <b>“PBR 0.41이 밴드 하단이라 싸다”는 철회합니다.</b> ROE 보정으로도,
+      2022년을 포함한 6년 사이클로도 성립하지 않습니다. 위 목표주가 표는
       밴드가 유지된다는 가정 위에 있습니다.<br>
+      📌 <b>IR로 확인한 것</b> — 상반기 영업이익 <b>−16.6%</b>, 원인은 유가가 아니라
+      <b>요금 규제</b>입니다(판매단가 +0.2% vs 연료비 +8.8%).
+      석탄 −13.4%·LNG −5.3%로 화석연료는 내렸고 <b>원전이 +18.0%</b> 올랐습니다.
+      2분기 단독 영업이익은 1.13조로 <b>컨센서스를 43% 밑돌았습니다.</b><br>
+      <b>총차입금 133.3조·평균금리 3.1%.</b> 주식이 기업가치의 13.8%뿐이라
+      <b>기업가치 1%가 주가 7.2%로 증폭</b>됩니다. 이게 변동성의 진짜 원인입니다.<br>
       📉 <b>이익 변동계수 1.21</b>(현대차 0.14의 8배). −4.5 → 8.4 → 13.5 → 8.2조입니다.
       <b>“언제 회복되냐”에 답할 수 없는 건 무엇이 정상 이익인지 정해지지 않기 때문</b>입니다.<br>
       ⛽ 유가 가설도 검정했습니다 — WTI +10%에 −1.77%(t=−2.25)로 방향은 맞지만,
@@ -785,7 +955,10 @@
       OBV는 t=−3.61로 여전히 매도 우위이고, 현재가 위 <b>17.2% 구간에 매물</b>이 쌓여 있습니다.<br>
       남는 건 <b>상관계수가 가장 낮아 분산에 기여</b>한다는 것 하나입니다.
       평단 60,000까지는 +80%가 필요합니다.
-      <b>팔 이유는 없지만 더 살 이유도 없다</b>는 게 결론입니다.
+      <b>팔 이유는 없지만 더 살 이유도 없다</b>는 게 결론입니다.<br><br>
+      🎯 <b>반증 조건을 등록했습니다 — 판매단가 상승률이 연료비 상승률을 넘어서면
+      추매로 전환합니다.</b> 지금은 +0.2% vs +8.8%입니다.
+      반기 IR에서 이 두 숫자만 보면 되고, 제 판단이 언제 바뀌는지 미리 아실 수 있습니다.
     </div>
   </div>
 
@@ -825,9 +998,8 @@
         <p>없습니다. 현대차 매도는 <b>갈 곳이 정해질 때까지</b> 보류하고,
         예수금 1억도 <b>넣을 곳을 못 찾았으니 넣지 않습니다.</b><br>
         제가 다음 주까지 할 일: ① 새 종목 후보를 이름과 근거로 제시
-        ② 삼성전자 HBM 가격·증설 계획 확인 (ROE 22% 유지 가능한지)
-        ③ 한국전력 2026년 영업이익이 13.5조→8.2조로 줄어드는 이유 확인
-        (요금 동결인지 연료비인지 일회성인지 아직 확인 못 했습니다)</p>
+        ② 삼성전자 HBM 가격·증설 계획 확인 (지속 ROE 22% 가능한지)
+        ③ <s>한국전력 영업이익 감소 이유</s> — <b>확인 완료.</b> 요금 규제입니다</p>
       </div>
     </div>
   </section>
