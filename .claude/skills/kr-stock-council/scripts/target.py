@@ -45,12 +45,17 @@ def roe_adjust(name, price):
               f"{[k for k in fin if not k.startswith('_')]}")
         return 1
     ann = fin[name]["annual"]
-    rows, suspect = [], []
+    rows, suspect, loss = [], [], []
     prev_rev = None
     for yr in sorted(ann):
         a = ann[yr]
         roe, pbr, bps, rev = a.get("roe"), a.get("pbr"), a.get("bps"), a.get("revenue")
-        if not roe or not pbr or roe <= 0:
+        if roe is not None and roe <= 0:
+            # 적자 연도. PBR/ROE는 음수가 되어 못 쓴다. 다만 **버리면 안 된다** —
+            # 경기민감주에서 적자 해는 사이클 바닥이고, 가장 정보가 많은 관측치다.
+            loss.append((yr, roe, a.get("op")))
+            continue
+        if not roe or not pbr:
             continue
         # 캡처 오류 감지 — 이 숫자를 그대로 쓰면 결론이 통째로 틀린다
         if a.get("_suspect"):
@@ -64,6 +69,17 @@ def roe_adjust(name, price):
     for yr, op, roe, pbr, ratio, _ in rows:
         op_s = f"{op/10000:,.1f}조" if op else "—"
         print(f"  {yr:<10}{op_s:>10}{roe:>7.2f}%{pbr:>7.2f}{ratio:>10.4f}")
+
+    if loss:
+        print(f"\n  ⛔ **적자 연도가 있다. 이 종목에 PBR/ROE 방법을 쓰지 않는다.**")
+        for yr, roe, op in loss:
+            op_s = f"영업이익 {op/10000:+.1f}조" if op else ""
+            print(f"     {yr}: ROE {roe:.2f}%  {op_s}")
+        print(f"     적자 해는 PBR/ROE가 음수라 계산에서 빠지는데, **버리면 안 되는 관측치**다.")
+        print(f"     경기민감주에서 적자 해는 사이클 바닥이고 정보가 가장 많다.")
+        print(f"     남은 {len(rows)}년으로 평균을 내면 **사이클의 좋은 쪽만 보는 것**이 된다.")
+        print(f"     → 정상화 이익(사이클 전체 평균)과 `implied.py`의 EV 기준으로 간다.")
+        return 1
 
     if suspect:
         print(f"\n  ⚠️  제외한 연도 — 데이터가 검증되지 않았다")
