@@ -155,8 +155,7 @@
   .tg-pct{font-size:10.5px; display:block; font-weight:600; margin-top:1px}
 
   /* ── 비교표 ── */
-  /* 표는 자기 안에서만 가로로 밀린다. 페이지 본문은 절대 가로 스크롤되지 않는다.
-     class="scroll" 을 쓰면서 이 규칙이 없으면 좁은 화면에서 본문이 통째로 밀린다 */
+  /* 표는 좁은 화면에서 자기 안에서만 가로로 밀린다. 페이지 본문은 절대 밀리지 않는다 */
   .scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
   .scroll>table{min-width:340px}
   table.cmp{width:100%; border-collapse:collapse; font-size:12.5px}
@@ -192,8 +191,8 @@
 
   <div class="verdict">
     <div class="verdict-label">오늘의 결론</div>
-    <div class="verdict-main">오늘 걸 주문 없음</div>
-    <div class="verdict-sub">비중이 큰 두 종목이 밸류 상단, 작은 두 종목이 하단입니다. 아래 비교표부터 보세요.</div>
+    <div class="verdict-main">오늘 걸 주문 없음 · 한국전력 갈아타기는 철회합니다</div>
+    <div class="verdict-sub">어제 근거로 쓴 계산을 스크립트로 재현했더니 방법이 틀렸습니다. 첫 두 칸부터 보세요.</div>
   </div>
 
   <section>
@@ -213,35 +212,250 @@
 
   <section>
     <div class="head">
-      <h2>어디에 돈이 있고, 어디가 오를 것 같은가</h2>
-      <div class="note">PBR 밴드 중립 + 배당</div>
+      <h2>제가 어제 낸 목표주가를 철회합니다</h2>
+      <div class="note">계산을 재현해봤더니 방법이 틀렸습니다</div>
     </div>
     <div class="body">
-      <div class="scroll">
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.65">
+        어제 <b>“한국전력 1년 +27.1%”</b>라고 드렸고, 그 다음 다시 계산해서
+        <b>“ROE 기준으로는 −26.1%”</b>라고 뒤집었습니다.
+        오늘 그 계산을 손이 아니라 스크립트로 다시 돌렸더니
+        <b>두 번째 것도 그대로 쓸 수 없습니다.</b>
+        <br><br>
+        PBR을 ROE로 나눈 값을 평균 내는 방식인데,
+        <b>ROE가 낮은 해가 하나 있으면 그 해가 평균을 통째로 끌어올립니다</b>
+        (작은 수로 나누니까요). 네이버 2023년 ROE 4.41%가 정확히 그 경우라,
+        그 해를 넣으면 +28.8%, 빼면 −3.8%가 나옵니다. 같은 회사, 같은 날인데요.
+        <b>어제 저는 네이버만 그 해를 빼고 현대차는 넣은 채로 순위를 만들었습니다.</b>
+      </div>
+
+      <div style="margin-top:14px" class="scroll">
         <table class="cmp">
-          <thead><tr><th>종목</th><th>비중</th><th>PBR</th><th>밴드 위치</th><th>1년</th><th>3년</th></tr></thead>
+          <thead><tr><th>종목</th><th>과거 관측</th><th>ROE 기울기</th><th>쓸 수 있나</th></tr></thead>
           <tbody>
-            <tr><td>한국전력</td><td class="num">2.5%</td><td class="num">0.41</td>
-                <td><span class="loc loc-lo">하단</span></td>
-                <td class="num up bigpos">+27.1%</td><td class="num up bigpos">+52.8%</td></tr>
-            <tr><td>네이버</td><td class="num">9.3%</td><td class="num">1.15</td>
-                <td><span class="loc loc-lo">하단</span></td>
-                <td class="num up bigpos">+20.4%</td><td class="num up bigpos">+35.9%</td></tr>
-            <tr><td>현대차</td><td class="num">77.1%</td><td class="num">0.96</td>
-                <td><span class="loc loc-hi">상단</span></td>
-                <td class="num down bigpos">−16.6%</td><td class="num down">−1.7%</td></tr>
-            <tr><td>삼성전자</td><td class="num">3.2%</td><td class="num">2.51</td>
-                <td><span class="loc loc-hi">상단</span></td>
-                <td class="num down bigpos">−22.6%</td><td class="num down">−2.8%</td></tr>
+            <tr><td>한국전력</td><td class="num">2년</td><td class="num">—</td>
+                <td><span class="loc loc-hi">회귀 불가</span></td></tr>
+            <tr><td>현대차</td><td class="num">3년</td><td class="num down">−0.023</td>
+                <td><span class="loc loc-hi">모형 안 맞음</span></td></tr>
+            <tr><td>네이버</td><td class="num">3년</td><td class="num down">−0.070</td>
+                <td><span class="loc loc-hi">모형 안 맞음</span></td></tr>
+            <tr><td>삼성전자</td><td class="num">3년</td><td class="num">—</td>
+                <td><span class="loc loc-hi">정점이익</span></td></tr>
           </tbody>
         </table>
       </div>
       <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        ⚠️ <b>돈이 가장 많이 들어간 종목의 기대수익이 가장 나쁩니다.</b>
-        많이 오른 종목이 비중도 커졌고, 오른 만큼 밸류가 밴드 상단에 갔습니다.
+        나누지 않는 방식(<b>PBR = a + b×ROE</b> 회귀)으로 다시 하니
+        현대차·네이버는 <b>기울기가 음수</b>로 나왔습니다.
+        <b>ROE가 떨어지는 동안 PBR이 올랐다</b>는 뜻이고,
+        그러면 그 가격은 애초에 이익으로 매겨진 게 아니라서
+        <b>적정주가라는 걸 계산할 수 없습니다.</b>
+        한국전력은 기울기가 양수지만 과거 데이터가 2년뿐입니다 —
+        두 점을 지나는 직선은 항상 완벽해서 아무 정보가 없습니다.
         <br><br>
-        이 표의 유일한 가정은 <b>“PBR이 밴드 중간으로 돌아온다”</b>입니다.
-        회사 성격이 바뀌면(현대차→로봇, 삼성전자→AI) 밴드 자체가 이동합니다.
+        📌 <b>삼성전자는 다른 이유입니다.</b> 제가 “캡처 오류”라고 했던 건
+        <b>제가 틀렸습니다</b> — 아래 칸에서 검산했습니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>삼성전자 — 제가 틀렸습니다</h2>
+      <div class="note">검산 6개 전부 통과</div>
+    </div>
+    <div class="body">
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.65">
+        어제 <b>“매출 738조는 캡처 오류”</b>라고 했습니다.
+        <b>검산을 안 하고 상식으로만 판단했습니다.</b> 재캡처를 받아 맞춰보니
+        여섯 개가 전부 맞습니다.
+      </div>
+      <div style="margin-top:12px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>검산</th><th>결과</th></tr></thead>
+          <tbody>
+            <tr><td>분기 합 = 연간</td><td>가려진 1분기를 역산하면 <b>791,405</b> — 캡처의 “…,405”와 일치</td></tr>
+            <tr><td>순이익 ÷ EPS = 주식수</td><td>4년 내내 <b>68.0억주</b>로 일정</td></tr>
+            <tr><td>EPS × PER</td><td>47,821 × 5.74 = <b>274,493</b></td></tr>
+            <tr><td>BPS × PBR</td><td>109,367 × 2.51 = <b>274,511</b></td></tr>
+            <tr><td>EPS ÷ 평균BPS</td><td><b>55.17%</b> vs 표의 ROE 55.83%</td></tr>
+            <tr><td>BPS 증가 ≈ EPS−DPS</td><td>+45,370 vs 유보 40,097</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>오류가 아니라 실제 정점이익이었습니다.</b>
+        2026년 1분기는 추정이 아니라 <b>발표된 실적</b>이고,
+        매출 133.9조에 <b>영업이익률 42.75%</b>입니다.
+        주가도 그에 맞게 움직입니다 — 최근 4개월 <b>207,000~362,500원</b>,
+        7월 31일 하루에 <b>−23.8%</b>, 연환산 변동성 <b>99.3%</b>입니다.
+        평소의 삼성전자가 아닙니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>그래서 예측할 수 있느냐 — 아니오</h2>
+      <div class="note">대신 지도를 드립니다</div>
+    </div>
+    <div class="body">
+      <div class="verdict">
+        <div class="verdict-label">정직한 답</div>
+        <div class="verdict-main">예측 못 합니다. 예측하면 안 되는 자리입니다</div>
+        <div class="verdict-sub">ROE가 1년에 10.85% → 55.83%로 뛴 회사의 다음 해를 맞히는 건 운입니다</div>
+      </div>
+      <div style="margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.7">
+        <b>PER 5.74가 함정입니다.</b> 반도체 같은 경기민감주는
+        <b>이익이 정점일 때 PER이 가장 낮습니다</b> — 나누는 EPS가 최대니까요.
+        그 PER을 “싸다”로 읽으면 <b>정확히 꼭대기에서 삽니다.</b>
+        2023년엔 PER 36.84였고 그때가 이익 바닥이었습니다.
+        <br><br>
+        그래서 질문을 뒤집었습니다. <b>“얼마까지 오르나”가 아니라
+        “지금 274,500원이 성립하려면 ROE가 영구히 몇 %여야 하나”</b>입니다.
+        이건 예측이 아니라 나눗셈이라 틀릴 수가 없습니다.
+      </div>
+      <div style="margin-top:14px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>자본비용 가정</th><th>필요한 지속 ROE</th><th>과거 최고 대비</th><th>당기 대비</th></tr></thead>
+          <tbody>
+            <tr><td>베타 1.00 → 9.00%</td><td class="num">18.1%</td><td class="num">1.7배</td><td class="num">32%</td></tr>
+            <tr><td>베타 1.29 → 10.74%</td><td class="num bigpos">22.4%</td><td class="num">2.1배</td><td class="num">40%</td></tr>
+            <tr><td>베타 1.60 → 12.60%</td><td class="num">27.1%</td><td class="num">2.5배</td><td class="num">48%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>시장은 ROE 55.83%를 안 믿고 있습니다.</b> 그 40% 남짓만 지속된다고 보고 있습니다.
+        “정점이라 위험하다”는 걱정은 <b>이미 가격에 들어가 있습니다.</b>
+        남는 질문은 딱 하나 — <b>사이클을 지나 ROE가 22% 위냐 아래냐</b>입니다.
+      </div>
+
+      <div style="margin-top:16px;font-size:13px;font-weight:700">ROE가 어디에 안착하느냐에 따른 가격</div>
+      <div style="margin-top:8px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>지속 ROE</th><th>적정 PBR</th><th>적정주가</th><th>현재가 대비</th><th>정규화 PER</th></tr></thead>
+          <tbody>
+            <tr><td>10.85% <span class="opt">2025 실적</span></td><td class="num">1.01</td><td class="num">110,921</td><td class="num down bigpos">−59.6%</td><td class="num">23.1배</td></tr>
+            <tr><td>15.00%</td><td class="num">1.55</td><td class="num">169,561</td><td class="num down bigpos">−38.2%</td><td class="num">16.7배</td></tr>
+            <tr><td>20.00%</td><td class="num">2.20</td><td class="num">240,212</td><td class="num down">−12.5%</td><td class="num">12.5배</td></tr>
+            <tr><td>22.43% <span class="opt">역산값</span></td><td class="num">2.51</td><td class="num">274,548</td><td class="num">±0.0%</td><td class="num">11.2배</td></tr>
+            <tr><td>30.00%</td><td class="num">3.49</td><td class="num">381,513</td><td class="num up bigpos">+39.0%</td><td class="num">8.4배</td></tr>
+            <tr><td>55.83% <span class="opt">당기</span></td><td class="num">6.83</td><td class="num">746,493</td><td class="num up bigpos">+171.9%</td><td class="num">4.5배</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>이 표는 예측이 아니라 지도입니다.</b> 제가 고를 게 아니라
+        <b>어느 칸에 동의하시는지</b>가 답입니다.
+        <br><br>
+        참고로 <b>과거 3년 ROE는 4.15 / 9.03 / 10.85%</b>였습니다.
+        22.4%는 그 최고의 두 배입니다. 이게 “이번엔 다르다”가 성립해야 하는
+        지점이고, <b>저는 그게 성립하는지 확인할 방법이 없습니다</b> —
+        HBM 가격과 증설 계획은 제가 검색으로 확인 못 했습니다.
+        <b>확인 못 한 걸 확인한 척하지 않겠습니다.</b>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>대신 거래량을 봤습니다</h2>
+      <div class="note">보내주신 차트에 있던 데이터 · 최근 20~26일</div>
+    </div>
+    <div class="body">
+      <div style="font-size:13px;color:var(--ink-2);line-height:1.65;margin-bottom:14px">
+        재무제표는 1년에 네 번 나오고 추정치는 틀립니다.
+        <b>거래량은 매일 나오고 조작이 안 됩니다.</b>
+        보내주신 차트에 이미 있던 건데 제가 가격만 쓰고 있었습니다.
+        <br><br>
+        핵심은 <b>주가와 OBV(누적 매수−매도 거래량)가 어긋나는 자리</b>입니다.
+        주가는 오르는데 OBV가 내려가면 <b>오르는 동안 누군가 물량을 넘기고 있다</b>는 뜻입니다.
+      </div>
+      <div class="scroll">
+        <table class="cmp">
+          <thead><tr><th>종목</th><th>20일 주가</th><th>20일 거래량</th><th>OBV t</th><th>매물대 대비</th></tr></thead>
+          <tbody>
+            <tr><td>현대차</td><td class="num up">+6.4%</td><td class="num">−46.3%</td>
+                <td class="num down bigpos">−4.75</td><td class="num down">−19.6%</td></tr>
+            <tr><td>현대차우</td><td class="num up">+8.1%</td><td class="num">−32.1%</td>
+                <td class="num down bigpos">−6.65</td><td class="num down">−13.4%</td></tr>
+            <tr><td>네이버</td><td class="num up">+18.2%</td><td class="num">−14.8%</td>
+                <td class="num up bigpos">+3.91</td><td class="num">−1.2%</td></tr>
+            <tr><td>삼성전자</td><td class="num up">+7.4%</td><td class="num">−0.0%</td>
+                <td class="num">−1.10</td><td class="num up">+4.0%</td></tr>
+            <tr><td>한국전력</td><td class="num down">−2.4%</td><td class="num">−33.3%</td>
+                <td class="num down bigpos">−3.61</td><td class="num down">−17.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>OBV t가 ±2를 넘으면</b> 그 방향이 우연이 아닙니다.
+        <b>매물대(거래대금 가중 평균가) 대비가 음수면</b> 그만큼 위에 물린 물량이 저항입니다.
+        <br><br>
+        ⚠️ <b>현대차·현대차우는 주가가 오르는 동안 물량이 넘어갔습니다.</b>
+        거래량도 46% 줄었습니다. 오르긴 오르는데 <b>받쳐주는 사람이 없는 상승</b>입니다.
+        <br>
+        ✅ <b>네이버만 주가와 물량이 같이 올라갑니다.</b>
+        최근 20일 신고가 4회 / 신저가 0회로 유일하게 추세가 살아 있습니다.
+        <br>
+        ➖ <b>한국전력은 신호가 엇갈립니다.</b> 빠지면서 거래량이 33% 줄어
+        매도가 소진되는 모습이지만, OBV는 t=−3.61로 여전히 매도 우위입니다.
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head">
+      <h2>“현대차 팔고 한국전력으로 갈아탈까” — 답</h2>
+      <div class="note">질문하신 것</div>
+    </div>
+    <div class="body">
+      <div class="verdict">
+        <div class="verdict-label">결론</div>
+        <div class="verdict-main">갈아타지 마세요. 최소한 <u>한국전력으로는</u> 아닙니다</div>
+        <div class="verdict-sub">현대차가 좋다는 뜻이 아니라, 한국전력이 그 대안이 못 된다는 뜻입니다</div>
+      </div>
+      <div style="margin-top:14px;font-size:13px;color:var(--ink-2);line-height:1.7">
+        <b>한국전력을 사자고 했던 근거가 세 개였는데 셋 다 무너졌습니다.</b>
+        <br><br>
+        ① <b>“PBR 밴드 하단이라 싸다”</b> → 이익이 줄어서 PBR도 같이 내려온 것이었습니다.
+        2024년(ROE 9.22%)에 PBR 0.32였는데 2026년 추정(ROE 9.06%)에 0.41입니다.
+        <b>이익은 같은데 28% 비싸졌습니다.</b>
+        <br><br>
+        ② <b>“외국인이 순매수 전환”</b> → 한쪽만 본 것이었습니다.
+        최근 20일 외국인 +219만주인데 <b>같은 기간 기관이 −512만주</b>입니다.
+        외국인이 사는 걸 기관이 받아낸 구조라 매수 신호가 아닙니다.
+        게다가 +219만주는 5개월 순매도 875만주의 <b>25%</b>일 뿐입니다.
+        <br><br>
+        ③ <b>“지금이 최저점”</b> → 최저점인 건 맞습니다. 문제는
+        <b>한국전력 영업이익 변동계수가 1.21로 현대차 0.14의 여덟 배</b>라는 겁니다
+        (−4.5 → 8.4 → 13.5 → 8.2조).
+        <b>“언제 회복되냐”는 질문 자체가 성립하지 않습니다</b> —
+        무엇으로 돌아가는 게 회복인지 정할 수가 없으니까요.
+        직접 하신 그 걱정이 맞습니다.
+        <br><br>
+        거래량도 도와주지 않습니다. 매도 소진 신호는 있지만
+        OBV는 여전히 −3.61이고, <b>현재가 위로 17.2% 구간에 물린 물량</b>이 쌓여 있습니다.
+      </div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft);
+                  font-size:13px;color:var(--ink-2);line-height:1.7">
+        <b>그런데 현대차를 그대로 두라는 뜻은 아닙니다.</b> 문제는 종목이 아니라
+        <b>비중 77.1%</b>입니다.
+        <br><br>
+        · 오르는 동안 물량이 넘어가고 있습니다(OBV t=−4.75, 거래량 −46%)
+        <br>
+        · 가격이 ROE로 설명되지 않습니다 → <b>로봇 서사가 값을 매기고 있습니다.</b>
+        지금 가격에 붙은 로봇 프리미엄은 <b>36.2조</b>인데
+        증권사 컨센서스는 15~30조, 회사 2028년 계획으로 역산하면 15.9조입니다
+        <br>
+        · <b>+92.8% 수익 중이라 파는 건 손절이 아니라 익절입니다.</b>
+        싫어하시는 그 손절이 아닙니다
+        <br><br>
+        📌 <b>목적지를 정하기 전에는 팔지 않습니다.</b> 현금으로 두면
+        갈아타기 문턱(거래비용 + 배당 손실 연 2.21%p)만 물고 끝납니다.
+        후보를 다음 주까지 찾아서 이름과 근거를 같이 드리겠습니다
+        (방향은 조선·방산·전력기기 쪽을 보고 있습니다).
       </div>
     </div>
   </section>
@@ -313,6 +527,18 @@
       <b>연 +0.7%p 주가상승</b>입니다. 현대차가 그만큼도 못 오를 것 같으면 팔고,
       그보다 오를 것 같으면 들고 갑니다. <b>이건 세금이 아니라 미래가치 판단이고,
       지금 저는 그 판단을 내릴 근거가 부족합니다.</b>
+    </div>
+
+    <div class="keep">
+      📊 <b>거래량이 상승을 안 받쳐줍니다.</b> 최근 26일 주가는 올랐는데
+      OBV 기울기 <b>t=−4.75</b>로 물량은 반대로 갔습니다.
+      <b>오르는 동안 누군가 넘기고 있다</b>는 뜻입니다.
+      최근 20일 거래량은 이전 대비 <b>−46.3%</b>, 신고가 1회 대 신저가 5회입니다.<br>
+      매물대(거래대금 가중 평균가)는 <b>563,330원</b>으로 현재가보다 19.6% 위입니다.
+      <b>6월 고점 근처에서 산 물량이 그 구간에 그대로 남아 있어</b>,
+      다시 올라갈 때 저항이 됩니다. 목표주가에 이 구간 통과를 넣어야 합니다.<br>
+      현대차우도 같습니다(OBV t=−6.65, 거래량 −32.1%, 매물대 −13.4%).
+      <b>두 종목이 같은 방향으로 움직이니 분산 효과가 없습니다.</b>
     </div>
   </div>
 
@@ -410,10 +636,14 @@
       </table></div>
     </div>
     <div class="keep">
-      <b>PBR 1.15로 밴드 하단</b>이고 매출은 4년간 +42.6%. 비관 시나리오도 플러스입니다.<br>
+      ✅ <b>5종목 중 거래량이 유일하게 주가를 따라옵니다.</b>
+      최근 20일 주가 +18.2%에 OBV t=+3.91, 신고가 4회·신저가 0회.
+      상승일 거래량이 하락일의 <b>1.40배</b>라 매집으로 읽힙니다.
+      현재가가 매물대와 −1.2%로 거의 붙어 있어 위에 걸린 물량도 없습니다.<br>
       ⚠️ 다만 <b>ROE가 4년 내내 7% 언저리</b>(4.41→7.90→7.36→6.78)입니다.
       자본은 154,077→198,445원으로 쌓이는데 이익이 못 따라갑니다.
-      <b>“싸다”는 맞지만 “좋다”는 아닙니다.</b>
+      <b>“수급은 가장 좋다”는 맞지만 “이익이 좋다”는 아닙니다.</b>
+      위 목표주가는 PBR 밴드 가정이고, ROE 보정 모형은 이 종목에 맞지 않았습니다(맨 위 참조).
     </div>
 
     <div class="keep">
@@ -468,9 +698,16 @@
     </div>
     <div class="keep">
       🚨 <b>목표주가를 PBR로 못 냅니다.</b> 2026E 영업이익 390.9조, 영업이익률 52.93%,
-      ROE 55.83%는 AI 메모리 슈퍼사이클 수치라 영구 성장 가정에 쓸 수 없습니다.<br>
-      PER로 보면 <b>5.74배</b>인데, <b>사이클 산업에서 “피크 이익 + 낮은 PER”은 고점 신호</b>이기도 합니다.
-      이 슈퍼사이클이 몇 년 가는지가 전부이고, 저는 그걸 판정 못 합니다.
+      ROE 55.83%는 AI 메모리 슈퍼사이클 수치라 영구 성장 가정에 쓸 수 없습니다.
+      (재무 데이터는 검산 6개를 통과했습니다 — 오류가 아니라 실제 수치입니다.)<br>
+      PER로 보면 <b>5.74배</b>인데, <b>사이클 산업에서 “피크 이익 + 낮은 PER”은 고점 신호</b>입니다.
+      2023년 PER 36.84가 이익 바닥이었던 것과 정확히 반대편입니다.<br>
+      🔄 <b>대신 역산했습니다</b>(위 섹션) — 지금 274,500원이 성립하려면
+      지속 ROE가 <b>22.4%</b>여야 합니다. 과거 최고 10.85%의 2.1배이고,
+      당기 55.83%의 40%입니다. <b>시장은 이미 정상화를 가격에 넣었습니다.</b><br>
+      판단 기준이 이걸로 바뀝니다 — <b>“슈퍼사이클이 몇 년 가나”가 아니라
+      “사이클을 지나 ROE가 22% 위냐 아래냐”</b>입니다.
+      아래 매도 조건(20일선 이탈)은 그 판단이 필요 없는 규칙이라 그대로 둡니다.
     </div>
 
     <div class="keep">
@@ -483,7 +720,7 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">한국전력 <span class="tag t-sell">매수 후보 1순위</span></div>
+        <div class="s-name">한국전력 <span class="tag t-wait">보유 · 추매 철회</span></div>
         <div class="s-pos">보유 <b>1,000주</b> · 3,325만 · <b class="down">−44.4%</b> · 비중 2.5%</div>
       </div>
       <div class="s-px">
@@ -525,17 +762,30 @@
     <div class="keep">
       📈 <b>완전한 턴어라운드입니다.</b> 2023년 영업적자 4.5조 → 2025년 흑자 13.5조,
       ROE −12.63% → 19.40%, 부채비율 543% → 401%. BPS는 55,837 → 80,762원(+44.6%).<br>
-      <b>PBR 0.41은 밴드 하단</b>이고 비관 시나리오조차 3년 −2.1%입니다.
-      평단 60,000은 3년 뒤 <b>PBR 0.59</b>면 닿습니다(BPS가 늘기 때문).<br>
+      ⛔ <b>다만 “PBR 0.41이 밴드 하단이라 싸다”는 철회합니다.</b>
+      2024년에 ROE 9.22%로 PBR 0.32였고, 2026E는 ROE 9.06%인데 PBR 0.41입니다.
+      <b>이익이 같은데 28% 비싸진 것</b>이라 밴드 하단이 저평가를 뜻하지 않습니다.
+      ROE로 보정하면 적정주가 24,578원(−26.1%)인데, 이것도 과거 데이터가
+      2년뿐이라 숫자로 쓰지 않고 <b>방향만</b> 씁니다. 위 목표주가 표는
+      밴드가 유지된다는 가정 위에 있습니다.<br>
+      📉 <b>이익 변동계수 1.21</b>(현대차 0.14의 8배). −4.5 → 8.4 → 13.5 → 8.2조입니다.
+      <b>“언제 회복되냐”에 답할 수 없는 건 무엇이 정상 이익인지 정해지지 않기 때문</b>입니다.<br>
       ⛽ 유가 가설도 검정했습니다 — WTI +10%에 −1.77%(t=−2.25)로 방향은 맞지만,
       5개월 −29% 중 유가 몫은 <b>−3.1%p(9%)</b>뿐입니다.
       주범은 <b>2026E 영업이익 13.5조→8.2조 추정</b>입니다.
     </div>
 
     <div class="keep">
-      손절 논의는 끝났습니다. <b>외국인이 최근 20거래일 +219만주 순매수로 전환</b>했고
-      (5개월 내내 팔던 종목입니다), 상관계수가 5종목 중 가장 낮아 <b>유일하게 분산에 기여</b>합니다.
-      평단 60,000까지는 +80%가 필요하지만, <b>팔 이유가 없다</b>는 게 결론입니다.
+      손절 논의는 끝났습니다 — 하지만 <b>“그러니 더 사자”로는 이어지지 않습니다.</b><br>
+      외국인 최근 20거래일 +219만주는 <b>한쪽만 본 숫자</b>였습니다.
+      같은 기간 <b>기관이 −512만주</b>이고, +219만주도 5개월 순매도 875만주의 <b>25%</b>뿐입니다.
+      보유율은 1.94%p 하락분 중 0.49%p만 되돌렸습니다.
+      <b>외국인이 사는 걸 기관이 받아낸 구조</b>입니다.<br>
+      거래량은 엇갈립니다 — 빠지면서 거래량 −33.3%로 <b>매도가 소진되는 모습</b>이지만
+      OBV는 t=−3.61로 여전히 매도 우위이고, 현재가 위 <b>17.2% 구간에 매물</b>이 쌓여 있습니다.<br>
+      남는 건 <b>상관계수가 가장 낮아 분산에 기여</b>한다는 것 하나입니다.
+      평단 60,000까지는 +80%가 필요합니다.
+      <b>팔 이유는 없지만 더 살 이유도 없다</b>는 게 결론입니다.
     </div>
   </div>
 
@@ -572,7 +822,12 @@
     <div class="body">
       <div class="empty">
         <span class="mark">✓</span>
-        <p>없습니다. 현대차 매도는 <b>갈 곳이 정해질 때까지</b> 보류합니다.</p>
+        <p>없습니다. 현대차 매도는 <b>갈 곳이 정해질 때까지</b> 보류하고,
+        예수금 1억도 <b>넣을 곳을 못 찾았으니 넣지 않습니다.</b><br>
+        제가 다음 주까지 할 일: ① 새 종목 후보를 이름과 근거로 제시
+        ② 삼성전자 HBM 가격·증설 계획 확인 (ROE 22% 유지 가능한지)
+        ③ 한국전력 2026년 영업이익이 13.5조→8.2조로 줄어드는 이유 확인
+        (요금 동결인지 연료비인지 일회성인지 아직 확인 못 했습니다)</p>
       </div>
     </div>
   </section>
@@ -594,10 +849,13 @@
     매도는 현재가보다 위, 매수는 현재가보다 아래라야 걸립니다.<br><br>
     <b>▼ 내리면</b>은 현재가보다 아래여서 <b>지정가로 못 겁니다.</b> 조건이 닿은 날 저녁에
     다시 판단하는 항목이고, 자동으로 팔리지 않습니다.<br><br>
-    <b>예수금 1억의 행선지</b> — 밖에서 새 종목을 찾을 필요가 없습니다.
-    이미 가진 종목 중 <b>한국전력(1년 +27.1%)</b>과 <b>네이버(+20.4%)</b>가 밴드 하단입니다.
-    한국전력이 기대수익도 높고 <b>5종목 중 상관계수가 가장 낮아 분산에도 기여</b>합니다.
-    현대차를 한 주도 안 팔고 비중이 77.1%→71.8%, 유효 종목 수가 1.65→1.88이 됩니다.<br><br>
+    <b>예수금 1억의 행선지</b> — 어제는 한국전력이라고 했는데 <b>철회합니다.</b>
+    근거였던 “밴드 하단”이 ROE 보정에서 무너졌고, 수급도 외국인 +219만주 뒤에
+    <b>기관 −512만주</b>가 있었습니다. 분산 기여가 가장 크다는 것만 남았는데,
+    <b>그건 사는 이유가 아니라 파는 이유가 없다는 뜻</b>입니다.<br>
+    지금 확실한 건 하나입니다 — <b>넣을 곳을 못 찾았으면 넣지 않습니다.</b>
+    예수금 1억은 예금 3%로도 연 300만원이고, 이건 잘못된 종목에 넣는 것보다 낫습니다.
+    후보는 다음 주까지 이름과 근거를 같이 드리겠습니다.<br><br>
     판단 재료이고 최종 결정은 본인이 합니다. 장중에는 대응이 어려우므로
     모든 지시는 아침에 걸 수 있는 형태로만 냅니다.
   </footer>
