@@ -24,19 +24,79 @@ TAX = 0.0020 + 0.00015     # 증권거래세 + 수수료
 STEPS = 4                   # 사다리 칸 수
 
 
+def buy_ladder(name, price, budget, fair, levels, now_share=0.10):
+    """매수 사다리 — 파는 사다리를 뒤집는다.
+
+    **적정주가 위에서 사면 그 차이만큼 손해로 시작한다.** 그렇다고 안 사고
+    기다리면 영영 못 살 수도 있다. 둘 다 대비하는 방법은 나누는 것뿐이다.
+
+    파는 사다리는 위로 갈수록 많이 팔았다. 사는 사다리는 **아래로 갈수록
+    많이 산다.** 이유가 같다 — 쌀수록 기대수익이 크기 때문이다.
+
+    첫 칸을 지금 넣는 건 **"안 빠지면 한 주도 못 산다"는 위험**의 값이다.
+    """
+    over = price / fair - 1
+    print(f"\n{'='*70}\n  {name} — 분할 매수 사다리\n{'='*70}")
+    print(f"  현재가 {price:,.0f}   적정주가 {fair:,.0f}   → **{over*100:+.1f}%**")
+    print(f"  예산 {budget/1e4:,.0f}만원")
+    if over > 0:
+        print(f"\n  ⚠️ **지금 사면 적정주가보다 {over*100:.1f}% 비싸게 시작한다.**")
+        print(f"     그래도 첫 칸을 {now_share*100:.0f}% 넣는 건")
+        print(f"     **안 빠질 경우 한 주도 못 사는 위험**에 대한 값이다.")
+
+    weights = [now_share] + [w * (1 - now_share) for w in
+                            [x / sum(range(1, len(levels))) for x in range(1, len(levels))]]
+    print(f"\n▸ 사다리 — 아래로 갈수록 많이 산다 (쌀수록 기대수익이 크므로)")
+    print(f"    {'가격':>10}{'현재가 대비':>11}{'배분':>7}{'금액':>11}{'주수':>9}   자리")
+    tq = tc = 0
+    for (px, tag), w in zip(levels, weights):
+        amt = budget * w
+        q = int(amt // px)
+        tq += q; tc += q * px
+        print(f"    {px:>10,.0f}{px/price*100-100:>+10.1f}%{w*100:>6.0f}%"
+              f"{q*px/1e4:>9,.0f}만{q:>8,}주   {tag}")
+    print(f"    {'계':>10}{'':>11}{'':>7}{tc/1e4:>9,.0f}만{tq:>8,}주")
+    print(f"    평균 매입단가 **{tc/tq:,.0f}원**  (지금 전량 매수 대비 "
+          f"{tc/tq/price*100-100:+.1f}%)")
+
+    print(f"\n▸ 안 빠지면 어떻게 되나 — 이게 이 방법의 비용이다")
+    first_q = int(budget * weights[0] // levels[0][0])
+    print(f"    첫 칸만 체결되면 {first_q:,}주({budget*weights[0]/1e4:,.0f}만원)만 갖게 된다.")
+    print(f"    나머지 {budget*(1-weights[0])/1e4:,.0f}만원은 현금으로 남는다.")
+    print(f"    **그것도 나쁜 결과가 아니다** — 비싸게 안 산 것이고 현금은 예금 이자를 받는다.")
+    print(f"\n  {'='*66}")
+    print(f"  사는 것도 파는 것과 같다. **한 번에 결정하지 않는다.**")
+    print(f"  '지금이 바닥인가'는 답할 수 없는 질문이고, 답하려 하면 틀린다.")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--name", required=True)
     ap.add_argument("--price", type=float, required=True, help="현재가")
-    ap.add_argument("--qty", type=int, required=True, help="보유 주수")
-    ap.add_argument("--fair", type=float, nargs=2, required=True,
-                    metavar=("하단", "상단"), help="적정주가 밴드")
+    ap.add_argument("--qty", type=int, help="보유 주수 (매도 사다리)")
+    ap.add_argument("--fair", type=float, nargs="+",
+                    metavar="가격", help="적정주가 밴드(하단 상단) 또는 단일값(--buy)")
+    ap.add_argument("--buy", type=float, metavar="예산", help="분할 매수 사다리 예산(원)")
+    ap.add_argument("--levels", nargs="+", metavar="가격:설명",
+                    help="--buy의 매수 단계. 예 53400:지금 51900:박스하단")
     ap.add_argument("--keep", type=float, default=0.5,
                     help="끝까지 남길 비율 (0~1). 기본 0.5")
     ap.add_argument("--avg", type=float, help="평단. 있으면 손익을 같이 낸다")
     ap.add_argument("--peak", type=float, help="과거 고점. 있으면 대조한다")
     args = ap.parse_args()
 
+    if args.buy:
+        if not args.fair or not args.levels:
+            ap.error("--buy에는 --fair(단일값)과 --levels가 필요하다")
+        lv = []
+        for x in args.levels:
+            a, _, b = x.partition(":")
+            lv.append((float(a), b or ""))
+        return buy_ladder(args.name, args.price, args.buy, args.fair[0], lv)
+
+    if not args.qty or not args.fair or len(args.fair) != 2:
+        ap.error("매도 사다리에는 --qty와 --fair 하단 상단이 필요하다")
     lo, hi = args.fair
     sellable = int(args.qty * (1 - args.keep))
     over = args.price / hi - 1
