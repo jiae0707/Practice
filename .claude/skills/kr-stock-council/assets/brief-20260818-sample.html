@@ -215,8 +215,8 @@
 
   <div class="verdict act">
     <div class="verdict-label">오늘 할 일</div>
-    <div class="verdict-main">사다리 8칸 그대로. 오늘 바꿀 것 없습니다</div>
-    <div class="verdict-sub">SOX +1.64%. 삼성전자 개장 +1.1% 기대되지만 어느 사다리도 안 건드립니다</div>
+    <div class="verdict-main">사다리 8칸 그대로 — 다만 뉴스 두 개가 계산을 건드렸습니다</div>
+    <div class="verdict-sub">현대차 관세 4조 절감, 삼성전자 D램 400% 전망. 아래에서 반영했습니다</div>
   </div>
 
   <section>
@@ -280,61 +280,110 @@
   </section>
 
   <section>
-    <div class="head"><h2>밤사이</h2><div class="note">미국 8/17 마감</div></div>
+    <div class="head"><h2>밤사이 — 미국 8/17 마감</h2><div class="note">SOX는 캡처 · 나머지는 검색</div></div>
     <div class="body">
       <div class="chips">
         <div class="chip"><span class="k">SOX 반도체</span><span class="v num up">+1.64%</span></div>
-        <div class="chip"><span class="k">SOX 종가</span><span class="v num">12,621</span></div>
-        <div class="chip pending"><span class="k">나스닥</span><span class="v">미확인</span></div>
-        <div class="chip pending"><span class="k">VIX</span><span class="v">미확인</span></div>
-        <div class="chip pending"><span class="k">원/달러</span><span class="v">미확인</span></div>
-        <div class="chip pending"><span class="k">WTI</span><span class="v">미확인</span></div>
+        <div class="chip"><span class="k">나스닥</span><span class="v num up">+0.81%</span></div>
+        <div class="chip"><span class="k">S&amp;P 500</span><span class="v num up">+0.65%</span></div>
+        <div class="chip"><span class="k">다우</span><span class="v num up">+0.13%</span></div>
+        <div class="chip"><span class="k">원/달러</span><span class="v num">1,412.10</span></div>
+        <div class="chip"><span class="k">WTI</span><span class="v num down">81.51</span></div>
+        <div class="chip"><span class="k">미 10년물</span><span class="v num">4.69%</span></div>
+        <div class="chip pending"><span class="k">VIX</span><span class="v">검색 실패</span></div>
       </div>
       <div style="margin-top:14px" class="scroll">
         <table class="cmp">
-          <thead><tr><th>종목</th><th>SOX 베타</th><th>t</th><th>개장 기대</th><th>예상가</th></tr></thead>
+          <thead><tr><th>종목</th><th>SOX +1.64%</th><th>환율 +0.15%</th><th>WTI −3.92%</th><th>개장 기대</th></tr></thead>
           <tbody>
-            <tr><td>삼성전자</td><td class="num">0.684</td><td class="num">3.88</td>
-                <td class="num up bigpos">+1.12%</td><td class="num">277,600</td></tr>
-            <tr><td>네이버</td><td class="num">0.297</td><td class="num">2.10</td>
-                <td class="num up">+0.49%</td><td class="num">229,100</td></tr>
-            <tr><td>현대차</td><td class="num">0.272</td><td class="num">2.03</td>
-                <td class="num up">+0.45%</td><td class="num">455,000</td></tr>
-            <tr><td>한국전력</td><td class="num muted">0.161</td><td class="num muted">1.75</td>
-                <td class="num muted">유의하지 않음</td><td class="num muted">—</td></tr>
+            <tr><td>삼성전자</td><td class="num up">+1.11%</td><td class="num muted">—</td>
+                <td class="num muted">—</td><td class="num up bigpos">+1.11%</td></tr>
+            <tr><td>네이버</td><td class="num up">+0.49%</td><td class="num muted">—</td>
+                <td class="num muted">—</td><td class="num up">+0.49%</td></tr>
+            <tr><td>현대차</td><td class="num up">+0.47%</td><td class="num muted">—</td>
+                <td class="num muted">—</td><td class="num up">+0.47%</td></tr>
+            <tr><td>한국전력</td><td class="num muted">—</td><td class="num muted">—</td>
+                <td class="num muted">—</td><td class="num muted">0.00%</td></tr>
           </tbody>
         </table>
       </div>
       <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        SOX 12,621은 <b>52주 최고 14,655(6/22) 대비 −13.9%</b>이고
-        52주 최저 5,480 대비 +130%입니다. 어제는 <b>고가 12,771에서 밀려 마감</b>했습니다(−1.2%).
-        <br><br>
-        ⚠️ <b>KOSPI를 같이 넣으면 SOX 효과가 사라집니다</b>(t=−0.90).
-        삼성전자가 KOSPI의 큰 부분이라 KOSPI가 SOX를 이미 반영하기 때문입니다.
-        위 숫자는 <b>개장 전에만 쓰는 단독 베타</b>이고, 개장 후엔 KOSPI를 봅니다.
-        <br><br>
-        📌 나스닥·VIX·원/달러·WTI는 안 받았습니다. <b>없는 걸 지어내지 않습니다.</b>
-        SOX만으로 오늘 판단은 충분합니다 — <b>어느 사다리도 안 건드리기 때문</b>입니다.
+        팩터별로 <b>단독 회귀해서 t&gt;2인 것만</b> 더했습니다. 환율(+0.15%)과 WTI(−3.92%)는
+        네 종목 모두 유의하지 않아 <b>0으로 봅니다.</b> WTI가 3.9% 빠졌는데도 한국전력이
+        움직이지 않는 건, 제가 앞서 확인한 <b>“유가가 원인이 아니다”</b>와 같은 얘기입니다.
       </div>
     </div>
   </section>
 
   <section>
-    <div class="head"><h2>그래서 오늘 할 일</h2><div class="note">변경 없음</div></div>
+    <div class="head"><h2>간밤 뉴스 — 판단에 들어가는 것만</h2>
+      <div class="note">9종목 + 후보 전부 검색</div></div>
     <div class="body">
       <div class="mini">
-        <div class="mini-row"><span class="l">현대차 매도 사다리</span>
-          <span class="r">첫 칸 <b>453,000</b> · 개장 예상 455,000<br>
-          <b>바로 체결될 수 있습니다.</b> 의도한 대로입니다</span></div>
-        <div class="mini-row"><span class="l">KT 매수 사다리</span>
-          <span class="r">첫 칸 <b>53,400</b> · 통신은 SOX와 무관<br>
-          그대로 둡니다</span></div>
-        <div class="mini-row"><span class="l">삼성전자</span>
-          <span class="r">개장 <b>277,600</b> 예상 · 매도 사다리 첫 칸은 381,513<br>
-          아직 <b>37% 위</b>라 멀었습니다. 20일선 244,475도 안전</span></div>
-        <div class="mini-row"><span class="l">오늘 볼 것</span>
-          <span class="r"><b>삼성전자 차기 주주환원 정책</b><br>
-          8월~3분기 발표 예정이라 오늘 나올 수도 있습니다</span></div>
+        <div class="mini-row"><span class="l">🔥 삼성전자</span>
+          <span class="r"><b>D램 가격 2026년 말까지 400% 상승 전망</b><br>
+          씨티는 D램 +200%·낸드 +186% 예상. 공급 부족이 <b>2027년까지</b> 이어진다고 봅니다<br>
+          → <b>제 “지속 ROE 22.4%” 질문에 직접 닿습니다.</b> 아래에서 다시 계산했습니다</span></div>
+        <div class="mini-row"><span class="l">🔥 현대차</span>
+          <span class="r"><b>미국 자동차 관세 15%로 인하 → 연 4조원 이상 절감</b><br>
+          다만 2분기는 매출 49조 사상 최대인데 <b>영업이익률 5.8%</b>로 수익성 딜레마<br>
+          → <b>자동차 본업 가치가 올라가니 적정주가 밴드를 다시 봐야 합니다</b></span></div>
+        <div class="mini-row"><span class="l">한국전력</span>
+          <span class="r"><b>3분기 전기요금도 동결.</b> 연료비조정단가 +5원(상한) 유지<br>
+          필요 조정단가는 <b>−3.4원</b>이었는데 안 내렸습니다<br>
+          → 연료비 하락분을 요금에 안 돌려준 것이라 <b>한전엔 유리</b>. 다만
+          제 반증 조건(판매단가 &gt; 연료비)은 <b>아직 아닙니다</b></span></div>
+        <div class="mini-row"><span class="l">네이버</span>
+          <span class="r"><b>AI팩토리를 GW급으로 확대, 장기 매출 20조원 구상</b><br>
+          8/11 웹툰 게임사 알아이게임즈 <b>1,400억 인수</b><br>
+          → 20조는 <b>구상이지 계약이 아닙니다.</b> 인수로 순현금 1.83조는 더 줄어듭니다</span></div>
+        <div class="mini-row"><span class="l">비츠로셀</span>
+          <span class="r">1분기 매출 <b>+26.6%</b>, 영업이익 +34.5%, 순이익 +55.7%<br>
+          스마트미터·무선통신 수요 증가 → <b>−33.2% 손실이지만 사업은 좋아지고 있습니다</b></span></div>
+        <div class="mini-row"><span class="l">KT · 하나금융</span>
+          <span class="r">새 뉴스 없음. <b>사다리 그대로</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>뉴스를 계산에 넣으면</h2>
+      <div class="note">나열이 아니라 반영</div></div>
+    <div class="body">
+      <div style="font-size:13px;font-weight:700">① 현대차 — 관세 4조 절감</div>
+      <div style="margin-top:8px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        세후 3.03조 = <b>주당 14,805원</b>. 2026E EPS 38,028 → <b>조정 52,833원</b>.
+        과거 PER 밴드 4.60~8.39배를 적용하면 <b>243,030 ~ 443,266원</b>입니다.
+        <br><br>
+        ⚠️ <b>그래도 밴드를 지금 바꾸지 않습니다.</b> 2분기 영업이익률이 <b>5.8%</b>로
+        여전히 낮아 <b>절감이 아직 실적에 안 왔고</b>, 얼마가 이미 주가에 들어갔는지도 모릅니다.
+        <b>3분기 실적에서 영업이익률이 오르는지 보고 그때 바꿉니다.</b>
+        <br>
+        사다리 첫 칸은 유지합니다 — <b>로봇 프리미엄 129조 문제는 그대로</b>이기 때문입니다.
+      </div>
+
+      <div style="margin-top:18px;font-size:13px;font-weight:700">② 삼성전자 — 공급 부족 2027년까지</div>
+      <div style="margin-top:8px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        2027년에도 비슷한 이익을 내면 <b>BPS가 109,367 → 약 149,599원</b>으로 쌓입니다.
+        그러면 같은 주가 274,500의 PBR이 <b>2.51 → 1.83</b>으로 내려갑니다.
+      </div>
+      <div style="margin-top:10px" class="scroll">
+        <table class="cmp">
+          <thead><tr><th>기준</th><th>BPS</th><th>PBR</th><th>필요한 지속 ROE</th></tr></thead>
+          <tbody>
+            <tr><td>2026</td><td class="num">109,367</td><td class="num">2.51</td><td class="num">22.4%</td></tr>
+            <tr><td>2027 (이익 유지 시)</td><td class="num">149,599</td><td class="num">1.83</td>
+                <td class="num up bigpos">17.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        <b>이익이 한 해 더 가면 요구 ROE가 5.2%p 낮아집니다.</b> 자본이 쌓여서
+        같은 주가가 싸지기 때문입니다.
+        <br><br>
+        ⚠️ 다만 “2027년까지 부족”이 “영구히 22.4%”를 뜻하진 않습니다.
+        <b>정점이 1년 길어지는 것</b>이고, 그건 매도 사다리 첫 칸 381,513에 닿을
+        가능성을 높입니다. <b>사다리를 그대로 두는 이유가 여기 있습니다.</b>
       </div>
     </div>
   </section>
