@@ -1,4 +1,5 @@
-<title>평일 저녁 60분</title>
+<!-- 제목은 `날짜 + 무엇` — 실제로 만들 때 그 주의 날짜로 바꾼다 -->
+<title>8.18-22 평일저녁</title>
 <style>
   :root {
     --ground:       #EDEFF4;
@@ -249,7 +250,7 @@
 
   <header class="masthead">
     <div class="eyebrow">귀가 18:00 · 취침 21:00</div>
-    <h1>평일 저녁 60분</h1>
+    <h1>8.18-22 평일저녁</h1>
     <p class="dek">
       퇴근은 5시지만 집에 오면 6시, 집 정리까지 하면 <b>6시 반</b>. 실제로 쓸 수 있는 건
       <b>2시간 반</b>이다. 그래서 게임과 넷플릭스를 없애지 않고 <b>순서만 바꾼다</b> —
@@ -260,15 +261,25 @@
   <section>
     <div class="sec-head"><h2>하루에서 쓰는 몫</h2><span>18:30~21:00 · 150분 안에서</span></div>
 
-    <p style="margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-soft)">기본형 — 수 · 목</p>
+    <p style="margin:0 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-soft)">기본형 — 수 (영어를 따로 하는 날)</p>
     <div class="bar">
       <div class="seg use" style="flex:35">운동 35</div>
       <div class="seg" style="flex:20">씻기 20</div>
       <div class="seg use" style="flex:25">영어 25</div>
-      <div class="seg free" style="flex:45">자유 45분</div>
+      <div class="seg free" style="flex:50">자유 50분</div>
       <div class="seg" style="flex:20">취침 준비</div>
     </div>
-    <div class="bar-legend"><span>18:30</span><span>19:55</span><span>21:00</span></div>
+    <div class="bar-legend"><span>18:30</span><span>21:00</span></div>
+
+    <p style="margin:20px 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-soft)">반흡수형 — 목 (홈트하며 듣고, 말하기만 따로)</p>
+    <div class="bar">
+      <div class="seg use" style="flex:35">홈트 35 + 듣기</div>
+      <div class="seg" style="flex:20">씻기 20</div>
+      <div class="seg use" style="flex:15">영어 15</div>
+      <div class="seg free" style="flex:60">자유 60분</div>
+      <div class="seg" style="flex:20">취침 준비</div>
+    </div>
+    <div class="bar-legend"><span>18:30</span><span>21:00</span></div>
 
     <p style="margin:20px 0 8px;font-size:12.5px;font-weight:600;color:var(--ink-soft)">흡수형 — 월 · 금 (산책하며 영어)</p>
     <div class="bar">
@@ -277,13 +288,19 @@
       <div class="seg free" style="flex:75">자유 75분</div>
       <div class="seg" style="flex:20">취침 준비</div>
     </div>
-    <div class="bar-legend"><span>18:30</span><span>19:25</span><span>21:00</span></div>
+    <div class="bar-legend"><span>18:30</span><span>21:00</span></div>
 
     <p class="bar-note">
-      2시간 반은 생각보다 짧다. 운동과 영어를 따로 하면 자유 시간이 <b>45분</b>밖에 안 남는다.
-      그래서 산책하는 날엔 <b>이어폰 끼고 혼잣말</b>로 영어를 같이 끝낸다 —
-      35분에 둘이 해결되고 자유 시간이 <b>75분</b>으로 늘어난다.
-      그리고 <b>자유 시간은 항상 마지막</b>이다. 앞으로 오면 그날은 거기서 끝난다.
+      2시간 반은 생각보다 짧다. 운동과 영어를 따로 하면 자유 시간이 <b>50분</b>까지 줄어든다.
+      드라마 한 편이 45~55분이니 <b>50분이 하한선</b>이다 — 그 밑으로 내려가면
+      "순서만 바꾼다"가 아니라 "분량을 줄인다"가 된다.
+      그래서 산책하는 날엔 <b>이어폰 끼고 혼잣말</b>로 영어를 같이 끝내고,
+      자유 시간을 <b>75분</b>으로 늘린다. 그리고 <b>자유 시간은 항상 마지막</b>이다.
+    </p>
+
+    <p class="bar-note" style="margin-top:10px">
+      <b>시각은 세 개만 적는다</b> — 저녁이 시작되는 18:30, 취침 21:00, 그리고 화요일 수영 19:00.
+      나머지는 순서다. 분 단위 시간표는 이 사람의 언어가 아니다.
     </p>
   </section>
 
@@ -294,61 +311,61 @@
       <article class="day">
         <header>
           <div class="dow">월 <em>MON</em></div>
-          <div class="am">아침 06:10 요가 (회사)</div>
+          <div class="am">아침 06:10 요가 (회사) · 머리 감는 날</div>
           <div class="tag">단지 산책 35분</div>
         </header>
         <ul class="tl">
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:00</span>
-            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">~18:30</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">①</span>
+            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">30분 · 이미 하는 습관</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">②</span>
             <span class="b"><span class="name">단지 산책 35분</span><span class="sub">이어폰 끼고 <b>영어 혼잣말</b> · 중간에 집에 안 들름</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:30</span>
-            <span class="b"><span class="name">씻기</span><span class="sub">~19:25</span></span></label></li>
-          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:25</span>
-            <span class="b"><span class="name">자유 시간</span><span class="sub">75분</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">③</span>
+            <span class="b"><span class="name">씻기</span><span class="sub">20분 · 머리 감는 날</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">④</span>
+            <span class="b"><span class="name">자유 시간</span><span class="sub"><b>75분</b> — 드라마 한 편 · 게임 한 판 · 책</span></span></label></li>
         </ul>
-        <div class="mini"><div class="lbl">힘든 날</div><p>단지 한 바퀴 10분 + 영어 3분 버전</p></div>
+        <div class="mini"><div class="lbl">비 · 폭염 · 한파</div><p>커뮤니티 헬스 트레드밀 35분. 도보 5분이라 문턱이 산책과 비슷하고 영어 흡수도 그대로.<br><b>힘든 날</b> — 단지 한 바퀴 10분 + 영어 3분 버전</p></div>
       </article>
 
       <article class="day solo">
         <header>
           <div class="dow">화 <em>TUE</em></div>
-          <div class="am">아침 06:10 필라테스 (회사)</div>
+          <div class="am">아침 06:10 필라테스 (회사) · 머리 감는 날</div>
           <div class="tag">수영 19:00 — 저녁이 이거 하나</div>
         </header>
         <ul class="tl">
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:00</span>
-            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">~18:30</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:15</span>
-            <span class="b"><span class="name">영어 3분 버전</span><span class="sub">출발 전에 끝내둔다 · 다녀와서 아무것도 안 해도 되게</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
-            <span class="b"><span class="name">출발</span><span class="sub">수영가방은 전날 밤에</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">①</span>
+            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">수영가방은 전날 밤에</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">②</span>
+            <span class="b"><span class="name">영어 3분 버전</span><span class="sub"><b>출발 전에</b> 끝내둔다 · 다녀와서 아무것도 안 해도 되게</span></span></label></li>
           <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:00</span>
-            <span class="b"><span class="name">수영 강습</span><span class="sub">~19:50 · 20:30 귀가</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">20:35</span>
-            <span class="b"><span class="name">수영용품 정리</span><span class="sub">현관에서 가방 바로 풀어 <b>젖은 것만 널기</b> · 15분</span></span></label></li>
+            <span class="b"><span class="name">수영 강습</span><span class="sub">~19:50 · 샤워·드라이는 수영장에서</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">③</span>
+            <span class="b"><span class="name">수영용품 정리 20분</span><span class="sub">현관에서 가방 바로 풀어 <b>젖은 것만 널기</b></span></span></label></li>
         </ul>
         <div class="mini"><div class="lbl">이 날만은</div>
-          <p>자유 시간이 없는 날로 친다. 용품 정리는 <b>미루지 않고 그날 밤에</b> —
-             대신 젖은 것 널기까지만 하고 끝낸다.
+          <p>자유 시간이 없는 날로 친다. <b>취침도 늦어지는 날로 인정한다</b> — 21시에 맞추려고 뭘 빼지 않는다.
+             다음 날 수요일에 아침 운동이 없는 게 다행이다.
              점심 이후 7시간째 공복이니 첫 2~3주는 무리하지 않는다.</p></div>
       </article>
 
       <article class="day hero">
         <header>
           <div class="dow">수 <em>WED</em></div>
-          <div class="am">아침 운동 없음</div>
+          <div class="am">아침 운동 없음 · 몸만 씻는 날</div>
           <div class="tag">자전거 성내천 35분 — 이번 주의 중심</div>
         </header>
         <ul class="tl">
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:00</span>
-            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">~18:30</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">①</span>
+            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">30분</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">②</span>
             <span class="b"><span class="name">자전거 성내천 35분</span><span class="sub">물 챙기고 그늘 구간으로 · 스트레칭은 따로 붙이지 않는다</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:30</span>
-            <span class="b"><span class="name">영어 25분</span><span class="sub">6 Minute English 1일차 — 자막 보며 · 씻고 19:30부터</span></span></label></li>
-          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:55</span>
-            <span class="b"><span class="name">자유 시간</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">③</span>
+            <span class="b"><span class="name">씻기</span><span class="sub">20분</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">④</span>
+            <span class="b"><span class="name">영어 25분</span><span class="sub">이번 주 회차 — <b>자막 보며 쉐도잉</b> + 막힌 표현 3개</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">⑤</span>
+            <span class="b"><span class="name">자유 시간</span><span class="sub"><b>50분</b> — 45분 안에 끝나는 한 편 · 게임 한 판 · 책</span></span></label></li>
         </ul>
         <div class="mini"><div class="lbl">비 오면</div><p>목요일 홈트로 바꾼다. 자전거를 못 탄 게 쉬는 이유가 되지 않게.</p></div>
       </article>
@@ -356,18 +373,20 @@
       <article class="day">
         <header>
           <div class="dow">목 <em>THU</em></div>
-          <div class="am">아침 운동 없음</div>
+          <div class="am">아침 운동 없음 · 머리 감는 날</div>
           <div class="tag">홈트 + 스트레칭 35분</div>
         </header>
         <ul class="tl">
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:00</span>
-            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">~18:30</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
-            <span class="b"><span class="name">홈트 35분</span><span class="sub">워밍업 5 · 상체·코어 18 · 하체 7 · 스트레칭 5 — 끊지 않고 이어서</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:30</span>
-            <span class="b"><span class="name">영어 25분</span><span class="sub">2일차 — 자막 보며 한 번 더 · 씻고 19:30부터</span></span></label></li>
-          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:55</span>
-            <span class="b"><span class="name">자유 시간</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">①</span>
+            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">30분</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">②</span>
+            <span class="b"><span class="name">홈트 35분 + 듣기 10분</span><span class="sub">워밍업 5 · 상체·코어 18 · 하체 7 · 스트레칭 5 — <b>워밍업과 스트레칭에만 이어폰</b></span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">③</span>
+            <span class="b"><span class="name">씻기</span><span class="sub">20분 · 머리 감는 날</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">④</span>
+            <span class="b"><span class="name">영어 15분</span><span class="sub">이미 들었으니 <b>자기 말로 요약</b>만</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">⑤</span>
+            <span class="b"><span class="name">자유 시간</span><span class="sub"><b>60분</b> — 드라마 한 편 · 게임 · 창밖 보며 콜드브루</span></span></label></li>
         </ul>
         <div class="mini"><div class="lbl">어제 자전거를 탔으니</div><p>하체는 가볍게, 상체·코어 위주로. 나가지 않아도 되는 날이 하나 있으면 주 전체가 덜 부담스럽다.</p></div>
       </article>
@@ -375,17 +394,21 @@
       <article class="day">
         <header>
           <div class="dow">금 <em>FRI</em></div>
-          <div class="am">아침 06:10 요가 (회사)</div>
+          <div class="am">아침 06:10 요가 (회사) · 몸만 씻는 날</div>
           <div class="tag">단지 산책 35분 · 주말 진입</div>
         </header>
         <ul class="tl">
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:00</span>
-            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">~18:30</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">18:30</span>
-            <span class="b"><span class="name">단지 산책 35분</span><span class="sub">이어폰 끼고 <b>영어 혼잣말</b> — 35분에 둘이 같이 끝난다</span></span></label></li>
-          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">19:25</span>
-            <span class="b"><span class="name">자유 시간</span><span class="sub">75분</span></span></label></li>
-          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">밤</span>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">①</span>
+            <span class="b"><span class="name">귀가 · 집 정리</span><span class="sub">30분</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">②</span>
+            <span class="b"><span class="name">단지 산책 35분</span><span class="sub">이어폰 끼고 <b>영어 혼잣말</b> — 그 주 회차를 자기 말로 다시</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">③</span>
+            <span class="b"><span class="name">화장실 청소</span><span class="sub">샤워 직전에 · 주말을 깨끗한 화장실로 시작한다</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">④</span>
+            <span class="b"><span class="name">씻기</span><span class="sub">20분</span></span></label></li>
+          <li class="free"><label class="row"><input type="checkbox"><span class="box"></span><span class="t">⑤</span>
+            <span class="b"><span class="name">자유 시간</span><span class="sub"><b>75분</b> — 드라마 한 편 · 게임 · 음악 들으며 플레이리스트 정리</span></span></label></li>
+          <li><label class="row"><input type="checkbox"><span class="box"></span><span class="t">⑥</span>
             <span class="b"><span class="name">내일 수영가방</span><span class="sub">토요일 10시 강습</span></span></label></li>
         </ul>
         <div class="mini"><div class="lbl">힘든 날</div><p>단지 한 바퀴 10분. 그것도 한 날이다.</p></div>
@@ -395,12 +418,20 @@
   </section>
 
   <section>
-    <div class="sec-head"><h2>영어 25분</h2><span>25분 내내 소리를 내는 게 유일한 규칙 · 조용히 읽기만 한 25분은 0분과 같다</span></div>
+    <div class="sec-head"><h2>영어</h2><span>소리를 내는 게 유일한 규칙 · 조용히 읽기만 한 25분은 0분과 같다</span></div>
     <div class="steps">
-      <div class="step"><span class="m">0–5분</span><span class="h">어제 문장 3개</span><span class="d">소리내어 다시. 복습이 없으면 매일 새로 시작하게 된다</span></div>
-      <div class="step"><span class="m">5–20분</span><span class="h">오늘 주제로 말하기</span><span class="d">아래 콘텐츠 중 하나. 한 주 동안 같은 걸 쓴다</span></div>
-      <div class="step"><span class="m">20–25분</span><span class="h">막힌 표현 3개 적기</span><span class="d">이게 엔진이다. 내일 첫 5분의 재료가 된다</span></div>
+      <div class="step"><span class="m">앞 5분</span><span class="h">어제 문장 3개</span><span class="d">소리내어 다시. 복습이 없으면 매일 새로 시작하게 된다</span></div>
+      <div class="step"><span class="m">가운데 15분</span><span class="h">오늘 주제로 말하기</span><span class="d">이번 주 자료 하나로. 방식은 요일이 정해뒀다</span></div>
+      <div class="step"><span class="m">뒤 5분</span><span class="h">막힌 표현 3개 적기</span><span class="d">이게 엔진이다. 내일 첫 5분의 재료가 된다</span></div>
     </div>
+
+    <p class="bar-note" style="margin-top:14px">
+      <b>25분을 온전히 쓰는 날은 수요일 하루뿐이다.</b> 월·금은 산책 안에서 혼잣말로,
+      목은 홈트 중에 듣고 씻은 뒤 15분만 소리내고, 화요일은 3분 버전.
+      그래서 <b>한 회차를 5일에 걸쳐 관통</b>시킨다 —
+      월 미리 듣기 → 수 자막 보며 쉐도잉 → 목 자막 없이 듣고 요약 → 금 자기 말로 다시.
+      <b>고르는 건 월요일 한 번뿐</b>이고, 나머지 날은 고를 게 없다.
+    </p>
 
     <div class="eng" style="margin-top:16px">
       <div class="card">
@@ -408,8 +439,8 @@
         <h3>BBC 6 Minute English</h3>
         <p><b>6분</b>이라 25분 안에 세 번 반복할 수 있다. <b>스크립트와 워크시트가 무료</b>로 붙어 있고
            진행자 둘이 주고받는 형식이라, 혼자 두 사람 몫을 따라 하면 리듬이 빨리 붙는다.</p>
-        <p><b>한 주 사용법</b> — 월요일에 한 회차를 골라 금요일까지 그것만.
-           1~2일차 자막 보며, 3~4일차 자막 없이, 5일차 자기 말로 요약.</p>
+        <p><b>한 주 사용법</b> — 월요일에 한 회차를 고르고 금요일까지 그것만.
+           요일마다 역할이 다르다(위 문단).</p>
         <div class="links">
           <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026" target="_blank" rel="noopener">회차 + 스크립트</a>
           <a href="https://www.bbc.co.uk/learningenglish" target="_blank" rel="noopener">코스 홈</a>
@@ -435,7 +466,7 @@
         <span class="k">말하기 상대</span>
         <h3>AI 음성 대화</h3>
         <p>Claude 앱이나 ChatGPT 앱의 음성 모드. <b>상대가 기다려주고 창피할 일이 없다</b>는 게 핵심이라,
-           말하기 싫은 날의 저항이 가장 낮다.</p>
+           말하기 싫은 날의 저항이 가장 낮다. 얹는다면 <b>수요일 25분</b>에만.</p>
         <p><b>프롬프트</b> — "영어 회화 연습 상대가 되어줘. 내가 말하면 자연스럽게 대화를 이어가되,
            어색하면 <b>내가 쓴 단어를 최대한 살려서</b> 고쳐줘. 통째로 다른 문장으로 바꾸지는 말고."</p>
         <p>고쳐받은 문장은 <b>그 자리에서 소리내어 세 번</b>. 안 읽으면 안 남는다.</p>
@@ -451,7 +482,9 @@
       <li>오늘 한 일을 한 문장으로 말한다 <b>(1분)</b></li>
       <li>내일 할 일을 한 문장으로 말한다 <b>(1분)</b></li>
     </ol>
-    <p>이걸 했으면 오늘도 한 날로 친다. <b>스스로에게 그렇게 쳐야 내일 이어진다.</b></p>
+    <p>이걸 했으면 오늘도 한 날로 친다. <b>스스로에게 그렇게 쳐야 내일 이어진다.</b>
+       한 주에 세 번 넘게 쓰게 되면 그건 의지가 아니라 <b>설계가 무겁다는 신호</b>다 —
+       그 주는 강도를 한 단계 내린다.</p>
   </section>
 
 </div>

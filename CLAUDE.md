@@ -29,7 +29,8 @@
 대화에서만 기억하면 다음 세션에 사라진다. 사용자가 생활 패턴이나 취향을 말하면
 그 자리에서 `.claude/context/about-me.md`에 반영하고, 반영했다고 한 줄로 알린다.
 
-주기가 있는 반복 활동은 `.claude/skills/best-weekend-design/references/recurring-rules.md`에
+주기가 있는 반복 활동은 `.claude/skills/best-weekend-design/references/recurring-rules.md`에,
+평일 저녁의 실행 여부는 `.claude/skills/weekday-evening/references/evening-log.md`에
 표로 관리한다. **마지막 실행 날짜는 실제로 한 뒤에** 갱신한다 — 계획 단계에서 갱신하면
 같은 날을 다시 짤 때 '이미 한 것'으로 잡혀 빠진다.
 
@@ -38,7 +39,8 @@
 - `best-weekend-design` — 주말·휴일 일정을 5인 페르소나 토론으로 설계.
   검증 스크립트(`scripts/validate_schedule.py`)로 하드 제약을 기계적으로 확인한다
 - `weekday-evening` — 퇴근 후 18:30~21:00을 운동과 영어로 채우는 평일 루틴.
-  게임·넷플릭스를 없애지 않고 순서만 바꾸는 방식
+  게임·넷플릭스를 없애지 않고 순서만 바꾸는 방식.
+  실행 여부는 `references/evening-log.md`에 쌓고, 2주 연속 못 지킨 요일은 종목을 바꾼다
 - `kr-stock-council` — 보유 국내 주식을 5인 전문가가 토론해 보유·매도·추매를 판단.
   세금·수수료를 반영한 세후 기준으로 계산하고, **숫자는 반드시 검색으로 확인**한다
 
