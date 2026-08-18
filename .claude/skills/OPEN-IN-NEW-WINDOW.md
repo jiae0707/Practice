@@ -110,22 +110,36 @@ git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
 
 ## 3️⃣ 주식 협의체 — `kr-stock-council`
 
-> ⚠️ 아침 브리핑은 **기존 창**에서 계속한다. 이 창은 **스킬 자체를 손보는 용도**다.
+> ✅ **2026-08-19부터 이 창이 주식 전담이다.** 아침 브리핑도 여기서 한다.
+> 기존 창은 더 이상 주식을 다루지 않는다.
+
+새 창을 열 때 붙여넣을 프롬프트는 아래와 같다. 핵심은 **HANDOFF.md를 먼저
+읽게 하는 것**이다 — 새 창은 3주치 기억이 없고, 그 문서가 유일한 인수인계다.
 
 ```
-kr-stock-council 스킬을 점검해줘. 매일 브리핑은 다른 창에서 돌리고 있고,
-이 창에서는 스킬 자체의 구조를 본다.
+kr-stock-council 스킬을 이 창에서 전담한다. 매일 아침 브리핑도 여기서 한다.
 
-1. SKILL.md와 references 7개, scripts 10개를 전부 읽는다
-2. 다음을 점검한다:
-   - data/decisions.json 의 표류율을 확인하고 (scripts/decisions.py --audit)
-     표류가 잦은 종목에 어떤 장치가 더 필요한지
-   - references 사이에 서로 모순되는 규칙이 없는지
-     (특히 daily-brief.md, decision-protocol.md, future-value.md)
-   - scripts 중 안 쓰이는 것, 중복되는 것이 있는지
-   - 아직 미해결로 남은 것: 화인베스틸 자본총계·부채비율(fnguide 차단),
-     VIX 일별 데이터 수집 경로
-3. 고칠 것을 목록으로 내고, 동의를 받은 뒤 고친다
+시작 전에 반드시 이 순서로 읽는다:
+1. CLAUDE.md → .claude/context/about-me.md
+2. .claude/skills/kr-stock-council/references/HANDOFF.md   ← 인수인계. 가장 중요
+3. SKILL.md
+4. references/daily-brief.md
+
+HANDOFF.md에 있는 것 — 다른 데서 다시 만들 수 없는 것들이다:
+  · 사용자의 투자 제약 (손절을 싫어함, "망한다"의 정의, 장중에 못 움직임)
+  · 내가 틀린 5가지 방식과 그 근본 원인
+  · 자료 등급제 (1급 4/4 맞음 vs 검색 요약 0/7 맞음)
+  · 지금 걸려 있는 지정가 주문 12칸
+  · 종목별 반증 조건
+  · 장치들이 어떤 실패에서 나왔는지
+
+읽고 나서 먼저 할 일:
+  python3 .claude/skills/kr-stock-council/scripts/dart.py --check
+  python3 .claude/skills/kr-stock-council/scripts/decisions.py --audit
+
+DART가 열려 있으면 --setup 후에 미확인 5건을 순서대로 처리한다
+(현대차 BD 지분, 넥스틸 소송 금액, 화인베스틸 자본총계, 동국산업·비츠로셀 재무).
+막혀 있으면 무엇이 막혔는지(키인지 도메인인지) 사용자에게 정확히 알린다.
 
 작업 시작 전에 기준 브랜치를 받아온다:
 git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
