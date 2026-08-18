@@ -1,11 +1,55 @@
 # 스킬별 새 창 열기
 
-세 스킬을 각각 다른 창에서 다루려면 **claude.ai/code에서 새 세션을 만들고
+세 스킬을 각각 다른 창에서 다룬다. **claude.ai/code에서 새 세션을 만들고
 저장소를 `jiae0707/Practice`로 지정한 뒤 아래 프롬프트를 붙여넣는다.**
 
-브랜치는 셋 다 `claude/weekend-schedule-generator-8cnp60`을 쓴다.
-같은 저장소를 보므로 서로의 변경이 보인다 — 다른 창에서 커밋했으면
-작업 전에 `git pull origin claude/weekend-schedule-generator-8cnp60`을 한다.
+---
+
+## 브랜치는 창마다 하나씩 쓴다
+
+같은 브랜치를 셋이 쓰면 한 창이 커밋할 때마다 나머지 둘의 푸시가 막힌다.
+매번 `git pull`을 기억해야 하는데, 그걸 잊는 게 정상이다.
+**창마다 브랜치를 따로 두면 서로를 막지 않는다.**
+
+대신 합치는 기준점이 하나 필요하다 —
+**기준 브랜치는 `claude/weekend-schedule-generator-8cnp60`** (저장소 기본 브랜치).
+모든 창은 여기서 갈라지고, 작업이 끝나면 여기로 합친다.
+
+| 창 | 스킬 | 브랜치 |
+|---|---|---|
+| **기준** | — | `claude/weekend-schedule-generator-8cnp60` |
+| 1️⃣ | `best-weekend-design` | `claude/weekend-scheduling-gkj7zq` |
+| 2️⃣ | `weekday-evening` | `claude/weekday-schedule-skill-migration-3s1kgi` |
+| 3️⃣ | `kr-stock-council` | *(창을 열면 정해진다 — 정해진 이름을 여기 적는다)* |
+
+**브랜치 이름은 새 창을 열 때 자동으로 붙는다. 고를 수 없다.**
+그래서 붙은 이름을 이 표에 적어두는 게 나중에 그 창을 다시 찾는 유일한 방법이다.
+
+### 창을 열 때 · 닫을 때
+
+| 언제 | 무엇을 |
+|---|---|
+| **작업 시작** | `git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60` — 다른 창이 올린 걸 먼저 받는다 |
+| **작업 끝** | 자기 브랜치에 커밋 → `git push -u origin <자기 브랜치>` |
+| **합칠 때** | 자기 브랜치를 기준 브랜치로 머지한다 (PR을 만들어도 되고 직접 머지해도 된다) |
+
+---
+
+## 공용 파일 — 여기만 조심하면 된다
+
+| 파일 | 누가 쓰나 |
+|---|---|
+| `CLAUDE.md` | 세 창이 모두 읽는다 |
+| `.claude/context/about-me.md` | 세 창이 모두 읽고, **새로 알게 된 걸 세 창이 모두 적는다** |
+| `best-weekend-design/references/recurring-rules.md` | 주말 창이 주로 쓰지만 평일 창도 본다 |
+| `kr-stock-council/data/*.json` | 주식 창 전용 — 다른 창은 건드리지 않는다 |
+
+**공용 파일을 고쳤으면 그 커밋만 먼저 기준 브랜치로 올린다.**
+프로필에 새로 알게 된 한 줄을 안 올려두면, 다른 창이 옛날 프로필로 일정을 짠다.
+스킬 폴더 안의 변경은 급하지 않으니 작업이 끝난 뒤에 합쳐도 된다.
+
+각 창이 자기 스킬 폴더 안에서만 움직이면 충돌은 거의 나지 않는다.
+충돌이 나는 건 대개 공용 파일 네 개 중 하나다.
 
 ---
 
@@ -33,7 +77,9 @@ best-weekend-design 스킬로 이번 주말(2026년 8월 22일 토요일 ~ 23일
 결과는 큰 블록 + 체크리스트 두 층으로 내고, 선택지가 갈리는 자리는
 후보 2~3개를 성격과 함께 낸다.
 
-브랜치 claude/weekend-schedule-generator-8cnp60 에서 작업하고 커밋·푸시한다.
+작업 시작 전에 기준 브랜치를 받아온다:
+git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
+커밋·푸시는 이 창의 브랜치 claude/weekend-scheduling-gkj7zq 에 한다.
 ```
 
 ---
@@ -47,15 +93,17 @@ weekday-evening 스킬을 점검해줘. 아직 실전에서 안 써본 스킬이
 1. .claude/context/about-me.md 를 읽고 시작한다
 2. SKILL.md와 references를 전부 읽는다
 3. 다음을 점검한다:
-   - 퇴근 17:00, 저녁 안 먹음, 취침 21:00이라 17:30~21:00이 통째로 비는데
-     그 시간 구조가 현실적인가
+   - 귀가 18:00, 집 정리 마치면 18:30, 저녁 안 먹음, 취침 21:00이라
+     18:30~21:00 2시간 30분이 통째로 비는데 그 시간 구조가 현실적인가
    - 게임·넷플릭스를 없애지 않고 순서만 바꾼다는 원칙이 실제로 지켜지는 설계인가
    - 운동과 영어의 강도가 매일 같은가, 요일별로 달라야 하는가
    - kr-stock-council에 있는 장치 중 여기에도 필요한 게 있는가
      (반증 조건, 신뢰등급, 결론 이력 같은 것)
 4. 고칠 것을 목록으로 내고, 동의를 받은 뒤 고친다
 
-브랜치 claude/weekend-schedule-generator-8cnp60 에서 작업하고 커밋·푸시한다.
+작업 시작 전에 기준 브랜치를 받아온다:
+git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
+커밋·푸시는 이 창의 브랜치 claude/weekday-schedule-skill-migration-3s1kgi 에 한다.
 ```
 
 ---
@@ -79,7 +127,10 @@ kr-stock-council 스킬을 점검해줘. 매일 브리핑은 다른 창에서 �
      VIX 일별 데이터 수집 경로
 3. 고칠 것을 목록으로 내고, 동의를 받은 뒤 고친다
 
-브랜치 claude/weekend-schedule-generator-8cnp60 에서 작업하고 커밋·푸시한다.
+작업 시작 전에 기준 브랜치를 받아온다:
+git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
+커밋·푸시는 이 창의 브랜치에 한다.
+그 브랜치 이름을 .claude/skills/OPEN-IN-NEW-WINDOW.md 의 표에 적어둔다.
 ```
 
 ---
@@ -88,7 +139,9 @@ kr-stock-council 스킬을 점검해줘. 매일 브리핑은 다른 창에서 �
 
 | | |
 |---|---|
-| **같은 브랜치** | 셋 다 같은 브랜치를 쓴다. 작업 전에 `git pull` |
-| **충돌 지점** | `data/` 아래 파일을 두 창이 동시에 고치면 충돌한다. 스킬 폴더 안에서만 작업하면 안전하다 |
+| **브랜치** | 창마다 하나. 시작할 때 기준 브랜치를 머지하고, 끝나면 기준 브랜치로 합친다 |
+| **이름 적기** | 새 창의 브랜치 이름은 자동으로 붙는다. **위 표에 적어두지 않으면 그 창을 다시 못 찾는다** |
+| **충돌 지점** | 공용 파일 네 개(위 표). 스킬 폴더 안에서만 작업하면 안전하다 |
+| **프로필 갱신** | `about-me.md`를 고쳤으면 **바로** 기준 브랜치로 올린다. 안 올리면 다른 창이 옛날 프로필로 일정을 짠다 |
 | **CLAUDE.md** | 세 창 모두 자동으로 읽는다. `about-me.md`를 먼저 읽으라는 규칙도 그대로 적용된다 |
 | **브리핑** | 매일 05:10 브리핑은 **기존 창**에서 한다. 새 창 3개는 스킬 개발용이다 |
