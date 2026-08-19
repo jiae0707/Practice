@@ -16,6 +16,7 @@
 import argparse
 import json
 import os
+import re
 import sys
 
 RF = 0.03          # 무위험수익률 가정 (한국 10년물 근처)
@@ -29,7 +30,52 @@ def ke(beta):
     return RF + beta * ERP
 
 
-def cycle(name, price, beta, growths=(0.0, 0.02, 0.03, 0.05)):
+def _latest_actual_book(name, fin):
+    """**현재 자본**으로 BPS를 낸다. 추정치를 현재값으로 쓰지 않는다.
+
+    2026-08-19에 이 함수가 없어서 틀렸다. `annual`의 마지막 행이 `2026.12E`
+    (연말 **추정**)라 BPS 109,367을 현재값처럼 썼고, 요구 지속 ROE가
+    25.0%가 아니라 18.1%로 나왔다. 과소평가 방향이라 '싸 보이게' 만든다.
+
+    우선순위:
+      1) IR 원문(1급)의 최근 분기말 자본 ÷ 주식수
+      2) 추정(`E`로 끝나는 키)이 아닌 최근 분기 행의 bps
+      3) 추정이 아닌 최근 연간 행의 bps
+    셋 다 없으면 계산을 거부한다. 추정치로 대신하지 않는다.
+    """
+    d = fin[name]
+    shares = d.get("shares")
+
+    # 1) IR 재무상태표 — 가장 최근 분기말 자본
+    best = None
+    for key, blk in d.items():
+        if not (key.startswith("ir_") and isinstance(blk, dict)):
+            continue
+        for qk, q in (blk.get("재무상태_억원") or {}).items():
+            m = re.match(r"(\d)Q말(\d\d)", qk)
+            if not m or not q.get("자본"):
+                continue
+            order = (int(m.group(2)), int(m.group(1)))
+            if best is None or order > best[0]:
+                best = (order, q["자본"], key, qk)
+    if best and shares:
+        _, cap_eok, src, qk = best
+        bps = cap_eok * 1e8 / shares
+        return bps, f"{src} {qk} 자본 {cap_eok/10000:,.2f}조 ÷ {shares/1e8:.2f}억주 (1급)"
+
+    # 2·3) 추정이 아닌 최근 행
+    for sect in ("quarterly", "annual"):
+        rows = d.get(sect) or {}
+        for k in sorted(rows, reverse=True):
+            if k.rstrip().endswith("E"):
+                continue
+            if rows[k].get("bps"):
+                return rows[k]["bps"], f"{sect} {k} 실적 bps"
+
+    return None, None
+
+
+def cycle(name, price, beta, growths=(0.0, 0.02, 0.03, 0.05), bps_override=None):
     """정점이익 종목을 역산으로 다룬다.
 
     **경기민감주는 PER이 낮을 때가 고점이다.** 이익이 정점이면 EPS가 커서
@@ -50,12 +96,31 @@ def cycle(name, price, beta, growths=(0.0, 0.02, 0.03, 0.05)):
     ann = fin[name]["annual"]
     yrs = sorted(ann)
     cur = ann[yrs[-1]]
-    bps, pbr, cur_roe = cur["bps"], cur["pbr"], cur["roe"]
+    cur_roe = cur["roe"]
+
+    # 🚨 BPS는 **실적 자본**에서 낸다. 추정치를 현재값으로 쓰면 과소평가된다.
+    if bps_override:
+        bps, bps_src = bps_override, "--bps로 직접 지정"
+    else:
+        bps, bps_src = _latest_actual_book(name, fin)
+    if not bps:
+        print(f"  ⛔ {name}의 **실적 기준** 자본을 찾지 못했다.")
+        print(f"     추정 BPS로 대신 계산하지 않는다 — 그게 2026-08-19의 오류였다.")
+        print(f"     IR의 분기말 자본을 financials.json에 넣거나 --bps로 직접 준다.")
+        return 1
+
+    # 🚨 PBR은 **넘겨받은 현재가**로 다시 계산한다.
+    # 표에 저장된 pbr을 쓰면 --price를 아무리 바꿔도 요구 ROE가 안 변한다.
+    pbr = price / bps
     r = ke(beta)
 
     print(f"\n{'='*68}\n  {name} — 정점이익 검사와 역산된 지속가능 ROE\n{'='*68}")
     print(f"  현재가 {price:,.0f}   BPS {bps:,.0f}   PBR {pbr:.2f}   "
           f"당기 ROE {cur_roe:.2f}%")
+    print(f"  BPS 출처: {bps_src}")
+    if cur.get("bps") and abs(cur["bps"] - bps) / bps > 0.05:
+        print(f"  ⚠️  {yrs[-1]} 표의 BPS {cur['bps']:,.0f}원과 {cur['bps']/bps-1:+.1%} 차이."
+              f" 그건 **추정**이므로 현재가와 섞지 않는다")
     print(f"  자본비용 {r*100:.2f}%  (무위험 {RF*100:.0f}% + 베타 {beta:.2f} "
           f"× 프리미엄 {ERP*100:.0f}%)")
 
@@ -114,6 +179,11 @@ def cycle(name, price, beta, growths=(0.0, 0.02, 0.03, 0.05)):
         print(f"    {x:>9.2f}%{fp:>11.2f}{px:>12,.0f}원"
               f"{px/price*100-100:>+12.1f}%{price/eps_n:>11.1f}배{mark}")
 
+    print(f"\n    · 위 적정주가는 **지금 자본** 기준이다. 자본이 쌓이는 회사면"
+          f" 시간이 갈수록 같은 ROE에서도 밴드가 올라간다.")
+    print(f"      연말 추정 자본으로 보고 싶으면 --bps로 그 값을 명시해서 따로 돌린다."
+          f" 두 기준을 한 표에 섞지 않는다.")
+
     print(f"\n{'='*68}")
     print(f"  이 표는 예측이 아니다. **어느 ROE를 믿느냐가 곧 가격**이라는 지도다.")
     print(f"  물어야 할 것은 '얼마까지 오르나'가 아니라")
@@ -126,6 +196,8 @@ def main():
     ap.add_argument("--cycle", metavar="종목",
                     help="정점이익 검사 + 역산된 지속가능 ROE (financials.json 사용)")
     ap.add_argument("--price", type=float, help="--cycle에서 쓰는 현재가")
+    ap.add_argument("--bps", type=float,
+                    help="BPS 직접 지정. 생략하면 실적 자본에서 계산한다(추정치는 안 쓴다)")
     ap.add_argument("--name")
     ap.add_argument("--cap", type=float, help="시가총액(조원)")
     ap.add_argument("--nopat", type=float, help="연 세후영업이익(조원)")
@@ -138,7 +210,7 @@ def main():
     if args.cycle:
         if not args.price:
             ap.error("--cycle에는 --price가 필요하다")
-        return cycle(args.cycle, args.price, args.beta)
+        return cycle(args.cycle, args.price, args.beta, bps_override=args.bps)
     missing = [f"--{k}" for k in ("name", "cap", "nopat") if getattr(args, k) is None]
     if missing:
         ap.error("필요한 인자: " + ", ".join(missing))
