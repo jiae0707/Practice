@@ -109,6 +109,15 @@ python3 scripts/dart.py --doc 20251127000123
 **이건 키 문제가 아니다.** 사용자가 환경 설정에서 도메인을 열어야 한다.
 `--check`가 둘을 갈라서 알려주니 원인을 헷갈리지 않는다.
 
+### 창을 옮기면 1번도 다시 없어진다
+
+**`DART_API_KEY`는 저장소가 아니라 창(컨테이너)의 환경변수다.** 새 창을 열면
+빈 상태로 시작한다 — 실제로 2026-08-19 인수 시점의 이 창에서 키가 미설정이었다.
+그러니 창을 옮긴 뒤 `--check`가 "키 없음"을 내도 **전에 넣었던 키가 지워진 게 아니라
+이 창에 아직 안 들어온 것**이다. 사용자에게 알릴 때 이 구분을 같이 말한다.
+
+키는 저장소에 커밋하지 않는다(공개 저장소다). 환경 설정의 환경변수로 넣는다.
+
 열리는 즉시 위 5개 미확인 항목을 순서대로 처리한다.
 
 ---
@@ -214,3 +223,6 @@ python3 scripts/dart.py --doc 20251127000123
 
 기준 브랜치: `claude/weekend-schedule-generator-8cnp60`
 작업 시작 전: `git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60`
+
+**이 창(주식 전담)의 브랜치: `claude/stock-management-skill-migration-f6wgfx`**
+2026-08-19에 인수했다. 아침 05:10 브리핑도 이 창에서 낸다.

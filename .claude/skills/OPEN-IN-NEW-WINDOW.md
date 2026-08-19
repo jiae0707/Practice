@@ -20,7 +20,7 @@
 | **기준** | — | `claude/weekend-schedule-generator-8cnp60` |
 | 1️⃣ | `best-weekend-design` | `claude/weekend-scheduling-gkj7zq` |
 | 2️⃣ | `weekday-evening` | `claude/weekday-schedule-skill-migration-3s1kgi` |
-| 3️⃣ | `kr-stock-council` | *(창을 열면 정해진다 — 정해진 이름을 여기 적는다)* |
+| 3️⃣ | `kr-stock-council` | `claude/stock-management-skill-migration-f6wgfx` |
 
 **브랜치 이름은 새 창을 열 때 자동으로 붙는다. 고를 수 없다.**
 그래서 붙은 이름을 이 표에 적어두는 게 나중에 그 창을 다시 찾는 유일한 방법이다.
@@ -112,6 +112,7 @@ git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
 
 > ✅ **2026-08-19부터 이 창이 주식 전담이다.** 아침 브리핑도 여기서 한다.
 > 기존 창은 더 이상 주식을 다루지 않는다.
+> **이 창의 브랜치: `claude/stock-management-skill-migration-f6wgfx`** (2026-08-19 인수 완료)
 
 새 창을 열 때 붙여넣을 프롬프트는 아래와 같다. 핵심은 **HANDOFF.md를 먼저
 읽게 하는 것**이다 — 새 창은 3주치 기억이 없고, 그 문서가 유일한 인수인계다.
@@ -158,4 +159,4 @@ git fetch origin && git merge origin/claude/weekend-schedule-generator-8cnp60
 | **충돌 지점** | 공용 파일 네 개(위 표). 스킬 폴더 안에서만 작업하면 안전하다 |
 | **프로필 갱신** | `about-me.md`를 고쳤으면 **바로** 기준 브랜치로 올린다. 안 올리면 다른 창이 옛날 프로필로 일정을 짠다 |
 | **CLAUDE.md** | 세 창 모두 자동으로 읽는다. `about-me.md`를 먼저 읽으라는 규칙도 그대로 적용된다 |
-| **브리핑** | 매일 05:10 브리핑은 **기존 창**에서 한다. 새 창 3개는 스킬 개발용이다 |
+| **브리핑** | 매일 05:10 브리핑은 **3️⃣ 주식 창**(`claude/stock-management-skill-migration-f6wgfx`)에서 한다. 2026-08-19에 기존 창에서 넘어왔다 |
