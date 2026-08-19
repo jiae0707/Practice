@@ -1,3 +1,4 @@
+
 <title>새벽 종목 브리핑</title>
 <style>
   :root{
@@ -137,7 +138,7 @@
   .sum .k{font-size:11px; color:var(--muted); font-weight:600}
   .sum .v{font-size:16px; font-weight:700; margin-top:1px}
 
-  .up{color:var(--up)} .down{color:var(--down)}
+  .up{color:var(--up)} .down{color:var(--down)} .muted{color:var(--muted)}
 
   /* ── 목표주가 ── */
   .tgt{border-top:1px solid var(--line-soft); padding:12px 16px;
@@ -155,8 +156,7 @@
   .tg-pct{font-size:10.5px; display:block; font-weight:600; margin-top:1px}
 
   /* ── 비교표 ── */
-  /* 표는 자기 안에서만 가로로 밀린다. 페이지 본문은 절대 가로 스크롤되지 않는다.
-     class="scroll" 을 쓰면서 이 규칙이 없으면 좁은 화면에서 본문이 통째로 밀린다 */
+  /* 표는 좁은 화면에서 자기 안에서만 가로로 밀린다. 페이지 본문은 절대 밀리지 않는다 */
   .scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
   .scroll>table{min-width:340px}
   table.cmp{width:100%; border-collapse:collapse; font-size:12.5px}
@@ -169,79 +169,137 @@
   .loc{font-size:10px; font-weight:700; padding:2px 6px; border-radius:999px}
   .loc-lo{background:var(--accent-soft); color:var(--accent)}
   .loc-hi{background:var(--warn-soft); color:var(--warn)}
+
+  /* 신뢰등급 — 종목의 좋고 나쁨이 아니라 내 판단이 얼마나 두꺼운지 */
+  .grade{font-size:10px; font-weight:700; padding:2px 7px; border-radius:5px;
+         letter-spacing:.06em; white-space:nowrap; border:1px solid transparent}
+  .g-hi{background:var(--accent-soft); color:var(--accent); border-color:var(--accent)}
+  .g-mid{background:var(--surface-2); color:var(--ink-2); border-color:var(--line)}
+  .g-lo{background:var(--warn-soft); color:var(--warn); border-color:var(--warn)}
   .bigpos{font-weight:700}
   footer{font-size:12px; color:var(--muted); line-height:1.65;
           border-top:1px solid var(--line); padding-top:14px}
   footer b{color:var(--ink-2); font-weight:600}
   .preview{background:var(--accent-soft); color:var(--accent); border-radius:12px;
            padding:12px 14px; font-size:13px; line-height:1.55; font-weight:500}
+
+  /* ── 적정주가 · 사다리 ── */
+  .fair{display:grid; grid-template-columns:auto 1fr auto; gap:3px 10px;
+        align-items:baseline; padding:10px 12px; border-radius:10px;
+        background:var(--surface-2); border:1px solid var(--line-soft); margin-top:10px}
+  .fair .k{font-size:11px; color:var(--muted); font-weight:700; white-space:nowrap}
+  .fair .v{font-size:13.5px; font-weight:700}
+  .fair .d{font-size:12px; font-weight:700; text-align:right; white-space:nowrap}
+  .fair .n{grid-column:1/-1; font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:3px}
+
+  table.lad{width:100%; border-collapse:collapse; font-size:12.5px}
+  table.lad th{font-size:10.5px; color:var(--muted); font-weight:700;
+               padding:0 0 6px; text-align:right}
+  table.lad th:first-child{text-align:left}
+  table.lad td{padding:8px 0; border-top:1px solid var(--line-soft);
+               text-align:right; white-space:nowrap}
+  table.lad td:first-child{text-align:left; font-weight:700}
+  table.lad tr.now td{background:var(--warn-soft)}
+
+  .rule{display:flex; align-items:center; gap:10px; margin:6px 0 -4px}
+  .rule::before,.rule::after{content:""; flex:1; height:1px; background:var(--line)}
+  .rule span{font-size:11px; letter-spacing:.14em; color:var(--muted); font-weight:700}
 </style>
 
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">05:10 · 개장 3시간 50분 전</div>
+    <div class="eyebrow">2026 · 08 · 20 목요일</div>
     <h1>오늘 아침 브리핑</h1>
-    <div class="stamp">8월 14일(금) 본장 종가 기준 · 예수금 1억 반영</div>
+    <div class="stamp">8월 19일(수) 본장 종가 기준 · 예수금 8,755만 반영</div>
   </header>
-
-  <div class="preview">
-    <b>레이아웃 미리보기입니다.</b> 종목별 지시는 실제 값이고,
-    밤사이 미국장 자리만 비어 있습니다. 화요일 새벽에 그 칸이 채워집니다.
-  </div>
 
   <div class="verdict">
     <div class="verdict-label">오늘의 결론</div>
-    <div class="verdict-main">오늘 걸 주문 없음</div>
-    <div class="verdict-sub">비중이 큰 두 종목이 밸류 상단, 작은 두 종목이 하단입니다. 아래 비교표부터 보세요.</div>
+    <div class="verdict-main">확인 하나, 새 주문 없음</div>
+    <div class="verdict-sub">KT 매수 첫 칸이 걸려 있다면 어제 이미 체결됐습니다. 주문 내역부터 확인하세요.</div>
   </div>
 
   <section>
-    <div class="head"><h2>밤사이</h2><div class="note">미국 마감 05:00</div></div>
+    <div class="head"><h2>오늘 할 일</h2><div class="note">이것만 하면 끝</div></div>
     <div class="body">
-      <div class="chips">
-        <div class="chip pending"><span class="k">나스닥</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">S&amp;P 500</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">SOX 반도체</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">VIX</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">원/달러</span><span class="v">확인 예정</span></div>
-        <div class="chip pending"><span class="k">WTI</span><span class="v">확인 예정</span></div>
+      <div class="mini">
+        <div class="mini-row">
+          <span class="l">① <b>KT 주문 내역 확인</b></span>
+          <span class="r">매수 첫 칸 <span class="num">53,400</span>인데 어제 종가가 <span class="num">52,600</span>입니다.
+          <b>매수 지정가가 현재가보다 위면 즉시 체결됩니다.</b> 걸려 있었다면 어제 장중에 체결됐을 겁니다 —
+          체결됐는지, 아니면 애초에 안 걸려 있었는지 알려주세요</span>
+        </div>
+        <div class="mini-row">
+          <span class="l">② 그 외</span>
+          <span class="r"><b>없습니다.</b> 새로 걸 주문 없고, 조건에 닿은 종목도 없습니다</span>
+        </div>
       </div>
     </div>
   </section>
 
+  <section>
+    <div class="head"><h2>밤사이</h2><div class="note">미국 8/19 마감</div></div>
+    <div class="body">
+      <div class="chips">
+        <div class="chip"><span class="k">S&amp;P 500</span><span class="v num up">+0.21%</span></div>
+        <div class="chip"><span class="k">나스닥</span><span class="v num up">+0.16%</span></div>
+        <div class="chip"><span class="k">다우</span><span class="v num up">+0.22%</span></div>
+        <div class="chip"><span class="k">SOX 반도체</span><span class="v num down">−2.12%</span></div>
+        <div class="chip"><span class="k">나스닥 100</span><span class="v num down">−0.22%</span></div>
+        <div class="chip"><span class="k">다우운송</span><span class="v num down">−0.16%</span></div>
+        <div class="chip pending"><span class="k">원/달러</span><span class="v">미확인</span></div>
+        <div class="chip pending"><span class="k">WTI</span><span class="v">미확인</span></div>
+        <div class="chip pending"><span class="k">미 10년물</span><span class="v">미확인</span></div>
+        <div class="chip pending"><span class="k">VIX</span><span class="v">미확인</span></div>
+      </div>
+      <div style="margin-top:14px;font-size:13px;line-height:1.65">
+        <b>지수 셋은 올랐는데 반도체만 빠졌습니다.</b> 어제 −4.98%에 이어 이틀째로,
+        SOX는 8/17 대비 <b>−7.0%</b>입니다. 어제 한국 급락의 원인이던 금리·유가 부담이
+        시장 전체에서는 걷혔는데 반도체에서만 안 걷혔습니다.<br><br>
+        <b>원/달러·WTI·금리·VIX는 미확인입니다.</b> 미국 마감 20분 뒤라 확정 기사가 아직 없습니다.
+        검색을 안 한 게 아니라 <b>찾았는데 없는 것</b>입니다. 참고로 8/18 값은
+        원/달러 1,411.8 · WTI 84.95 · 10년물 4.708% · VIX 15.84였습니다.
+      </div>
+    </div>
+  </section>
 
   <section>
-    <div class="head">
-      <h2>어디에 돈이 있고, 어디가 오를 것 같은가</h2>
-      <div class="note">PBR 밴드 중립 + 배당</div>
-    </div>
+    <div class="head"><h2>예상 개장</h2><div class="note">SOX 단독 베타 · 개장 전이라 KOSPI 제외</div></div>
     <div class="body">
       <div class="scroll">
         <table class="cmp">
-          <thead><tr><th>종목</th><th>비중</th><th>PBR</th><th>밴드 위치</th><th>1년</th><th>3년</th></tr></thead>
+          <thead><tr><th>종목</th><th>어제 종가</th><th>예상</th><th>근거</th></tr></thead>
           <tbody>
-            <tr><td>한국전력</td><td class="num">2.5%</td><td class="num">0.41</td>
-                <td><span class="loc loc-lo">하단</span></td>
-                <td class="num up bigpos">+27.1%</td><td class="num up bigpos">+52.8%</td></tr>
-            <tr><td>네이버</td><td class="num">9.3%</td><td class="num">1.15</td>
-                <td><span class="loc loc-lo">하단</span></td>
-                <td class="num up bigpos">+20.4%</td><td class="num up bigpos">+35.9%</td></tr>
-            <tr><td>현대차</td><td class="num">77.1%</td><td class="num">0.96</td>
-                <td><span class="loc loc-hi">상단</span></td>
-                <td class="num down bigpos">−16.6%</td><td class="num down">−1.7%</td></tr>
-            <tr><td>삼성전자</td><td class="num">3.2%</td><td class="num">2.51</td>
-                <td><span class="loc loc-hi">상단</span></td>
-                <td class="num down bigpos">−22.6%</td><td class="num down">−2.8%</td></tr>
+            <tr><td>삼성전자</td><td class="num">247,500</td>
+                <td class="num down">−1.19% → 244,600</td>
+                <td>SOX 베타 <b>0.559</b> (t=3.08, 유의)</td></tr>
+            <tr><td>현대차</td><td class="num">414,000</td>
+                <td class="num">보합</td>
+                <td>SOX t=−1.62 <b>유의하지 않음</b> → 0으로 봅니다. 지수는 +0.2%대</td></tr>
+            <tr><td>네이버 · 한국전력</td><td class="num">208,000 · 30,850</td>
+                <td class="num">판단 보류</td>
+                <td>금리·유가 확정치를 못 구해 근거가 없습니다</td></tr>
           </tbody>
         </table>
       </div>
       <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        ⚠️ <b>돈이 가장 많이 들어간 종목의 기대수익이 가장 나쁩니다.</b>
-        많이 오른 종목이 비중도 커졌고, 오른 만큼 밸류가 밴드 상단에 갔습니다.
-        <br><br>
-        이 표의 유일한 가정은 <b>“PBR이 밴드 중간으로 돌아온다”</b>입니다.
-        회사 성격이 바뀌면(현대차→로봇, 삼성전자→AI) 밴드 자체가 이동합니다.
+        삼성전자에 KOSPI를 같이 넣으면 SOX 효과가 사라집니다(t=−0.15). 삼성이 코스피를 움직이는
+        종목이라 자기 자신에 회귀하는 셈이기 때문입니다. <b>개장 전에는 단독 베타를 씁니다.</b>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>어제 제 추론이 틀렸습니다</h2><div class="note">정정</div></div>
+    <div class="body">
+      <div style="font-size:13px;line-height:1.65">
+        어제 저녁 캡처에서 <b>삼성전자 시간외 260,000(+5.05%)</b>,
+        <b>SK하이닉스 시간외 +9.33%</b>가 나왔고, 같은 화면의 SK하이닉스 ADR 프리마켓이
+        +6.3%였습니다. 저는 이걸 <b>“미국 반도체 반등을 시간외가 따라가는 중”</b>으로 읽었습니다.<br><br>
+        <b>미국 정규장은 SOX −2.12%로 마감했습니다.</b> 프리마켓 상승분은 장중에 되돌려졌고,
+        제 추론은 방향이 틀렸습니다. <b>프리마켓으로 정규장을 예측하지 않겠습니다.</b>
+        어제 그것을 추론이라고 밝혀둔 건 맞았지만, 애초에 안 하는 게 나았습니다.
       </div>
     </div>
   </section>
@@ -250,176 +308,71 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">현대차 <span class="tag t-wait">매도 보류</span></div>
-        <div class="s-pos">보유 <b>2,302주</b> · 10억 4,281만 · <b class="up">+92.8%</b> · 비중 77.1%</div>
+        <div class="s-name">현대차 <span class="grade g-mid">신뢰 중</span><span class="tag t-sell">매도 사다리 4칸</span></div>
+        <div class="s-pos">보유 <b>2,302주</b> · 9억 5,303만 · <b class="up">+76.2%</b> · 비중 76.1%</div>
       </div>
       <div class="s-px">
-        <div class="p num">453,000</div>
-        <div class="c num up">+8.24%</div>
+        <div class="p num">414,000</div>
+        <div class="c num down">−4.83%</div>
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="fair">
+        <span class="k">적정주가</span>
+        <span class="v num">317,517 ~ 370,286</span>
+        <span class="d num down bigpos">+11.9% 초과</span>
+        <span class="n">⚠️ <b>이 밴드는 3급 “관세 4조 절감” 전제로 만든 것</b>입니다.
+          어제 1급 숫자(4.1조 → 0.9조, 축소 3.2조)가 들어왔으므로 <b>재계산 대상</b>입니다.
+          그래서 신뢰등급을 ‘상’에서 <b>‘중’으로 내렸습니다</b></span>
       </div>
     </div>
 
     <div class="lane up-lane">
       <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면</span>
-        <span class="sub">아직 걸지 마세요 — 아래 이유</span></div>
+        <span class="sub">지정가 매도 · 예약 가능</span></div>
       <div class="order">
-        <span class="o-px num">475,000</span>
-        <span class="o-do">매도 <b>300주</b> 후보</span>
-        <span class="o-gap num up">+4.86%</span>
-        <span class="o-note">세후 1억 4,219만원 · 7월 중순 매물대. <b>갈 곳이 정해지면</b> 그때 겁니다</span>
+        <span class="o-px num">435,000</span>
+        <span class="o-do">매도 <b>126주</b></span>
+        <span class="o-gap num up">+5.07%</span>
+        <span class="o-note">세후 약 5,470만원 · 고점 783,000의 55.6% 자리</span>
       </div>
       <div class="order">
-        <span class="o-px num">510,000</span>
-        <span class="o-do">매도 <b>300주</b> 후보<span class="opt">선택</span></span>
-        <span class="o-gap num up">+12.58%</span>
-        <span class="o-note">세후 1억 5,267만원 · 60일선(514,391) 도달 자리</span>
+        <span class="o-px num">489,240</span>
+        <span class="o-do">매도 <b>253주</b><span class="opt">다음 칸</span></span>
+        <span class="o-gap num up">+18.17%</span>
+        <span class="o-note">고점의 62.5%</span>
       </div>
     </div>
 
     <div class="lane dn-lane">
       <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
-        <span class="sub">예약주문 불가 — 조건 닿으면 그때 판단</span></div>
+        <span class="sub">조건 닿으면 그날 판단 · 자동 아님</span></div>
       <div class="order">
-        <span class="o-px num">400,000</span>
-        <span class="o-do">종가 2일 연속 이탈 → <b>200주 매도 검토</b></span>
-        <span class="o-gap num down">−11.70%</span>
-        <span class="o-note">20일선 399,300 이탈 = 반등 실패 신호. 자동 매도가 아니라 그날 다시 판단합니다</span>
+        <span class="o-px num">—</span>
+        <span class="o-do">손절선 <b>없음</b></span>
+        <span class="o-gap num">—</span>
+        <span class="o-note">평단 235,000 대비 아직 +76%입니다. 내려가는 쪽에 걸어둔 조건이 없습니다</span>
       </div>
-    </div>
-
-
-    <div class="tgt">
-      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 0.51~0.96 · BPS 연 6.08% 가정</span></div>
-      <div class="scroll"><table class="tg">
-        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
-        <tbody><tr><td>1년</td><td class="num">254,837<span class="tg-pct down">−43.7%</span></td><td class="num">367,266<span class="tg-pct down">−18.9%</span></td><td class="num">479,694<span class="tg-pct up">+5.9%</span></td></tr><tr><td>3년</td><td class="num">286,768<span class="tg-pct down">−36.7%</span></td><td class="num">413,283<span class="tg-pct down">−8.8%</span></td><td class="num">539,798<span class="tg-pct up">+19.2%</span></td></tr></tbody>
-      </table></div>
-    </div>
-    <div class="keep">
-      🤖 <b>로봇 가격표</b> — 로봇 이전 PBR 0.587로 보면 자동차 가치는 56.6조.
-      지금 시총 92.8조이니 <b>로봇에 36.2조</b>가 붙어 있습니다.
-      6/1 고점 750,000원에서는 <b>97.0조</b>였고, 그래서 −40% 빠졌습니다.<br>
-      보스턴다이내믹스는 5년 누적 매출 5,022억에 <b>누적 순손실 1조 7,558억</b>입니다.
-      2028년 3만대 계획이 그대로 돼도 제 추정 가치는 <b>15.9조</b>(컨센서스 15~30조 하단).
-      <b>“유망하다”와 “지금 값이 싸다”는 다른 얘기입니다.</b>
     </div>
 
     <div class="keep">
-      ⚠️ <b>622주 매도 계획을 철회했습니다.</b> "배당을 2,000만원 아래로 낮춰
-      종합과세를 피한다"가 근거였는데, 계산해보니 <b>622만원 배당을 포기해서
-      최대 235만원 세금을 아끼는 거래</b>였습니다. 어느 세율 구간에서도 손해입니다.<br><br>
-      매도가 성립하려면 <b>그 돈이 갈 더 나은 곳</b>이 있어야 합니다.
-      배당수익률 2.21%는 예금 금리보다도 낮으므로, 문턱은
-      <b>연 +0.7%p 주가상승</b>입니다. 현대차가 그만큼도 못 오를 것 같으면 팔고,
-      그보다 오를 것 같으면 들고 갑니다. <b>이건 세금이 아니라 미래가치 판단이고,
-      지금 저는 그 판단을 내릴 근거가 부족합니다.</b>
-    </div>
-  </div>
-
-  <!-- ════════ 현대차우 ════════ -->
-  <div class="stock">
-    <div class="s-top">
-      <div class="s-id">
-        <div class="s-name">현대차우 <span class="tag t-hold">전량 보유</span></div>
-        <div class="s-pos">보유 <b>316주</b> · 6,668만 · <b class="down">−24.6%</b> · 비중 4.9%</div>
-      </div>
-      <div class="s-px">
-        <div class="p num">211,000</div>
-        <div class="c num up">+5.24%</div>
-      </div>
-    </div>
-
-    <div class="lane up-lane">
-      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 절반 판다</span>
-        <span class="sub">지금 걸어도 되고, 215,000 회복 확인 후 걸어도 됩니다</span></div>
-      <div class="order">
-        <span class="o-px num">230,000</span>
-        <span class="o-do">매도 <b>158주</b></span>
-        <span class="o-gap num up">+9.00%</span>
-        <span class="o-note">세후 3,626만원 · 60일선(약 215,000) 회복이 먼저 확인돼야 의미가 있습니다</span>
-      </div>
-    </div>
-
-    <div class="lane dn-lane">
-      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
-        <span class="sub">팔지 않습니다 — 보유 근거를 다시 확인만</span></div>
-      <div class="order">
-        <span class="o-px num">195,230</span>
-        <span class="o-do">20일선 이탈 → <b>보유 근거 재확인</b></span>
-        <span class="o-gap num down">−7.47%</span>
-        <span class="o-note">외국인 보유율 56.78%가 무너지는지가 핵심. 유지되면 그대로 둡니다</span>
-      </div>
-    </div>
-
-
-    <div class="tgt">
-      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">보통주 목표가 × 괴리율 46.6% (104일 평균 45.6%)</span></div>
-      <div class="scroll"><table class="tg">
-        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
-        <tbody><tr><td>1년</td><td class="num">118,754<span class="tg-pct down">−43.7%</span></td><td class="num">171,146<span class="tg-pct down">−18.9%</span></td><td class="num">223,537<span class="tg-pct up">+5.9%</span></td></tr><tr><td>3년</td><td class="num">133,634<span class="tg-pct down">−36.7%</span></td><td class="num">192,590<span class="tg-pct down">−8.7%</span></td><td class="num">251,546<span class="tg-pct up">+19.2%</span></td></tr></tbody>
-      </table></div>
-    </div>
-    <div class="keep">
-      <b>파는 순서는 보통주가 먼저입니다.</b> 5개월간 외국인이 보통주는 −3.87%p 팔았는데
-      우선주는 <b>−0.03%p로 그대로</b>였고, 배당수익률도 <b>4.79% vs 2.21%</b>로 2배 이상입니다.
-    </div>
-  </div>
-
-  <!-- ════════ 네이버 ════════ -->
-  <div class="stock">
-    <div class="s-top">
-      <div class="s-id">
-        <div class="s-name">네이버 <span class="tag t-wait">추매 보류</span></div>
-        <div class="s-pos">보유 <b>550주</b> · 1억 2,540만 · <b class="down">−3.0%</b> · 비중 9.3%</div>
-      </div>
-      <div class="s-px">
-        <div class="p num">228,000</div>
-        <div class="c num up">+0.66%</div>
-      </div>
-    </div>
-
-    <div class="lane dn-lane">
-      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면 산다</span>
-        <span class="sub">단, 아래 조건이 먼저 충족돼야 합니다</span></div>
-      <div class="order">
-        <span class="o-px num">222,000</span>
-        <span class="o-do">매수 <b>100주</b></span>
-        <span class="o-gap num down">−2.63%</span>
-        <span class="o-note">약 2,220만원 · 6월 하순 지지선</span>
-      </div>
-      <div class="order">
-        <span class="o-px num">215,000</span>
-        <span class="o-do">매수 <b>100주</b></span>
-        <span class="o-gap num down">−5.70%</span>
-        <span class="o-note">약 2,150만원 · 60일선(215,081)</span>
-      </div>
-      <div class="order">
-        <span class="o-px num">211,850</span>
-        <span class="o-do">20일선 이탈 → <b>추매 중단</b></span>
-        <span class="o-gap num down">−7.08%</span>
-        <span class="o-note">여기까지 밀리면 사지 말고 멈춥니다</span>
-      </div>
-    </div>
-
-
-    <div class="tgt">
-      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 1.15~1.45 · BPS 연 5.42% 가정</span></div>
-      <div class="scroll"><table class="tg">
-        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
-        <tbody><tr><td>1년</td><td class="num">240,581<span class="tg-pct up">+5.5%</span></td><td class="num">271,961<span class="tg-pct up">+19.3%</span></td><td class="num">303,341<span class="tg-pct up">+33.0%</span></td></tr><tr><td>3년</td><td class="num">267,367<span class="tg-pct up">+17.3%</span></td><td class="num">302,240<span class="tg-pct up">+32.6%</span></td><td class="num">337,114<span class="tg-pct up">+47.9%</span></td></tr></tbody>
-      </table></div>
-    </div>
-    <div class="keep">
-      <b>PBR 1.15로 밴드 하단</b>이고 매출은 4년간 +42.6%. 비관 시나리오도 플러스입니다.<br>
-      ⚠️ 다만 <b>ROE가 4년 내내 7% 언저리</b>(4.41→7.90→7.36→6.78)입니다.
-      자본은 154,077→198,445원으로 쌓이는데 이익이 못 따라갑니다.
-      <b>“싸다”는 맞지만 “좋다”는 아닙니다.</b>
+      📄 <b>어제 받은 IR이 이 종목의 근거를 바꿉니다.</b> 「기업가치 제고 계획 이행현황 2026.5」(1급)에서
+      <b>관세영향이 ’25년 4.1조 → ’26년 0.9조</b>로 확인됐습니다. 그동안 3급(검색)으로 쓰던
+      “관세 4조 절감”이 1급 숫자로 대체됐고, 실제 축소폭은 <b>3.2조</b>입니다.<br><br>
+      주주환원은 말이 아니라 집행입니다 — TSR 정책 35%+에 <b>’25년 35.0% 달성</b>,
+      ’25.4월 <b>1.1조 자사주 소각</b>, ’26.1~4월 0.4조 매입.
+      다만 <b>DPS가 12,000원(’24) → 10,000원(’25)으로 줄었고</b> 그게 정책상 바닥입니다.
+      배당성향은 26.3% → 27.7%로 올랐습니다. <b>이익이 줄어 배당을 깎은 것</b>입니다.
     </div>
 
     <div class="keep">
-      ⚠️ <b>지금은 주문을 걸지 마세요.</b> 외국인이 5개월간 보유율 −3.34%p를 직선으로
-      팔고 있습니다(회귀 R² 0.82). <b>외국인 보유율이 20거래일 상승 전환</b>한 뒤에
-      위 주문을 겁니다. 연변동성 68.7%라 200주를 더 넣으면 노출이 36% 늘어납니다.
+      ⚠️ <b>사다리를 오늘 바꾸지 않습니다.</b> 52주 최고가가 <b>783,000원(6/1)</b>으로 확정됐고
+      지금은 거기서 <b>−47.1%</b>입니다. 사다리 4칸은 고점의 55.6~71.7% 구간에 있습니다.<br><br>
+      하지만 <b>고점은 밴드의 입력이 아닙니다.</b> 주가가 빠졌다는 이유로 목표가를 흔들면
+      그게 표류입니다. <b>밴드를 다시 만들 정당한 사유는 따로 생겼습니다</b> —
+      위의 1급 관세 숫자입니다. 지금 사다리는 3급 “4조 절감” 전제로 만들어졌으므로,
+      <b>주말 정밀 점검에서 5인 4라운드로 밴드와 4칸을 다시 산출합니다.</b>
     </div>
   </div>
 
@@ -427,55 +380,83 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">삼성전자 <span class="tag t-hold">조건부 보유</span></div>
-        <div class="s-pos">보유 <b>156주</b> · 4,282만 · <b class="down">−14.2%</b> · 비중 3.2%</div>
+        <div class="s-name">삼성전자 <span class="grade g-hi">신뢰 상</span><span class="tag t-hold">주문 없음</span></div>
+        <div class="s-pos">보유 <b>206주</b> · 5,099만 · <b class="down">−18.3%</b> · 비중 4.1%</div>
       </div>
       <div class="s-px">
-        <div class="p num">274,500</div>
-        <div class="c num up">+2.43%</div>
+        <div class="p num">247,500</div>
+        <div class="c num down">−7.82%</div>
+      </div>
+    </div>
+
+    <div class="lane">
+      <div class="fair">
+        <span class="k">적정주가</span>
+        <span class="v num">188,781 ~ 299,829</span>
+        <span class="d num muted">밴드 안</span>
+        <span class="n"><b>2Q말 자본 579.31조 ÷ 67.40억주 = BPS 85,951원</b>(IR 1급).
+          지속 ROE 20~30% · 자본비용 10.74% · 영구성장 3%.
+          <b>8/19에 주식수를 66.0억 → 67.40억으로 정정</b>했습니다(순이익÷EPS 교차검증)</span>
       </div>
     </div>
 
     <div class="lane up-lane">
-      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 계속 보유</span>
-        <span class="sub">팔지 않습니다</span></div>
+      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면</span>
+        <span class="sub">걸어둔 주문 없음</span></div>
       <div class="order">
-        <span class="o-px num">290,500</span>
-        <span class="o-do">60일선 회복 → <b>평단 320,000까지 보유</b></span>
-        <span class="o-gap num up">+5.83%</span>
-        <span class="o-note">회복하면 그때 매도 계획을 새로 짭니다</span>
+        <span class="o-px num">—</span>
+        <span class="o-do">아무것도 없음</span>
+        <span class="o-gap num">—</span>
+        <span class="o-note">어제 50주를 사고 나머지는 걸지 않기로 정했습니다</span>
       </div>
     </div>
 
     <div class="lane dn-lane">
-      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면 전량 판다</span>
-        <span class="sub">예약주문 불가 — 종가 확인 후 다음날 실행</span></div>
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
+        <span class="sub">감시 조건 · 자동으로 사지지 않습니다</span></div>
       <div class="order">
-        <span class="o-px num">244,475</span>
-        <span class="o-do">20일선 종가 이탈 → <b>156주 전량 매도</b></span>
-        <span class="o-gap num down">−10.94%</span>
-        <span class="o-note">세후 약 3,806만원 · 반등이 꺾였다는 뜻이므로 미련 없이 정리</span>
+        <span class="o-px num">230,000</span>
+        <span class="o-do">접근하면 <b>그날 다시 판단</b></span>
+        <span class="o-gap num down">−7.07%</span>
+        <span class="o-note">예상 개장 244,600에서 <b>−5.9%</b> 더 빠져야 닿습니다. 오늘 일이 아닙니다</span>
       </div>
     </div>
 
+    <div class="keep">
+      어제 <b>249,000원 50주</b> 매수(직접 체결) → 평단 320,000 → <b>302,776원</b>.
+      종가 247,500이라 그 50주는 −75,000원입니다.<br><br>
+      249,000의 요구 지속 ROE는 <b>25.4%</b>로, 과거 최고 10.85%의 2.3배입니다.
+      싼 가격이 아닙니다. 다만 연말 자본 기준 밴드(240,212~381,513)로 보면 <b>하단 근처</b>입니다.
+      <b>자본이 분기 19%씩 쌓여 밴드가 올라가는 유일한 종목</b>이라 “가장 낮을 때”를 맞히려 하면
+      아예 못 삽니다.
+    </div>
+  </div>
 
-    <div class="tgt">
-      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 방식 불가 — 2026E ROE 55.83%는 피크</span></div>
-      <div class="scroll"><table class="tg">
-        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
-        <tbody><tr><td>PER 4배</td><td class="num">191,284<span class="tg-pct down">−30.3%</span></td><td class="num">—<span class="tg-pct up"></span></td><td class="num">—<span class="tg-pct up"></span></td></tr><tr><td>PER 6배</td><td class="num">—<span class="tg-pct down"></span></td><td class="num">286,926<span class="tg-pct up">+4.5%</span></td><td class="num">—<span class="tg-pct up"></span></td></tr><tr><td>PER 8배</td><td class="num">—<span class="tg-pct down"></span></td><td class="num">—<span class="tg-pct up"></span></td><td class="num">382,568<span class="tg-pct up">+39.4%</span></td></tr></tbody>
-      </table></div>
+  <!-- ════════ 네이버 ════════ -->
+  <div class="stock">
+    <div class="s-top">
+      <div class="s-id">
+        <div class="s-name">네이버 <span class="grade g-mid">신뢰 중</span><span class="tag t-hold">보유</span></div>
+        <div class="s-pos">보유 <b>550주</b> · 1억 1,440만 · <b class="down">−11.5%</b> · 비중 9.1%</div>
+      </div>
+      <div class="s-px">
+        <div class="p num">208,000</div>
+        <div class="c num down">−4.15%</div>
+      </div>
+    </div>
+    <div class="lane dn-lane">
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
+        <span class="sub">조건 없음</span></div>
+      <div class="order">
+        <span class="o-px num">—</span>
+        <span class="o-do">조건 없음</span>
+        <span class="o-gap num">—</span>
+        <span class="o-note">3분기 영업이익률로 판단합니다 — 17% 회복이면 추매, 15% 아래면 비중 축소</span>
+      </div>
     </div>
     <div class="keep">
-      🚨 <b>목표주가를 PBR로 못 냅니다.</b> 2026E 영업이익 390.9조, 영업이익률 52.93%,
-      ROE 55.83%는 AI 메모리 슈퍼사이클 수치라 영구 성장 가정에 쓸 수 없습니다.<br>
-      PER로 보면 <b>5.74배</b>인데, <b>사이클 산업에서 “피크 이익 + 낮은 PER”은 고점 신호</b>이기도 합니다.
-      이 슈퍼사이클이 몇 년 가는지가 전부이고, 저는 그걸 판정 못 합니다.
-    </div>
-
-    <div class="keep">
-      <b>이 종목만 SOX를 봅니다.</b> 시장을 통제한 뒤에도 반도체 지수 반응이 남는
-      유일한 종목입니다(베타 0.32, t=2.18). 간밤 SOX가 +3%면 개장 기대 +1%p 정도입니다.
+      금리에 민감한 성장주입니다. 어제 급락 원인이 <b>미 장기국채 금리 급등</b>이었으므로
+      네이버 −4.15%는 그 직격입니다. <b>오늘 10년물 확정치를 못 구해</b> 예상 개장을 못 냅니다.
     </div>
   </div>
 
@@ -483,123 +464,159 @@
   <div class="stock">
     <div class="s-top">
       <div class="s-id">
-        <div class="s-name">한국전력 <span class="tag t-sell">매수 후보 1순위</span></div>
-        <div class="s-pos">보유 <b>1,000주</b> · 3,325만 · <b class="down">−44.4%</b> · 비중 2.5%</div>
+        <div class="s-name">한국전력 <span class="grade g-mid">신뢰 중</span><span class="tag t-wait">보유만</span></div>
+        <div class="s-pos">보유 <b>1,000주</b> · 3,085만 · <b class="down">−48.6%</b> · 비중 2.5%</div>
       </div>
       <div class="s-px">
-        <div class="p num">33,250</div>
-        <div class="c num up">+0.45%</div>
+        <div class="p num">30,850</div>
+        <div class="c num down">−5.37%</div>
       </div>
     </div>
-
-    <div class="lane up-lane">
-      <div class="lane-h"><span class="arrow">▲</span><span class="lbl">오르면 그때 살지 본다</span>
-        <span class="sub">지금은 한 주도 사지 않습니다</span></div>
-      <div class="order">
-        <span class="o-px num">36,631</span>
-        <span class="o-do">60일선 회복 → <b>추매 검토 시작</b></span>
-        <span class="o-gap num up">+10.17%</span>
-        <span class="o-note">현재 완전 역배열입니다. 회복 전 매수는 떨어지는 칼 잡기입니다</span>
+    <div class="lane">
+      <div class="fair">
+        <span class="k">적정주가</span>
+        <span class="v num">31,184 ~ 44,548</span>
+        <span class="d num muted">밴드 하단 근처</span>
+        <span class="n">정상화 세후이익 2.86조(4년 평균 영업이익) × PER 7~10배.
+          <b>밴드 상단이 평단 60,000보다 낮습니다</b></span>
       </div>
     </div>
 
     <div class="lane dn-lane">
-      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내려도 안 판다</span>
-        <span class="sub">뉴스만 확인합니다</span></div>
+      <div class="lane-h"><span class="arrow">▼</span><span class="lbl">내리면</span>
+        <span class="sub">사다리를 못 만드는 종목</span></div>
       <div class="order">
-        <span class="o-px num">32,850</span>
-        <span class="o-do">이탈 → <b>왜 빠지는지 뉴스 확인</b></span>
-        <span class="o-gap num down">−1.20%</span>
-        <span class="o-note">실적·규제 악재면 그때 판단, 단순 수급이면 버팁니다. 자동 매도 아닙니다</span>
+        <span class="o-px num">—</span>
+        <span class="o-do">조건 없음</span>
+        <span class="o-gap num">—</span>
+        <span class="o-note">밴드 상단 44,548이 평단 60,000보다 아래라 팔 자리를 그릴 수 없습니다</span>
       </div>
     </div>
-
-
-    <div class="tgt">
-      <div class="tgt-h"><span class="lbl">목표주가</span><span class="sub">PBR 0.32~0.63 · BPS 연 7.99% 가정</span></div>
-      <div class="scroll"><table class="tg">
-        <thead><tr><th></th><th>비관</th><th>중립</th><th>낙관</th></tr></thead>
-        <tbody><tr><td>1년</td><td class="num">27,909<span class="tg-pct down">−16.1%</span></td><td class="num">41,427<span class="tg-pct up">+24.6%</span></td><td class="num">54,945<span class="tg-pct up">+65.2%</span></td></tr><tr><td>3년</td><td class="num">32,547<span class="tg-pct down">−2.1%</span></td><td class="num">48,312<span class="tg-pct up">+45.3%</span></td><td class="num">64,076<span class="tg-pct up">+92.7%</span></td></tr></tbody>
-      </table></div>
-    </div>
     <div class="keep">
-      📈 <b>완전한 턴어라운드입니다.</b> 2023년 영업적자 4.5조 → 2025년 흑자 13.5조,
-      ROE −12.63% → 19.40%, 부채비율 543% → 401%. BPS는 55,837 → 80,762원(+44.6%).<br>
-      <b>PBR 0.41은 밴드 하단</b>이고 비관 시나리오조차 3년 −2.1%입니다.
-      평단 60,000은 3년 뒤 <b>PBR 0.59</b>면 닿습니다(BPS가 늘기 때문).<br>
-      ⛽ 유가 가설도 검정했습니다 — WTI +10%에 −1.77%(t=−2.25)로 방향은 맞지만,
-      5개월 −29% 중 유가 몫은 <b>−3.1%p(9%)</b>뿐입니다.
-      주범은 <b>2026E 영업이익 13.5조→8.2조 추정</b>입니다.
-    </div>
-
-    <div class="keep">
-      손절 논의는 끝났습니다. <b>외국인이 최근 20거래일 +219만주 순매수로 전환</b>했고
-      (5개월 내내 팔던 종목입니다), 상관계수가 5종목 중 가장 낮아 <b>유일하게 분산에 기여</b>합니다.
-      평단 60,000까지는 +80%가 필요하지만, <b>팔 이유가 없다</b>는 게 결론입니다.
+      본전까지 <b>+94.5%</b>가 필요하고 연 10%면 <b>6.9년</b>입니다.
+      문제는 연료비가 아니라 <b>요금 규제</b>입니다(IR 원문: 석탄 −13.4%, LNG −5.3%인데
+      판매단가는 +0.2%, 연료비 +8.8%). <b>판매단가 상승률 &gt; 연료비 상승률</b>이 확인되면 추매입니다.
     </div>
   </div>
 
   <!-- ════════ 소형주 ════════ -->
   <section>
     <div class="head">
-      <h2>소형주 4종 — 전부 보유</h2>
-      <div class="note">합계 4,136만 · 3.1%</div>
+      <h2>나머지 5종 — 전부 보유</h2>
+      <div class="note">합계 1억 275만 · 8.3%</div>
     </div>
     <div class="body">
       <div class="mini">
         <div class="mini-row">
+          <span class="l">현대차우 <span class="num">197,500</span> <span class="num down">−4.36%</span></span>
+          <span class="r">−29.5% · 평단 280,000이라 적정가에 팔아도 손절입니다. <b>비중은 보통주에서 줄입니다</b></span>
+        </div>
+        <div class="mini-row">
+          <span class="l">비츠로셀 <span class="num">34,750</span> <span class="num up">+13.75%</span></span>
+          <span class="r"><b>원인 미확인.</b> 쿼리 3개로 찾았고 당일 촉매가 없습니다.
+          걸리는 건 하나 — 기업가치제고계획의 <b>“6개월 평균주가 35,000원 초과 시 단계적 무상증자 검토”</b>이고
+          어제 종가가 그 바로 아래입니다. <b>가설이지 사실이 아닙니다</b> · DART로 확인 대상</span>
+        </div>
+        <div class="mini-row">
+          <span class="l">넥스틸 <span class="num">11,340</span> <span class="num down">−3.49%</span></span>
+          <span class="r">−13.8% · 정리 권고는 철회된 상태입니다. 조건 없음</span>
+        </div>
+        <div class="mini-row">
           <span class="l">동국산업 <span class="num">2,685</span></span>
-          <span class="r">▼ 2,457(20일선) 이탈 시 재검토 · PBR 0.31, 하락 방어 1위</span>
-        </div>
-        <div class="mini-row">
-          <span class="l">넥스틸 <span class="num">12,920</span></span>
-          <span class="r">−1.7%로 사실상 본전 · 조건 없음</span>
-        </div>
-        <div class="mini-row">
-          <span class="l">비츠로셀 <span class="num">31,750</span></span>
-          <span class="r">▼ 30,375(20일선) 이탈 시 재검토</span>
+          <span class="r"><b>어제 캡처에 없었습니다</b>(스크롤 아래). 8/15 값으로 계산했습니다 — 미확인</span>
         </div>
         <div class="mini-row">
           <span class="l">화인베스틸 <span class="num">997</span></span>
-          <span class="r">재무 확인 불가 · 정리 여부는 본인 판단 (598만원)</span>
+          <span class="r"><b>어제 캡처에 없었습니다.</b> 재무도 한 번도 못 봤습니다 — DART 대기</span>
         </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="head"><h2>오늘 걸 주문</h2></div>
+    <div class="head"><h2>신뢰등급</h2><div class="note">종목의 좋고 나쁨이 아닙니다</div></div>
     <div class="body">
-      <div class="empty">
-        <span class="mark">✓</span>
-        <p>없습니다. 현대차 매도는 <b>갈 곳이 정해질 때까지</b> 보류합니다.</p>
+      <div style="font-size:12.5px;color:var(--ink-2);line-height:1.65">
+        등급은 <b>제 판단이 얼마나 두꺼운지</b>이고, 맞을 확률이 아니라 <b>제가 말을 바꿀 확률</b>입니다.
+        오늘 현대차를 <b>상 → 중</b>으로 내렸습니다 — 밴드의 전제가 3급이었는데 1급 숫자가 들어와
+        다시 계산해야 하기 때문입니다. 결론(매도 사다리 4칸)은 그대로 두되,
+        <b>그 근거가 흔들린 상태라는 걸 먼저 알려드립니다.</b>
       </div>
     </div>
   </section>
 
+  <!-- ════════ 반증 조건 ════════ -->
   <section>
-    <div class="head"><h2>포트폴리오</h2></div>
+    <div class="head"><h2>반증 조건</h2><div class="note">미리 등록해둔 것 · 이게 있어야 번복이 정당해집니다</div></div>
     <div class="body">
-      <div class="sum">
-        <div><div class="k">총 평가</div><div class="v num">13억 5,232만</div></div>
-        <div><div class="k">손익</div><div class="v num up">+4억 3,015만</div></div>
-        <div><div class="k">예수금</div><div class="v num">1억 0,000만</div></div>
-        <div><div class="k">현대차+우</div><div class="v num">82.0%</div></div>
+      <div class="mini">
+        <div class="mini-row"><span class="l">삼성전자</span>
+          <span class="r">DS 영업이익률 70%→50% 아래 · DX 적자 3분기 연속 → 남은 매수 철회</span></div>
+        <div class="mini-row"><span class="l">현대차</span>
+          <span class="r">BD 상장 시총 100조 미만 → 2차 축소 / 129조 초과 → 남은 물량 유지</span></div>
+        <div class="mini-row"><span class="l">현대차</span>
+          <span class="r">3분기 영업이익률이 5.8%에서 오르면 → 관세 축소가 실적에 온 것, 밴드 상향</span></div>
+        <div class="mini-row"><span class="l">네이버</span>
+          <span class="r">3분기 영업이익률 17% 회복 → 추매 / 15% 아래 → 비중 축소</span></div>
+        <div class="mini-row"><span class="l">한국전력</span>
+          <span class="r">판매단가 상승률 &gt; 연료비 상승률 → 추매</span></div>
+        <div class="mini-row"><span class="l">KT</span>
+          <span class="r">요금 인하 규제 또는 배당 축소 → 살 이유가 통째로 사라짐</span></div>
       </div>
     </div>
   </section>
 
-  <footer>
-    <b>▲ 오르면</b>은 지금 증권사 앱에 <b>지정가 예약주문</b>으로 걸어둘 수 있는 것입니다.
-    매도는 현재가보다 위, 매수는 현재가보다 아래라야 걸립니다.<br><br>
-    <b>▼ 내리면</b>은 현재가보다 아래여서 <b>지정가로 못 겁니다.</b> 조건이 닿은 날 저녁에
-    다시 판단하는 항목이고, 자동으로 팔리지 않습니다.<br><br>
-    <b>예수금 1억의 행선지</b> — 밖에서 새 종목을 찾을 필요가 없습니다.
-    이미 가진 종목 중 <b>한국전력(1년 +27.1%)</b>과 <b>네이버(+20.4%)</b>가 밴드 하단입니다.
-    한국전력이 기대수익도 높고 <b>5종목 중 상관계수가 가장 낮아 분산에도 기여</b>합니다.
-    현대차를 한 주도 안 팔고 비중이 77.1%→71.8%, 유효 종목 수가 1.65→1.88이 됩니다.<br><br>
-    판단 재료이고 최종 결정은 본인이 합니다. 장중에는 대응이 어려우므로
-    모든 지시는 아침에 걸 수 있는 형태로만 냅니다.
-  </footer>
+  <!-- ════════ 포트폴리오 ════════ -->
+  <section>
+    <div class="head"><h2>포트폴리오</h2><div class="note">8/19 종가 기준</div></div>
+    <div class="body">
+      <div class="scroll">
+        <table class="cmp">
+          <thead><tr><th>종목</th><th>평가금액</th><th>손익</th><th>비중</th></tr></thead>
+          <tbody>
+            <tr><td>현대차</td><td class="num">9억 5,303만</td><td class="num up bigpos">+76.2%</td><td class="num">76.1%</td></tr>
+            <tr><td>네이버</td><td class="num">1억 1,440만</td><td class="num down">−11.5%</td><td class="num">9.1%</td></tr>
+            <tr><td>현대차우</td><td class="num">6,241만</td><td class="num down bigpos">−29.5%</td><td class="num">5.0%</td></tr>
+            <tr><td>삼성전자</td><td class="num">5,099만</td><td class="num down">−18.3%</td><td class="num">4.1%</td></tr>
+            <tr><td>한국전력</td><td class="num">3,085만</td><td class="num down bigpos">−48.6%</td><td class="num">2.5%</td></tr>
+            <tr><td>소형주 4종</td><td class="num">4,038만</td><td class="num down">−25%대</td><td class="num">3.2%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        총평가 <b>12억 5,206만</b> (+34.0%) · 예수금 <b>8,755만</b> · 총자산 <b>13억 3,960만</b><br>
+        ⚠️ 현대차+현대차우가 <b>81.1%</b>입니다. 같은 기업이므로 하나의 포지션으로 봐야 합니다.
+        아홉 종목이지만 비중으로 보면 <b>1.7종목</b>짜리입니다.
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 근거 ════════ -->
+  <section>
+    <div class="head"><h2>── 이하 근거 ──</h2><div class="note">안 읽어도 됩니다</div></div>
+    <div class="body">
+      <div style="font-size:12.5px;color:var(--ink-2);line-height:1.7">
+        <b>캡처 검산 통과.</b> 받은 여섯 지수 전부 전일비를 역산하니 저장된 8/18 값과
+        소수점까지 일치했습니다(6/6). 8/17에 검색값으로 지수를 채웠다가 셋 다 틀렸던 적이 있어
+        캡처를 받으면 이 검산을 먼저 합니다.<br><br>
+
+        <b>비츠로셀 검색값 하나를 버렸습니다.</b> 어떤 기사가 8/19 종가를 30,950(+10.93%)이라 했는데
+        캡처는 34,750이고 전일이 30,550입니다. 전일비가 안 맞아 그 숫자를 쓰지 않았습니다.<br><br>
+
+        <b>현대차 52주 최고 783,000원(2026-06-01)이 확정됐습니다.</b> 예전에 이 값을
+        “검색이라 틀렸다”고 기각했는데 오판이었습니다 — IR의 시가총액 148.0조(’26.5.29)로 역산하면
+        그때 주가가 약 70.7만원이고, 3거래일 뒤 78.3만원은 자연스럽습니다.
+        <b>3급을 결론으로 쓰면 틀리지만, 검산 없이 기각해도 틀립니다.</b><br><br>
+
+        <b>못 구한 것:</b> 8/19 원/달러·WTI·미10년물·VIX 확정치, 비츠로셀 급등 원인,
+        동국산업·화인베스틸 8/19 종가.
+        DART는 여전히 막혀 있어 미확인 6건이 그대로입니다.
+      </div>
+    </div>
+  </section>
+
+  <div style="text-align:center;padding:28px 0 8px;font-size:11.5px;color:var(--ink-3)">
+    숫자는 판단 재료이지 예측이 아닙니다 · 최종 결정은 본인이 합니다
+  </div>
 
 </div>
