@@ -10,17 +10,20 @@
     python3 scripts/brief_checklist.py
 """
 import json, os, sys
+from datetime import date
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PF = os.path.join(HERE, "..", "data", "portfolio.json")
 
+# 쿼리를 박아둔다. 생각할 여지를 없애야 빠뜨리지 않는다.
+# {d} 자리에 날짜가 들어간다.
 MACRO = [
-    ("나스닥 · S&P500 · 다우", "전반 위험선호"),
-    ("SOX 반도체", "삼성전자 단독 베타 0.559 (t=3.08)"),
-    ("원/달러", "현대차는 수출이라 환율이 이익에 직결"),
-    ("WTI", "한국전력 연료비 · 넥스틸 리그카운트"),
-    ("미 10년물", "네이버 할인율"),
-    ("VIX", "급등하면 그날은 팩터가 다 무너진다"),
+    ("원/달러 · WTI · 미10년물 · VIX",
+     "현대차 환율 · 한전 연료비 · 네이버 할인율",
+     "원달러 환율 WTI 유가 미국 10년물 국채금리 {d} 마감"),
+    ("미국 지수 (캡처가 없을 때만)",
+     "나스닥·S&P500·다우·SOX",
+     "뉴욕증시 마감 {d} 나스닥 S&P500 다우 필라델피아 반도체"),
 ]
 WATCH = {
     "현대차": "GM·포드·테슬라, 원/달러, 미국 관세, BD 나스닥 상장",
@@ -43,9 +46,12 @@ def main():
     print("=" * 72)
     print("  오늘 브리핑에서 검색할 것 — 빠짐없이 훑는다")
     print("=" * 72)
-    print("\n▸ 거시 (사용자가 SOX만 줘도 나머지는 내가 찾는다)")
-    for k, why in MACRO:
-        print(f"    [ ] {k:<24} {why}")
+    d = sys.argv[1] if len(sys.argv) > 1 else date.today().isoformat()
+    print("\n▸ 거시 — **사용자에게 묻지 않는다. 내가 검색한다**")
+    for k, why, q in MACRO:
+        print(f"    [ ] {k}")
+        print(f"        왜: {why}")
+        print(f"        쿼리: {q.format(d=d)}")
 
     print(f"\n▸ 보유 {len(names)}종목 — 한 종목당 검색 한 번이면 된다")
     for n in names:
@@ -59,6 +65,8 @@ def main():
     print("  · 못 찾았으면 '세 쿼리로 찾았는데 없었다'고 쓴다.")
     print("    **검색을 안 하고 '미확인'이라고 쓰는 건 거짓말이다**")
     print("  · 검색값이 캡처(1급)와 어긋나면 검색값을 버린다")
+    print("  · **사용자에게 시세·환율·유가·뉴스를 묻지 않는다.** 내가 구할 수 있다.")
+    print("    묻는 건 계좌 상태와 본인 의사뿐이다 (SKILL.md '내가 구할 수 있는 건 묻지 않는다')")
     return 0
 
 
