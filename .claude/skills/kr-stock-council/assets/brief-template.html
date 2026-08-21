@@ -206,239 +206,234 @@
   .rule span{font-size:11px; letter-spacing:.14em; color:var(--muted); font-weight:700}
 </style>
 <div class="wrap">
-
   <header>
-    <div class="eyebrow">2026 · 08 · 22 토요일 · 주말 정밀 점검</div>
-    <h1>9종목 전체 판단</h1>
-    <div class="stamp">8월 21일 종가 기준 · 5인 4라운드 + R3.5 관문</div>
+    <div class="eyebrow">2026 · 08 · 24 월요일 · 05:10</div>
+    <h1>오늘 아침 브리핑</h1>
+    <div class="stamp">8월 21일(금) 종가 기준 · 최종 NXT + 미국 8/21장 반영</div>
   </header>
 
   <div class="verdict act">
-    <div class="verdict-label">이번 점검의 결론</div>
-    <div class="verdict-main">바뀐 건 삼성전자 하나뿐입니다</div>
-    <div class="verdict-sub">나머지 여덟은 <b>결론 유지</b>. 스크립트가 번복을 막았고,
-      새 사실이 있는 건 삼성(주주환원 30조 확정)뿐이었습니다. 표류율 40% → 이번엔 0건.</div>
+    <div class="verdict-label">오늘 걸 주문</div>
+    <div class="verdict-main">KT 51,900 매수 173주</div>
+    <div class="verdict-sub">현재가 아래라 예약주문으로 걸립니다. <b>하루 한 칸만</b>.
+      나머지는 전부 멀어 오늘 손댈 게 없습니다.</div>
   </div>
 
-  <!-- 실버: 포트 리스크 -->
   <section>
-    <div class="head"><h2>🩶 실버 — 비중이 아니라 리스크로</h2><div class="note">correlation.py</div></div>
-    <div class="body">
-      <div class="sum">
-        <div><div class="k">현대차 비중</div><div class="v num">76.1%</div></div>
-        <div><div class="k">현대차 <b>리스크 기여</b></div><div class="v num up">95.0%</div></div>
-        <div><div class="k">유효 종목 수(리스크)</div><div class="v num">1.11종목</div></div>
-        <div><div class="k">1일 VaR 95%</div><div class="v num down">9,263만원</div></div>
-      </div>
-      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        "9종목을 갖고 있지만 <b>리스크는 1.1종목짜리</b>입니다. 분산비율 1.013 —
-        분산 효과가 사실상 0입니다. 그리고 위기에는 상관이 1로 수렴합니다.
-        분산이 가장 필요한 순간에 사라진다는 뜻입니다."
-        <br><br>
-        연환산 변동성 <b>72.2%</b>. 하루 −4%면 <b>5,400만원</b>이 움직입니다.
-      </div>
-    </div>
-  </section>
-
-  <!-- 레드: 출고 심사 -->
-  <section>
-    <div class="head"><h2>❤️ 레드 — 교차 검증과 출고 거부</h2><div class="note">R3.5 관문</div></div>
+    <div class="head"><h2>① 오늘 종가 예측</h2><div class="note">최종 NXT + SOX × 2.0</div></div>
     <div class="body">
       <div class="scroll">
         <table class="cmp">
-          <thead><tr><th>종목</th><th>방법 A</th><th>방법 B</th><th>판정</th></tr></thead>
+          <thead><tr><th>종목</th><th>금 종가</th><th>최종 NXT</th><th>합</th><th>예상</th><th>등락</th></tr></thead>
           <tbody>
-            <tr><td>현대차</td><td class="num">615,305~650,668<br><span class="tg-pct">PBR-ROE</span></td>
-                <td class="num">324,399<br><span class="tg-pct">부분합·BD 35조</span></td>
-                <td><span class="loc loc-hi">갈린다</span></td></tr>
-            <tr><td>삼성전자</td><td class="num">밴드 상단 −1.0%</td><td class="num">요구 ROE 29.7%</td>
-                <td><span class="loc loc-hi">둘 다 상단</span></td></tr>
-            <tr><td>네이버</td><td class="num">밴드 상단 −5.8%</td><td class="num">OBV t=+3.91</td>
-                <td><span class="loc loc-lo">둘 다 유효</span></td></tr>
-            <tr><td>한국전력</td><td class="num">밴드 하단</td><td class="num">OBV t=−3.61</td>
-                <td><span class="loc loc-lo">둘 다 하단</span></td></tr>
-            <tr><td>소형주 3종</td><td class="num muted">계산 불가</td><td class="num muted">시계열 없음</td>
-                <td><span class="loc loc-hi">방법 0개</span></td></tr>
+            <tr><td>삼성전자 <span class="grade g-lo">무효조건</span></td><td class="num">281,500</td><td class="num down">270,000</td>
+                <td class="num down">−4.37%</td><td class="num">256,900</td><td class="num down bigpos">−8.74%</td></tr>
+            <tr><td>SK하이닉스</td><td class="num">1,730,000</td><td class="num up">1,761,000</td>
+                <td class="num up">+1.79%</td><td class="num">1,792,000</td><td class="num up bigpos">+3.58%</td></tr>
+            <tr><td>비츠로셀</td><td class="num">30,500</td><td class="num up">30,600</td>
+                <td class="num up">+0.33%</td><td class="num">30,700</td><td class="num up">+0.66%</td></tr>
+            <tr><td>한국전력</td><td class="num">31,750</td><td class="num up">31,850</td>
+                <td class="num up">+0.31%</td><td class="num">31,950</td><td class="num up">+0.63%</td></tr>
+            <tr><td>현대차</td><td class="num">415,000</td><td class="num up">416,000</td>
+                <td class="num up">+0.24%</td><td class="num">417,000</td><td class="num up">+0.48%</td></tr>
+            <tr><td>KT</td><td class="num">52,400</td><td class="num down">52,300</td>
+                <td class="num down">−0.19%</td><td class="num">52,200</td><td class="num down">−0.38%</td></tr>
+            <tr><td>네이버</td><td class="num">222,000</td><td class="num down">221,500</td>
+                <td class="num down">−0.23%</td><td class="num">221,000</td><td class="num down">−0.45%</td></tr>
+            <tr><td>하나금융</td><td class="num">128,800</td><td class="num down">128,400</td>
+                <td class="num down">−0.31%</td><td class="num">128,000</td><td class="num down">−0.62%</td></tr>
           </tbody>
         </table>
       </div>
-      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        <b>"현대차는 갈립니다. 한쪽을 고르지 않겠습니다."</b> 관세제외 ROE를 믿으면 61만~65만이고,
-        BD를 애널 추정으로 매기면 32만입니다. 현재가 415,000이 그 사이에 있습니다.
-        <b>이 갈림은 BD 나스닥 상장 시총 하나로 풀립니다.</b>
-        <br><br>
-        <b>수급</b> — 현대차 OBV <b>t=−4.75</b>, VWAP −19.6%. 오르는 동안 물량이 넘어갔고
-        위에 물린 물량이 저항입니다. 네이버만 <b>t=+3.91</b>로 물량이 들어옵니다.
-        <br><br>
-        <b>소형주 3종은 출고를 막습니다.</b> F-Score·Z-Score를 돌렸는데
-        <b>재무 데이터가 없어 계산 자체가 안 됩니다.</b> 점수가 낮은 것과 데이터가 없는 것은 다릅니다.
-        신뢰등급 <b>'하'</b> — 믿지 말고 아무것도 하지 마세요.
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.55">
+        <b>모형을 고쳤습니다 — 18:09 시간외가 아니라 최종 NXT를 씁니다.</b>
+        같은 저녁인데 <b>현대차(−0.12%→+0.24%)와 비츠로셀(−0.16%→+0.33%)은 방향이 뒤집혔고</b>,
+        KT·한국전력은 18:09엔 거래가 없다가 최종엔 값이 생겼습니다.<br>
+        <b>예측 거부 4건</b> — 넥스틸·현대차우·동국산업·화인베스틸은 최종 NXT 값 없음.<br>
+        <b>예상치는 점이 아니라 범위로 읽으세요</b> — k 1.5~2.5를 적용하면 위 등락의 0.75~1.25배입니다.<br>        ⚠️ 삼성은 주주환원 발표일이라 <b>모형 무효 조건</b>입니다. 그래도 냅니다.
       </div>
     </div>
   </section>
 
-  <!-- 블랙·블루·골드 -->
   <section>
-    <div class="head"><h2>🖤 블랙 · 💙 블루 · 💛 골드</h2><div class="note">한 줄씩</div></div>
+    <div class="head"><h2>② 누적 채점</h2><div class="note">predictions.json</div></div>
+    <div class="body">
+      <div class="sum">
+        <div><div class="k">방향 적중</div><div class="v num up">13 / 14</div></div>
+        <div><div class="k">평균 절대오차</div><div class="v num">2.71%p</div></div>
+        <div><div class="k">관측</div><div class="v num">3거래일 · 14건</div></div>
+        <div><div class="k">함의된 k 범위</div><div class="v num down">0.5 ~ 5.8</div></div>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        ⚠️ <b>앞선 브리핑에서 "평균 오차 1.00%p"라고 쓴 것을 정정합니다.</b>
+        그건 8/21 하루치 4종목만 본 값이었습니다. <b>관측 전부로는 2.71%p</b>입니다.
+        좋은 날 하나를 성적으로 말했습니다.
+        <br><br>
+        <b>믿을 건 방향이지 크기가 아닙니다.</b> 방향은 13/14로 맞았고 <b>k와 무관</b>합니다
+        (k를 0.5로 하든 3.5로 하든 부호는 같습니다). 반면 크기는
+        관측별 함의된 k가 <b>0.5~5.8</b>로 흩어져 "2배"는 평균일 뿐 법칙이 아닙니다.
+        <br><br>
+        직전 실패 — 8/20 삼성 10.68%p(SOX 단독), 8/21 비츠로셀 10.95%p(괴리 0을 신호로 읽음).
+        둘 다 고쳤습니다. <b>3거래일짜리 기록으로 정확도를 주장하지 않습니다.</b>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>③ 실현손익 — 단타</h2><div class="note">8/21 · 핵심 보유와 별도</div></div>
     <div class="body">
       <div class="mini">
-        <div class="mini-row"><span class="l">🖤 블랙</span>
-          <span class="r">SOX가 8/19 −2.12% → 8/20 +0.53%로 이틀 연속 지수와 <b>따로</b> 움직였습니다.<br>
-            원/달러 <b>1,392.6원으로 1,400 이탈</b> — 현대차 수출에 역풍입니다</span></div>
-        <div class="mini-row"><span class="l">💙 블루</span>
-          <span class="r"><b>현대차우 괴리 52.5%.</b> 배당수익률이 보통주 2.41% vs 우선주 <b>5.08%</b>입니다.<br>
-            기다리는 동안 받는 게 두 배입니다 — 비중은 보통주에서 줄이는 게 맞습니다</span></div>
-        <div class="mini-row"><span class="l">💛 골드</span>
-          <span class="r">삼성 50주·하이닉스 10주는 <b>단타로 성격이 맞았습니다</b>(2전 2승).<br>
-            현대차를 3개월 마인드로 보면 흔들립니다. <b>BD 상장까지가 이 종목의 단위</b>입니다</span></div>
+        <div class="mini-row"><span class="l">삼성전자 50주</span>
+          <span class="r">249,000 → 282,000 · <b class="up">+1,617,818원 (세후 +12.99%)</b></span></div>
+        <div class="mini-row"><span class="l">SK하이닉스 10주</span>
+          <span class="r">약 1,500,000 → 1,730,000 · <b class="up">+2,260,555원 (약 +15%)</b></span></div>
+        <div class="mini-row"><span class="l">누적</span>
+          <span class="r"><b class="up">+3,878,373원 · 2전 2승</b> · 예수금 1억 388만</span></div>
       </div>
     </div>
   </section>
 
-  <!-- ★ 종목별 목표주가 · 전망 · 방향성 -->
-  <div class="rule"><span>종목별 판단</span></div>
+  <section>
+    <div class="head"><h2>④ 사흘 연속 반도체만 따로</h2><div class="note">미국 8/21</div></div>
+    <div class="body">
+      <div class="chips">
+        <div class="chip"><span class="k">다우</span><span class="v num up">+0.98%</span></div>
+        <div class="chip"><span class="k">다우운송</span><span class="v num up">+0.88%</span></div>
+        <div class="chip"><span class="k">나스닥</span><span class="v num up">+0.44%</span></div>
+        <div class="chip"><span class="k">S&amp;P 500</span><span class="v num up">+0.43%</span></div>
+        <div class="chip"><span class="k">나스닥 100</span><span class="v num up">+0.33%</span></div>
+        <div class="chip"><span class="k">SOX 반도체</span><span class="v num down">−0.51%</span></div>
+      </div>
+      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
+        SOX가 <b>8/19 −2.12% → 8/20 +0.53% → 8/21 −0.51%</b>로 사흘 내리 지수와 따로 놀았습니다.
+        이번엔 지수가 전부 올랐는데 반도체만 빠졌고, <b>다우가 +0.98%로 가장 컸습니다</b> —
+        경기민감·가치 쪽으로 돈이 옮겨가는 모양입니다.
+        <br><br>
+        검산 6/6 일치. 엔비디아 214.72 · TSMC ADR 418.95.
+        <br><br>
+        <b>원/달러 1,386.5원 (−6.1원).</b> 검산 통과 — 8/20 1,392.6에서 6.1 빼면 정확히 맞습니다.
+        1,400 아래로 더 내려갔고 <b>원화 강세가 이어집니다 → 현대차 수출에 역풍</b>입니다.
+        <br><br>
+        ⚠️ <b>미국장이 왜 올랐는지는 못 찾았습니다.</b> 세 쿼리를 돌렸고,
+        그중 잭슨홀 파월 기사가 상승·금리하락·달러약세를 완벽히 설명했지만
+        <b>2025년 기사였습니다</b>("파월 마지막 잭슨홀" — 임기가 2026년 5월 종료).
+        나머지 하나는 "3대 지수 모두 하락"이라 캡처와 모순돼 버렸습니다.
+        <b>검색을 안 한 게 아니라 찾았는데 없습니다.</b>
+      </div>
+    </div>
+  </section>
 
   <section>
-    <div class="head"><h2>목표주가 · 1~3개월 전망 · 방향성</h2><div class="note">9종목 전체</div></div>
+    <div class="head"><h2>⑤ 포트폴리오</h2><div class="note">8/21 종가 · 가격 정정 반영</div></div>
+    <div class="body">
+      <div class="sum">
+        <div><div class="k">총자산</div><div class="v num">13억 5,721만</div></div>
+        <div><div class="k">평가손익</div><div class="v num up">+35.9%</div></div>
+        <div><div class="k">예수금</div><div class="v num">1억 388만 (7.7%)</div></div>
+        <div><div class="k">현대차 <b>리스크</b></div><div class="v num up">95.0%</div></div>
+      </div>
+      <div class="scroll" style="margin-top:12px">
+        <table class="cmp">
+          <thead><tr><th>종목</th><th>종가</th><th>손익</th><th>비중</th></tr></thead>
+          <tbody>
+            <tr><td>현대차</td><td class="num">415,000</td><td class="num up bigpos">+76.6%</td><td class="num">76.2%</td></tr>
+            <tr><td>네이버</td><td class="num">222,000</td><td class="num down">−5.5%</td><td class="num">9.7%</td></tr>
+            <tr><td>현대차우</td><td class="num">197,000</td><td class="num down bigpos">−29.6%</td><td class="num">5.0%</td></tr>
+            <tr><td>삼성전자</td><td class="num">281,500</td><td class="num down">−12.0%</td><td class="num">3.5%</td></tr>
+            <tr><td>한국전력</td><td class="num">31,750</td><td class="num down bigpos">−47.1%</td><td class="num">2.5%</td></tr>
+            <tr><td>동국산업 <span class="opt">정정</span></td><td class="num">2,450</td><td class="num down bigpos">−33.8%</td><td class="num">1.2%</td></tr>
+            <tr><td>넥스틸</td><td class="num">11,790</td><td class="num down">−10.3%</td><td class="num">0.9%</td></tr>
+            <tr><td>비츠로셀</td><td class="num">30,500</td><td class="num down bigpos">−35.8%</td><td class="num">0.5%</td></tr>
+            <tr><td>화인베스틸 <span class="opt">정정</span></td><td class="num">899</td><td class="num down bigpos">−38.0%</td><td class="num">0.4%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--muted);line-height:1.55">
+        <b>나흘째 미확인이던 두 종목이 나왔습니다.</b> 동국산업 2,685→<b>2,450</b>, 화인베스틸 997→<b>899</b>.
+        둘 다 8/15 값을 계속 쓰고 있었고 실제는 9%쯤 낮습니다. 총평가 12억 5,533만 → <b>12억 5,333만</b>.<br>
+        비중 76.2%인데 <b>리스크 기여 95.0%</b> · 유효 종목 수 1.11 · 1일 VaR95% 9,263만원
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="head"><h2>⑥ 다음 할 일</h2><div class="note"></div></div>
+    <div class="body">
+      <div class="scroll">
+        <table class="lad">
+          <thead><tr><th>할 것</th><th>가격</th><th>수량</th><th>현재가 대비</th></tr></thead>
+          <tbody>
+            <tr class="now"><td>KT 매수</td><td class="num">51,900</td><td class="num">173주</td><td class="num down">−1.0%</td></tr>
+            <tr><td>현대차 매도</td><td class="num">561,720</td><td class="num">460주</td><td class="num up">+35.4%</td></tr>
+            <tr><td>현대차 매도</td><td class="num">738,000</td><td class="num">1,842주</td><td class="num up">+77.8%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mini" style="margin-top:12px">
+        <div class="mini-row"><span class="l">다음 촉매</span>
+          <span class="r"><b>10월말</b> 삼성 이사회(배당 30조 확정)·네이버 3분기<br>
+            <b>11월</b> 한전 3분기 · <b>Q4~1H27</b> 현대차 BD 나스닥 상장</span></div>
+        <div class="mini-row"><span class="l">막혀 있는 것</span>
+          <span class="r"><b>DART</b> — 미확인 6건, 소형주 4종 판단 불가의 원인</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"><span>종목별 판단</span></div>
+  <section>
+    <div class="head"><h2>⑦ 목표주가 · 1~3개월 · 방향성</h2><div class="note">8/22 정밀점검 기준</div></div>
     <div class="body">
       <div class="scroll">
         <table class="cmp">
           <thead><tr><th>종목</th><th>현재가</th><th>목표주가<br>(1년·밴드)</th><th>1~3개월</th><th>방향성</th><th>신뢰</th></tr></thead>
           <tbody>
-            <tr>
-              <td><b>현대차</b><br><span class="tg-pct">76.1%</span></td>
-              <td class="num">415,000</td>
-              <td class="num">324,000<br>~650,000<br><span class="tg-pct down">갈림</span></td>
-              <td class="num">BD 상장<br>대기<br><span class="tg-pct">횡보~변동</span></td>
-              <td><span class="tag t-sell">보유 + 축소대기</span><br><span class="tg-pct">561,720에 460주</span></td>
-              <td><span class="grade g-mid">중</span></td></tr>
-            <tr>
-              <td><b>삼성전자</b><br><span class="tg-pct">3.5%</span></td>
-              <td class="num">281,500</td>
-              <td class="num">179,000<br>~284,000<br><span class="tg-pct down">상단</span></td>
-              <td class="num">10월말<br>이사회<br><span class="tg-pct">차익실현 압력</span></td>
-              <td><span class="tag t-wait">보유 · 추매 없음</span></td>
-              <td><span class="grade g-mid">중</span></td></tr>
-            <tr>
-              <td><b>네이버</b><br><span class="tg-pct">9.7%</span></td>
-              <td class="num">222,000</td>
-              <td class="num">152,000<br>~236,000<br><span class="tg-pct">상단 −5.8%</span></td>
-              <td class="num">10월말<br>3분기 실적<br><span class="tg-pct up">수급 양호</span></td>
-              <td><span class="tag t-hold">보유</span><br><span class="tg-pct">OPM 17%면 추매</span></td>
-              <td><span class="grade g-mid">중</span></td></tr>
-            <tr>
-              <td><b>현대차우</b><br><span class="tg-pct">5.0%</span></td>
-              <td class="num">197,000</td>
-              <td class="num muted">산출 불가<br><span class="tg-pct">괴리 52.5%</span></td>
-              <td class="num">보통주<br>연동<br><span class="tg-pct">배당 5.08%</span></td>
-              <td><span class="tag t-hold">보유</span><br><span class="tg-pct">축소는 보통주에서</span></td>
-              <td><span class="grade g-mid">중</span></td></tr>
-            <tr>
-              <td><b>한국전력</b><br><span class="tg-pct">2.5%</span></td>
-              <td class="num">31,750</td>
-              <td class="num">31,200<br>~44,500<br><span class="tg-pct">하단</span></td>
-              <td class="num">11월<br>3분기 실적<br><span class="tg-pct">요금 규제</span></td>
-              <td><span class="tag t-wait">보유만</span><br><span class="tg-pct">팔 자리 없음</span></td>
-              <td><span class="grade g-mid">중</span></td></tr>
-            <tr>
-              <td><b>넥스틸</b><br><span class="tg-pct">0.9%</span></td>
-              <td class="num">11,790</td>
-              <td class="num muted">산출 불가</td>
-              <td class="num muted">WTI·<br>리그카운트</td>
-              <td><span class="tag t-hold">보유</span></td>
-              <td><span class="grade g-lo">하</span></td></tr>
-            <tr>
-              <td><b>동국산업</b><br><span class="tg-pct">1.3%</span></td>
-              <td class="num muted">2,685</td>
-              <td class="num muted">산출 불가</td>
-              <td class="num muted">미확인</td>
-              <td><span class="tag t-hold">보유</span></td>
-              <td><span class="grade g-lo">하</span></td></tr>
-            <tr>
-              <td><b>비츠로셀</b><br><span class="tg-pct">0.5%</span></td>
-              <td class="num">30,500</td>
-              <td class="num muted">산출 불가</td>
-              <td class="num muted">코스닥<br>연동</td>
-              <td><span class="tag t-hold">보유</span></td>
-              <td><span class="grade g-lo">하</span></td></tr>
-            <tr>
-              <td><b>화인베스틸</b><br><span class="tg-pct">0.5%</span></td>
-              <td class="num muted">997</td>
-              <td class="num muted">산출 불가</td>
-              <td class="num muted">조선 수주</td>
-              <td><span class="tag t-hold">보유</span></td>
-              <td><span class="grade g-lo">하</span></td></tr>
+            <tr><td><b>현대차</b></td><td class="num">415,000</td>
+                <td class="num">324,000<br>~650,000<br><span class="tg-pct down">방법 갈림</span></td>
+                <td class="num">BD 상장<br><span class="tg-pct">Q4~1H27</span></td>
+                <td><span class="tag t-sell">보유+축소대기</span><br><span class="tg-pct">561,720에 460주</span></td>
+                <td><span class="grade g-mid">중</span></td></tr>
+            <tr><td><b>삼성전자</b></td><td class="num">281,500</td>
+                <td class="num">179,000<br>~284,000<br><span class="tg-pct down">상단 −1.0%</span></td>
+                <td class="num">10월말<br><span class="tg-pct">이사회</span></td>
+                <td><span class="tag t-wait">보유·추매 없음</span></td>
+                <td><span class="grade g-mid">중</span></td></tr>
+            <tr><td><b>네이버</b></td><td class="num">222,000</td>
+                <td class="num">152,000<br>~236,000<br><span class="tg-pct">상단 −5.8%</span></td>
+                <td class="num">10월말<br><span class="tg-pct up">수급 양호</span></td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">OPM 17%면 추매</span></td>
+                <td><span class="grade g-mid">중</span></td></tr>
+            <tr><td><b>현대차우</b></td><td class="num">197,000</td>
+                <td class="num muted">산출 불가<br><span class="tg-pct">괴리 52.5%</span></td>
+                <td class="num">보통주 연동<br><span class="tg-pct up">배당 5.08%</span></td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">축소는 보통주에서</span></td>
+                <td><span class="grade g-mid">중</span></td></tr>
+            <tr><td><b>한국전력</b></td><td class="num">31,750</td>
+                <td class="num">31,200<br>~44,500<br><span class="tg-pct">하단</span></td>
+                <td class="num">11월<br><span class="tg-pct">3분기 실적</span></td>
+                <td><span class="tag t-wait">보유만</span><br><span class="tg-pct">팔 자리 없음</span></td>
+                <td><span class="grade g-mid">중</span></td></tr>
+            <tr><td><b>넥스틸</b></td><td class="num">11,790</td>
+                <td class="num muted">산출 불가</td><td class="num muted">WTI·리그</td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">판단 근거 없음</span></td>
+                <td><span class="grade g-lo">하</span></td></tr>
+            <tr><td><b>동국산업</b></td><td class="num">2,450</td>
+                <td class="num muted">산출 불가</td><td class="num muted">철강 업황</td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">판단 근거 없음</span></td>
+                <td><span class="grade g-lo">하</span></td></tr>
+            <tr><td><b>비츠로셀</b></td><td class="num">30,500</td>
+                <td class="num muted">산출 불가</td><td class="num muted">코스닥 연동</td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">판단 근거 없음</span></td>
+                <td><span class="grade g-lo">하</span></td></tr>
+            <tr><td><b>화인베스틸</b></td><td class="num">899</td>
+                <td class="num muted">산출 불가</td><td class="num muted">조선 수주</td>
+                <td><span class="tag t-hold">보유</span><br><span class="tg-pct">판단 근거 없음</span></td>
+                <td><span class="grade g-lo">하</span></td></tr>
           </tbody>
         </table>
       </div>
-      <div style="margin-top:14px;font-size:12.5px;color:var(--ink-2);line-height:1.65">
-        <b>목표주가는 밴드입니다. 점 하나가 아닙니다.</b> 어느 ROE를 믿느냐가 곧 가격이라
-        범위로 냅니다. 현대차는 방법 둘이 갈려서 <b>범위 자체가 두 개</b>입니다.
-        <br><br>
-        <b>1~3개월은 밴드가 아니라 촉매 일정으로 봅니다.</b> 3개월 안에 밸류에이션이
-        바뀔 일은 거의 없고, 바뀌는 건 <b>발표가 나오느냐</b>입니다.
-        그래서 목표가 대신 <b>날짜</b>를 적었습니다.
-        <br><br>
-        <b>'산출 불가' 4종목</b> — 재무 데이터가 없어 계산이 안 됩니다. DART가 열려야 풀립니다.
-        합쳐서 포트의 <b>3.2%</b>라 분석 비용을 더 쓰지 않습니다.
-      </div>
-    </div>
-  </section>
-
-  <!-- 오늘 걸 주문 -->
-  <section>
-    <div class="head"><h2>지금 걸 수 있는 주문</h2><div class="note">전부 지정가 · 하루 한 칸</div></div>
-    <div class="body">
-      <div class="scroll">
-        <table class="lad">
-          <thead><tr><th>종목</th><th>가격</th><th>수량</th><th>현재가 대비</th><th>세후</th></tr></thead>
-          <tbody>
-            <tr><td>현대차 매도</td><td class="num">561,720</td><td class="num">460주</td>
-                <td class="num up">+35.4%</td><td class="num">2.58억</td></tr>
-            <tr><td>현대차 매도</td><td class="num">738,000</td><td class="num">1,842주</td>
-                <td class="num up">+77.8%</td><td class="num">12.74억</td></tr>
-            <tr><td>KT 매수</td><td class="num">51,900</td><td class="num">173주</td>
-                <td class="num down">−1.0%</td><td class="num">898만</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="margin-top:12px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        <b>하루에 한 칸만 겁니다.</b> 갭이 나면 여러 칸이 한 가격에 체결돼 분할매수가 무의미해집니다.
-        <br>
-        ⚠️ <b>KT 첫 칸 53,400은 뺐습니다</b> — 8/21 종가가 52,400이라 그 가격은
-        <b>매수 지정가가 현재가보다 위</b>가 되어 즉시 체결됩니다. 사다리가 아닙니다.
-        <br>
-        삼성전자는 걸어둔 주문이 없습니다. 밴드 상단이라 추가 매수를 하지 않습니다.
-      </div>
-    </div>
-  </section>
-
-  <!-- 채점 -->
-  <section>
-    <div class="head"><h2>5인 채점</h2><div class="note">근거 품질 · 수익률은 채점 대상 아님</div></div>
-    <div class="body">
-      <div class="scroll">
-        <table class="cmp">
-          <thead><tr><th>항목</th><th>🖤</th><th>❤️</th><th>💙</th><th>🩶</th><th>💛</th><th>평균</th></tr></thead>
-          <tbody>
-            <tr><td>사실 확인</td><td class="num">9.5</td><td class="num">9.0</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.4</td></tr>
-            <tr><td>반대 논거</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">10</td><td class="num">9.5</td><td class="num">9.6</td></tr>
-            <tr><td>비용 반영</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td></tr>
-            <tr><td>실행 가능성</td><td class="num">9.5</td><td class="num">9.0</td><td class="num">9.0</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.3</td></tr>
-            <tr><td>리스크 명시</td><td class="num">10</td><td class="num">10</td><td class="num">9.5</td><td class="num">10</td><td class="num">9.5</td><td class="num">9.8</td></tr>
-            <tr><td>번복 내구성</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">9.5</td><td class="num">10</td><td class="num">9.5</td><td class="num">9.6</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div style="margin-top:12px;font-size:13px">
-        <b>평균 9.53 / 10</b>
-      </div>
-      <div style="margin-top:10px;font-size:12.5px;color:var(--ink-2);line-height:1.6">
-        <b>실행 가능성 9.3이 최저입니다.</b> 레드 지적 —
-        "<b>소형주 4종에 대해 실행할 수 있는 지시가 없습니다.</b> '보유'는 액션이 아니라 관성입니다.
-        다만 데이터가 없어 그 이상을 말하면 지어내는 것이라 이 점수를 받아들입니다."
-        <br><br>
-        사실 확인 9.4 — 삼성 주주환원이 <b>언론(2급)</b>이고 공시 원문을 못 봤습니다.
+      <div style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.55">
+        목표주가는 <b>밴드</b>입니다. 현대차는 방법 둘이 갈려 범위가 두 개입니다.<br>
+        1~3개월은 가격이 아니라 <b>날짜</b>입니다. <b>이 표는 주말 정밀 점검에서만 갱신합니다.</b>
       </div>
     </div>
   </section>
