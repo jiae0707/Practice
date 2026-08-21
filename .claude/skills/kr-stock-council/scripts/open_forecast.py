@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""예상 개장가를 낸다. 시간외 + 미국장을 **순서대로** 더한다. 의존성 없음.
+"""**다음 거래일 종가**를 예측한다. 시간외 + 미국장을 순서대로 더한다. 의존성 없음.
+
+⚠️ 이름을 정정했다(2026-08-21). 원래 "예상 개장"이라 불렀는데 **적합도 검증을
+   종가 대비 종가로 했다.** 시가를 받을 경로가 없어서다. 개장가 모형이라고 부르면
+   무엇의 값인지 틀리게 말하는 것이라, 종가 모형으로 정확히 쓴다.
 
 2026-08-20에 SOX 단독 베타만 써서 삼성전자를 -1.19%로 예측했다가
 실제 +9.49%로 10.68%p 틀렸다. 사용자 지적 —
@@ -79,7 +83,7 @@ def main():
         dsox = (fac[rows[-1]]["SOX"] / fac[rows[-2]]["SOX"] - 1) * 100
 
     print("=" * 76)
-    print(f"  예상 개장 — {iso} 종가·시간외 + 미국장 반영")
+    print(f"  다음 거래일 **종가** 예측 — {iso} 종가·시간외 + 미국장 반영")
     print("=" * 76)
     print(f"  미국 SOX {dsox:+.2f}%" if dsox is not None else "  SOX 변화 미확인 → 0으로 본다")
     print(f"  증폭 계수 k = {a.k}  (관측 2건 기준. 과적합이라 범위를 같이 낸다)\n")
@@ -91,6 +95,12 @@ def main():
         if name.startswith("_") or name not in ah:
             continue
         gap = ah[name] / close - 1
+        # 🚨 괴리가 정확히 0이면 **신호가 아니라 시간외 거래가 없었다는 뜻**이다.
+        # 2026-08-21 비츠로셀에서 이걸 무시하고 0%를 예측했다가 실제 -10.95%였다.
+        # 정보가 0인 것과 정보가 없는 것은 다르다.
+        if gap == 0.0:
+            print(f"  {name:<8}{close:>9,}{ah[name]:>9,}   —      시간외 거래 없음 → **예측 안 냄**")
+            continue
         beta, t = SOX_BETA.get(name, (0.0, 0.0))
         sox_part = (dsox or 0) / 100 * beta if t > 2 else 0.0
         raw = gap + sox_part
@@ -99,7 +109,7 @@ def main():
         print(f"  {name:<8}{close:>9,}{ah[name]:>9,}{gap:>+7.2%}{sox_part:>+8.2%}"
               f"{raw:>+8.2%}{close*(1+mid):>9,.0f}"
               f"{close*(1+lo):>10,.0f}~{close*(1+hi):>,.0f}")
-        out.append({"종목": name, "예상": round(close * (1 + mid)), "예상등락": round(mid * 100, 2),
+        out.append({"종목": name, "예상종가": round(close * (1 + mid)), "예상등락": round(mid * 100, 2),
                     "시간외괴리": round(gap * 100, 2), "SOX분": round(sox_part * 100, 2)})
 
     print("\n" + "=" * 76)
